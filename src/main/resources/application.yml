@@ -25,6 +25,13 @@ logging:
   level:
     org.hibernate.SQL: trace
 
+  #DB Setting
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url:
+    username:
+    password:
+
   #JPA Setting
   jpa:
     show-sql: false #if true, Show DB processing
