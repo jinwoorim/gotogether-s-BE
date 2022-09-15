@@ -11,19 +11,19 @@ spring:
   thymeleaf:
     cache: false
 
+  #DB Setting
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://gotogether.cxufpxkyookv.ap-northeast-2.rds.amazonaws.com:3306/gotogether
+    username: master
+    password: rhxnrpejaktmxj2
+
   sql:
     init:
       mode: never
 logging:
   level:
     org.hibernate.SQL: trace
-
-  #DB Setting
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql-container:3306/goto?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
-    username: khjun723
-    password: 1324
 
   #JPA Setting
   jpa:
