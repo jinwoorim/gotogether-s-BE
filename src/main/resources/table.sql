@@ -9,9 +9,10 @@ DROP TABLE IF EXISTS Product;
 DROP TABLE IF EXISTS Booker;
 DROP TABLE IF EXISTS Wish;
 DROP TABLE IF EXISTS Book;
+DROP TABLE IF EXISTS Interest;
 
 create table Member(
-                       id          bigint               auto_increment       PRIMARY KEY ,
+                       id          bigint               PRIMARY KEY ,
                        email       varchar(100)         not null ,
                        password    varchar(100)         not null ,
                        name        varchar(100)         not null ,
@@ -22,7 +23,7 @@ create table Member(
                        religion    enum('주님', '부처님', '상관없음'),
                        groupType   enum('여자끼리 그룹', '남자끼리 그룹', '자녀동반 그룹', '상관없음'),
                        theme       enum('문화탐방', '골프여행', '리조트 휴양 및 힐링', '오지탐험', '트레킹여행', '봉사활동', '성지순례', '상관없음'),
-                       season      enum('봄', '여름', '가을', '겨울', '상관없음'),
+                       season      num('12월~2월', '3월~5월', '6월~8월', '9월~11월'),
                        trvlDstnIntr varchar(255)
 );
 
