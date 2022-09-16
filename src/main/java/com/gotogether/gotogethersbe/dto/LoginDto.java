@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 public class LoginDto {
 
     @Data
@@ -18,17 +20,17 @@ public class LoginDto {
     @AllArgsConstructor
     @NoArgsConstructor
     public class LoginResponse {
-        private Long member_id;
+        private Long id;
         private String email;
         private String name;
         private Date birth;
-        private int age;
-        private String compaion;
-        private String religion;
-        private String group;
-        private String theme;
-        private String period;
         private String gender;
+        private String age;
+        private String companion;
+        private String religion;
+        private String groupType;
+        private String theme;
+        private String season;
         private String interest;
     }
 }
