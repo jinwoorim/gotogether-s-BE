@@ -17,9 +17,7 @@ public class AuthService {
 
     //로그인
     @Transactional(readOnly=true)
-    public DefaultRes login(LoginDto.LoginRequest request){
+    public void login(LoginDto.LoginRequest request){
         Member member = memberRepository.findByEmail(request.getEmail()).orElseThrow();
-
-
     }
 }
