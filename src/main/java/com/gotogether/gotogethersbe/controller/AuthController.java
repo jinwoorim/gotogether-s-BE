@@ -17,9 +17,8 @@ public class AuthController {
 
     //로그인
     @PostMapping("/login")
-    @ResponseBody
     public DefaultRes login(@RequestBody LoginDto.LoginRequest request){
 
-        return authService.login(request);
+        return DefaultRes();
     }
 }
