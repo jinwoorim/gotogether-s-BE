@@ -4,14 +4,14 @@
 --  username: khjun723 < 본인 계정 이름으로 변경
 --  password: 1324 < 본인 비밀 번호로 변경
 
+DROP TABLE IF EXISTS Book;
+DROP TABLE IF EXISTS Booker;
+DROP TABLE IF EXISTS Wish;
 DROP TABLE IF EXISTS Member;
 DROP TABLE IF EXISTS Product;
-DROP TABLE IF EXISTS Booker;
-DROP TABLE IF EXISTS Interest;
-DROP TABLE IF EXISTS Book;
 
 create table Member(
-                       id          bigint               PRIMARY KEY ,
+                       id          bigint               auto_increment       PRIMARY KEY ,
                        email       varchar(100)         not null ,
                        password    varchar(100)         not null ,
                        name        varchar(100)         not null ,
@@ -27,45 +27,45 @@ create table Member(
 );
 
 create table Product(
-                        id          bigint          PRIMARY KEY ,
-                        thumbnail   varchar(255)    not null ,
-                        productName varchar(255)    not null ,
-                        amount      Long            not null ,
+                        id          bigint              auto_increment        PRIMARY KEY ,
+                        thumbnail   varchar(255)        not null ,
+                        productName varchar(255)        not null ,
+                        amount      Long                not null ,
                         ctgNation   enum('동남아/태평양', '인도/중앙아시아', '아프리카/중동', '유럽/코카서스', '중남미/북미', '대만/중국/일본') ,
                         ctgGroup    enum('5070끼리', '2040 끼리', '남자끼리' , '여자끼리', '자녀동반'),
                         ctgTheme    enum('문화탐방', '골프여행', '휴양지', '트레킹', '성지순례', '볼론투어'),
-                        summary     varchar(255)    not null ,
-                        detail      varchar(255)    not null ,
-                        info        varchar(255)             ,
-                        way         varchar(255)             ,
-                        infoImage   varchar(255)    not null
+                        summary     varchar(255)        not null ,
+                        detail      varchar(255)        not null ,
+                        info        varchar(255)                 ,
+                        way         varchar(255)                 ,
+                        infoImage   varchar(255)        not null
 );
 
 create table Booker(
-                       id          bigint          PRIMARY KEY ,
-                       name        varchar(100)    not null ,
-                       age         int                      ,
-                       phoneNumber varchar(50)     not null ,
-                       role        boolean         not null
+                       id          bigint               auto_increment         PRIMARY KEY ,
+                       name        varchar(100)         not null ,
+                       age         int                           ,
+                       phoneNumber varchar(50)          not null ,
+                       role        boolean              not null
 );
 
-create table Interest(
-                         id          bigint          PRIMARY KEY ,
-                         productId   bigint,
-                         FOREIGN KEY(productId) REFERENCES Product(id) ON DELETE CASCADE,
-                         memberId    bigint,
-                         FOREIGN KEY(memberId) REFERENCES Member(id) ON DELETE CASCADE
-);
-
-create table Book(
-                     id          bigint          PRIMARY KEY ,
+create table Wish(
+                     id          bigint             auto_increment         PRIMARY KEY ,
                      productId   bigint,
                      FOREIGN KEY(productId) REFERENCES Product(id) ON DELETE CASCADE,
                      memberId    bigint,
+                     FOREIGN KEY(memberId) REFERENCES Member(id) ON DELETE CASCADE
+);
+
+create table Book(
+                     id          bigint            auto_increment         PRIMARY KEY ,
+                     productId    bigint,
+                     FOREIGN KEY(productId) REFERENCES Product(id) ON DELETE CASCADE,
+                     memberId     bigint,
                      FOREIGN KEY(memberId) REFERENCES Member(id) ON DELETE SET NULL,
-                     bookerId    bigint,
+                     bookerId     bigint,
                      FOREIGN KEY (bookerId) REFERENCES Booker(id) ON DELETE SET NULL,
-                     duration    varchar(100)    not null ,
-                     totalPrice  LONG            not null ,
-                     optionList  varchar(255)
+                     duration     varchar(100)      not null ,
+                     totalPrice   Long              not null ,
+                     optionList   varchar(255)
 );
