@@ -3,10 +3,11 @@ package com.gotogether.gotogethersbe.controller;
 import com.gotogether.gotogethersbe.dto.LoginDto;
 import com.gotogether.gotogethersbe.service.AuthService;
 import com.gotogether.gotogethersbe.web.api.DefaultRes;
+import com.gotogether.gotogethersbe.web.api.ResponseMessage;
+import com.gotogether.gotogethersbe.web.api.StatusCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -19,6 +20,6 @@ public class AuthController {
     @PostMapping("/login")
     public DefaultRes login(@RequestBody LoginDto.LoginRequest request){
 
-        return DefaultRes();
+        return new DefaultRes(StatusCode.OK, ResponseMessage.LOGIN_SUCCESS);
     }
 }
