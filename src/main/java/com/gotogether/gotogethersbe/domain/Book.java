@@ -17,6 +17,10 @@ public class Book {
     @Column(name = "BOOK_ID")
     private Long id;
 
+    private String duration;
+    private long totalPrice;
+    private String optionList;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
@@ -28,8 +32,4 @@ public class Book {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BOOKER_ID")
     private Booker booker;
-
-    private String duration;
-    private long totalPrice;
-    private String optionList;
 }

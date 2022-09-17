@@ -22,7 +22,7 @@ public class Product {
 
     private String thumbnail;
     private String productName;
-    private Long amount;
+    private long amount;
 
     @Enumerated(EnumType.STRING)
     private CtgNation ctgNation;
