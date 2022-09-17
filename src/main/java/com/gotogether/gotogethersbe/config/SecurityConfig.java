@@ -1,5 +1,8 @@
 package com.gotogether.gotogethersbe.config;
 
+import com.gotogether.gotogethersbe.config.auth.JwtAccessDeniedHandler;
+import com.gotogether.gotogethersbe.config.auth.JwtAuthenticationEntryPoint;
+import com.gotogether.gotogethersbe.config.auth.TokenManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,9 +21,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-//    private final TokenProvider tokenProvider;
-//    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-//    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+
+    private final TokenManager tokenManager;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -36,7 +40,8 @@ public class SecurityConfig {
 
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-                http.csrf().disable() //csrf 토큰 막기
+
+        http.csrf().disable() //csrf 토큰 막기
                 .authorizeRequests() //아래 요청은 모두 허용, 이외 요청은 인증 필수
                 .antMatchers("/login", "/join", "/reissue", "/logout","/products").permitAll()
                 .anyRequest().authenticated()
@@ -45,23 +50,25 @@ public class SecurityConfig {
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .and()
                 .cors().configurationSource(corsConfigurationSource())
-//                .and()
-//                .exceptionHandling() //인증 실패시 엔트리포인트 지정
-//                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint) //인증 실패시 엔트리포인트 지정
+                .accessDeniedHandler(jwtAccessDeniedHandler) //유효하지 않은 접근 처리
                 .and()
                 .sessionManagement() //기본제공 세션 막음
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and() //로그아웃 성공시 메인 페이지로 이동
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/")
                 .and()
+                .apply(new JwtSecurityConfig(tokenManager))
+                .and()
                 .formLogin().disable().headers().frameOptions().disable();
-//               .and()
-//               .apply(new JwtSecurityConfig(tokenProvider));
+
 //                    .and()
 //                .headers()
 //                .frameOptions()
 //                .sameOrigin() //iFrame 기반 솔루션
-//                .accessDeniedHandler(jwtAccessDeniedHandler)
+
         return http.build();
     }
 
