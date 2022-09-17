@@ -14,27 +14,28 @@ spring:
   sql:
     init:
       mode: never
-logging:
-  level:
-    org.hibernate.SQL: trace
 
   #DB Setting
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url:
-    username:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:tcp://localhost/./gotogether
+    username: sa
     password:
 
   #JPA Setting
   jpa:
     show-sql: false #if true, Show DB processing
     hibernate:
-      ddl-auto: none  #DDL
+      ddl-auto: create  #DDL
     properties:
       hibernate:
         format_sql: false
         highlight_sql: true
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        #dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+logging:
+  level:
+    org.hibernate.SQL: trace
 
 jwt:
   secret:
