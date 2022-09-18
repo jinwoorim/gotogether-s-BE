@@ -4,11 +4,11 @@
 --  username: khjun723 < 본인 계정 이름으로 변경
 --  password: 1324 < 본인 비밀 번호로 변경
 
-DROP TABLE IF EXISTS Book;
-DROP TABLE IF EXISTS Booker;
-DROP TABLE IF EXISTS Wish;
 DROP TABLE IF EXISTS Member;
 DROP TABLE IF EXISTS Product;
+DROP TABLE IF EXISTS Booker;
+DROP TABLE IF EXISTS Wish;
+DROP TABLE IF EXISTS Book;
 
 create table Member(
                        id          bigint               auto_increment       PRIMARY KEY ,
@@ -50,22 +50,17 @@ create table Booker(
 );
 
 create table Wish(
-                     id          bigint             auto_increment         PRIMARY KEY ,
-                     productId   bigint,
-                     FOREIGN KEY(productId) REFERENCES Product(id) ON DELETE CASCADE,
-                     memberId    bigint,
-                     FOREIGN KEY(memberId) REFERENCES Member(id) ON DELETE CASCADE
+                         id          bigint             auto_increment         PRIMARY KEY ,
+                         productId   bigint,
+                         memberId    bigint
 );
 
 create table Book(
-                     id          bigint            auto_increment         PRIMARY KEY ,
-                     productId    bigint,
-                     FOREIGN KEY(productId) REFERENCES Product(id) ON DELETE CASCADE,
-                     memberId     bigint,
-                     FOREIGN KEY(memberId) REFERENCES Member(id) ON DELETE SET NULL,
-                     bookerId     bigint,
-                     FOREIGN KEY (bookerId) REFERENCES Booker(id) ON DELETE SET NULL,
-                     duration     varchar(100)      not null ,
-                     totalPrice   Long              not null ,
-                     optionList   varchar(255)
+                         id          bigint            auto_increment         PRIMARY KEY ,
+                         productId    bigint,
+                         memberId     bigint,
+                         bookerId     bigint,
+                         duration     varchar(100)      not null ,
+                         totalPrice   Long              not null ,
+                         optionList   varchar(255)
 );
