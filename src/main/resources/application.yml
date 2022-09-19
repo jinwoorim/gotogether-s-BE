@@ -22,6 +22,13 @@ spring:
     username: sa
     password:
 
+  #DB Setting
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql-container:3306/goto?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: khjun723
+    password: 1324
+
   #JPA Setting
   jpa:
     show-sql: true #if true, Show DB processing
