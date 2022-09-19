@@ -7,6 +7,7 @@ public class ResponseMessage {
     public static final String NOT_FOUND_USER = "회원을 찾을 수 없습니다.";
     public static final String CREATED_USER = "회원 가입 성공";
     public static final String CREATED_FAIL = "회원 가입 실패";
+    public static final String REISSUE_SUCCESS = "토큰 재발급 성공";
     public static final String UPDATE_MEMBER_SUCCESS = "회원 정보 수정 성공";
     public static final String UPDATE_MEMBER_FAIL = "회원 정보 수정 실패";
     public static final String DELETE_USER = "회원 탈퇴 성공";
