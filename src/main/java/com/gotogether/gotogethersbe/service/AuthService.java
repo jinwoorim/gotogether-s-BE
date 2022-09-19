@@ -1,8 +1,10 @@
 package com.gotogether.gotogethersbe.service;
 
 import com.gotogether.gotogethersbe.config.auth.TokenManager;
+import com.gotogether.gotogethersbe.domain.Member;
 import com.gotogether.gotogethersbe.domain.RefreshToken;
 import com.gotogether.gotogethersbe.dto.LoginDto;
+import com.gotogether.gotogethersbe.dto.MemberDto;
 import com.gotogether.gotogethersbe.dto.TokenDto;
 import com.gotogether.gotogethersbe.repository.MemberRepository;
 import com.gotogether.gotogethersbe.repository.RefreshTokenRepository;
@@ -25,6 +27,18 @@ public class AuthService {
     private final TokenManager tokenManager;
     private final RefreshTokenRepository refreshTokenRepository;
 
+    //회원 가입
+    @Transactional
+    public MemberDto.MemberResponse signup(MemberDto.MemberRequest request) {
+        //이메일 유효성 검사
+        if (memberRepository.existsByEmail(request.getEmail())) {
+            throw new RuntimeException("이미 가입되어 있는 유저입니다");
+        }
+        //패스워드 암호화 후 저장
+        Member member = request.toMember(passwordEncoder);
+        return MemberDto.MemberResponse.of(memberRepository.save(member));
+    }
+
     // 로그인
     @Transactional
     public TokenDto login(LoginDto.LoginRequest loginRequest) {
@@ -45,6 +59,37 @@ public class AuthService {
                 .build();
 
         refreshTokenRepository.save(refreshToken);
+
+        // 토큰 발급
+        return tokenDto;
+    }
+
+    //토큰 재발행
+    @Transactional
+    public TokenDto reissue(TokenDto tokenRequestDto) {
+        // Refresh Token 검증
+        if (!tokenManager.validateToken(tokenRequestDto.getRefreshToken())) {
+            throw new RuntimeException("Refresh Token 이 유효하지 않습니다.");
+        }
+
+        // Access Token 에서 Member ID 가져오기
+        Authentication authentication = tokenManager.getAuthentication(tokenRequestDto.getAccessToken());
+
+        // 저장소에서 Member ID 를 기반으로 Refresh Token 값 가져옴
+        RefreshToken refreshToken = refreshTokenRepository.findByKey(authentication.getName())
+                .orElseThrow(() -> new RuntimeException("로그아웃 된 사용자입니다."));
+
+        // Refresh Token 일치하는지 검사
+        if (!refreshToken.getValue().equals(tokenRequestDto.getRefreshToken())) {
+            throw new RuntimeException("토큰의 유저 정보가 일치하지 않습니다.");
+        }
+
+        // 새로운 토큰 생성
+        TokenDto tokenDto = tokenManager.generateTokenDto(authentication);
+
+        // 저장소 정보 업데이트
+        RefreshToken newRefreshToken = refreshToken.updateValue(tokenDto.getRefreshToken());
+        refreshTokenRepository.save(newRefreshToken);
 
         // 토큰 발급
         return tokenDto;
