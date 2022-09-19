@@ -3,6 +3,7 @@ package com.gotogether.gotogethersbe.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import java.sql.Date;
 
@@ -14,6 +15,10 @@ public class LoginDto {
     public class LoginRequest {
         private String email;
         private String password;
+
+        public UsernamePasswordAuthenticationToken toAuthentication() {
+            return new UsernamePasswordAuthenticationToken(email, password);
+        }
     }
 
     @Data
@@ -32,5 +37,6 @@ public class LoginDto {
         private String theme;
         private String season;
         private String interest;
+
     }
 }
