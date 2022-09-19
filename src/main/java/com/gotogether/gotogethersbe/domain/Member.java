@@ -1,6 +1,8 @@
 package com.gotogether.gotogethersbe.domain;
 
+import com.gotogether.gotogethersbe.domain.enums.Authority;
 import com.gotogether.gotogethersbe.domain.enums.Gender;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -26,6 +28,9 @@ public class Member {
     private Date birth; //생일
 
     @Enumerated(EnumType.STRING)
+    private Authority authority;
+
+    @Enumerated(EnumType.STRING)
     private Gender gender; //성별(MALE, FEMALE)
 
     private String age; //연령대 그룹
@@ -41,4 +46,11 @@ public class Member {
     private String season; //여행 시기
 
     private String interest; //관심있는 여행지
+
+    @Builder
+    public Member(String email, String password, Authority authority) {
+        this.email = email;
+        this.password = password;
+        this.authority = authority;
+    }
 }
