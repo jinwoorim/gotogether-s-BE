@@ -18,8 +18,8 @@ import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 
-@EnableWebSecurity
 @RequiredArgsConstructor
+@EnableWebSecurity
 public class SecurityConfig {
 
     private final TokenManager tokenManager;
@@ -42,23 +42,23 @@ public class SecurityConfig {
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
         http.csrf().disable() //csrf 토큰 막기
-                .authorizeRequests() //아래 요청은 모두 허용, 이외 요청은 인증 필수
-                .antMatchers("/login", "/join", "/reissue", "/logout","/products").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .authorizeRequests() //cors설정
-                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-                .and()
+                .authorizeRequests((authz) -> authz
+                        .antMatchers("/login", "/join", "/reissue", "/logout","/products").permitAll()
+                        .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                ) //아래 요청은 모두 허용, 이외 요청은 인증 필수
+                .authorizeRequests((authz) -> authz
+                        .anyRequest().authenticated()
+                )
                 .cors().configurationSource(corsConfigurationSource())
                 .and()
-                .exceptionHandling()
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint) //인증 실패시 엔트리포인트 지정
-                .accessDeniedHandler(jwtAccessDeniedHandler) //유효하지 않은 접근 처리
-                .and()
+                .exceptionHandling((exc) -> exc
+                        .authenticationEntryPoint(jwtAuthenticationEntryPoint) //인증 실패시 엔트리포인트 지정
+                        .accessDeniedHandler(jwtAccessDeniedHandler) //유효하지 않은 접근 처리
+                )
                 .sessionManagement() //기본제공 세션 막음
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and() //로그아웃 성공시 메인 페이지로 이동
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/")
+                .and()
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/")//로그아웃 성공시 메인 페이지로 이동
                 .and()
                 .apply(new JwtSecurityConfig(tokenManager))
                 .and()
