@@ -1,4 +1,4 @@
-package com.fastcampus.web.api;
+package com.gotogether.gotogethersbe.web.api;
 
 public class StatusCode {
 
