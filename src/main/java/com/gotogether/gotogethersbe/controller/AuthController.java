@@ -21,8 +21,7 @@ public class AuthController {
     //회원가입
     @PostMapping("/signup")
     public DefaultRes signup(@RequestBody MemberDto.MemberRequest request){
-        authService.signup(request);
-        return new DefaultRes(StatusCode.OK, ResponseMessage.CREATED_USER);
+        return new DefaultRes(StatusCode.OK, ResponseMessage.CREATED_USER, authService.signup(request));
     }
 
     //로그인
