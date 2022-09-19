@@ -17,17 +17,10 @@ spring:
 
   #DB Setting
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/./gotogether
-    username: sa
-    password:
-
-  #DB Setting
-  datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql-container:3306/goto?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
-    username: khjun723
-    password: 1324
+    url: jdbc:mysql://localhost:3306/goto?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
 
   #JPA Setting
   jpa:
