@@ -19,7 +19,6 @@ public class AuthController {
     //로그인
     @PostMapping("/login")
     public DefaultRes login(@RequestBody LoginDto.LoginRequest request){
-
-        return new DefaultRes(StatusCode.OK, ResponseMessage.LOGIN_SUCCESS);
+        return new DefaultRes(StatusCode.OK, ResponseMessage.LOGIN_SUCCESS, authService.login(request));
     }
 }
