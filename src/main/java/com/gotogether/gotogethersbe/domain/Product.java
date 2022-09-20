@@ -1,8 +1,6 @@
 package com.gotogether.gotogethersbe.domain;
 
-import com.gotogether.gotogethersbe.enums.CtgGroup;
-import com.gotogether.gotogethersbe.enums.CtgNation;
-import com.gotogether.gotogethersbe.enums.CtgTheme;
+import com.gotogether.gotogethersbe.enums.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,13 +23,25 @@ public class Product {
     private long amount;
 
     @Enumerated(EnumType.STRING)
+    private Country country;
+
+    @Enumerated(EnumType.STRING)
+    private Ages ages;
+
+    @Enumerated(EnumType.STRING)
+    private Together together;
+
+    @Enumerated(EnumType.STRING)
+    private Companion companion;
+
+    @Enumerated(EnumType.STRING)
+    private Religion religion;
+
+    @Enumerated(EnumType.STRING)
+    private Theme theme;
+
+    @Enumerated(EnumType.STRING)
     private CtgNation ctgNation;
-
-    @Enumerated(EnumType.STRING)
-    private CtgGroup ctgGroup;
-
-    @Enumerated(EnumType.STRING)
-    private CtgTheme ctgTheme;
 
     private String summary;
     private String detail;
