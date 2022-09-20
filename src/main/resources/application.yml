@@ -13,28 +13,29 @@ spring:
 
   sql:
     init:
-      mode: never
-logging:
-  level:
-    org.hibernate.SQL: trace
+      mode: always # memory db(h2)는 기본적으로 직접 작성한 Schema.sql을 실행 시키지만, 물리적 db(mysql)는 sql-init-mode-always를 해주지않으면 Schema.sql을 실행시키지않는다. 따라서, 테이블과 데이터를 셋팅하는 용도로 최초 1회만 always, 그 뒤론 never
 
   #DB Setting
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql-container:3306/goto?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
-    username: khjun723
-    password: 1324
+    url: jdbc:mysql://localhost:3306/goto?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
 
   #JPA Setting
   jpa:
-    show-sql: false #if true, Show DB processing
+    show-sql: true #if true, Show DB processing
     hibernate:
       ddl-auto: none  #DDL
     properties:
       hibernate:
-        format_sql: false
-        highlight_sql: true
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        format_sql: true
+        #highlight_sql: true
+        #dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+logging:
+  level:
+    org.hibernate.SQL: trace
 
 jwt:
   secret:
