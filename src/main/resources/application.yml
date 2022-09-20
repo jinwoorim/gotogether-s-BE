@@ -14,20 +14,17 @@ spring:
   sql:
     init:
       mode: never
-logging:
-  level:
-    org.hibernate.SQL: trace
 
   #DB Setting
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://gotogether.cxufpxkyookv.ap-northeast-2.rds.amazonaws.com:3306/gotogether
-    username: master
-    password: rhxnrpejaktmxj2
+    url: jdbc:mysql://localhost:3306/goto?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
 
   #JPA Setting
   jpa:
-    show-sql: false #if true, Show DB processing
+    show-sql: true #if true, Show DB processing
     hibernate:
       ddl-auto: none  #DDL
     properties:
@@ -35,6 +32,10 @@ logging:
         format_sql: false
         highlight_sql: true
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+logging:
+  level:
+    org.hibernate.SQL: trace
 
 jwt:
   secret:
