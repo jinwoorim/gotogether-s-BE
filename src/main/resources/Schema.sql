@@ -15,15 +15,7 @@ create table Member(
                        email       varchar(100)         not null ,
                        password    varchar(100)         not null ,
                        name        varchar(100)         not null ,
-                       birth       DATE                 not null ,
-                       gender      enum('남', '여') ,
-                       groupAge    enum('2030 그룹', '3040 그룹', '4050 그룹','5060 그룹','6070 그룹', '상관없음') ,
-                       companion   enum('나홀로 참가', '친구나 동료', '연인이나 부부', '자녀를 동반하는 가족', '상관없음'),
-                       religion    enum('주님', '부처님', '상관없음'),
-                       groupType   enum('여자끼리 그룹', '남자끼리 그룹', '자녀동반 그룹', '상관없음'),
-                       theme       enum('문화탐방', '골프여행', '리조트 휴양 및 힐링', '오지탐험', '트레킹여행', '봉사활동', '성지순례', '상관없음'),
-                       season      enum('봄', '여름', '가을', '겨울', '상관없음'),
-                       trvlDstnIntr varchar(255)
+                       birth       DATE                 not null
 );
 
 create table Product(
