@@ -19,9 +19,10 @@ public class AuthController {
     private final AuthService authService;
 
     //회원가입
-    @PostMapping("/signup")
-    public DefaultRes<MemberDto.MemberResponse> signup(@RequestBody MemberDto.MemberRequest request){
-        return DefaultRes.res(StatusCode.OK, ResponseMessage.CREATED_USER, authService.signup(request));
+    @PostMapping("/members")
+    public DefaultRes signup(@RequestBody MemberDto.MemberRequest request){
+        authService.signup(request);
+        return DefaultRes.res(StatusCode.OK, ResponseMessage.CREATED_USER);
     }
 
     //로그인

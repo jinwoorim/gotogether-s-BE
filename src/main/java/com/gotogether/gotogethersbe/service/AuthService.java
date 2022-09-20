@@ -1,6 +1,7 @@
 package com.gotogether.gotogethersbe.service;
 
 import com.gotogether.gotogethersbe.config.auth.TokenManager;
+import com.gotogether.gotogethersbe.config.common.exception.CustomException;
 import com.gotogether.gotogethersbe.domain.Member;
 import com.gotogether.gotogethersbe.domain.RefreshToken;
 import com.gotogether.gotogethersbe.dto.LoginDto;
@@ -8,6 +9,8 @@ import com.gotogether.gotogethersbe.dto.MemberDto;
 import com.gotogether.gotogethersbe.dto.TokenDto;
 import com.gotogether.gotogethersbe.repository.MemberRepository;
 import com.gotogether.gotogethersbe.repository.RefreshTokenRepository;
+import com.gotogether.gotogethersbe.web.api.ResponseMessage;
+import com.gotogether.gotogethersbe.web.api.StatusCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -29,10 +32,10 @@ public class AuthService {
 
     //회원 가입
     @Transactional
-    public MemberDto.MemberResponse signup(MemberDto.MemberRequest request) {
+    public MemberDto.MemberResponse signup(MemberDto.MemberRequest request){
         //이메일 유효성 검사
         if (memberRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("이미 가입되어 있는 유저입니다");
+            throw new CustomException(ResponseMessage.CREATED_FAIL, StatusCode.BAD_REQUEST);
         }
         //패스워드 암호화 후 저장
         Member member = request.toMember(passwordEncoder);
@@ -69,7 +72,7 @@ public class AuthService {
     public TokenDto reissue(TokenDto tokenRequestDto) {
         // Refresh Token 검증
         if (!tokenManager.validateToken(tokenRequestDto.getRefreshToken())) {
-            throw new RuntimeException("Refresh Token 이 유효하지 않습니다.");
+            throw new CustomException("Refresh Token 이 유효하지 않습니다.", StatusCode.UNAUTHORIZED);
         }
 
         // Access Token 에서 Member ID 가져오기
@@ -77,11 +80,11 @@ public class AuthService {
 
         // 저장소에서 Member ID 를 기반으로 Refresh Token 값 가져옴
         RefreshToken refreshToken = refreshTokenRepository.findByKey(authentication.getName())
-                .orElseThrow(() -> new RuntimeException("로그아웃 된 사용자입니다."));
+                .orElseThrow(() -> new CustomException("로그아웃 된 사용자입니다.", StatusCode.UNAUTHORIZED));
 
         // Refresh Token 일치하는지 검사
         if (!refreshToken.getValue().equals(tokenRequestDto.getRefreshToken())) {
-            throw new RuntimeException("토큰의 유저 정보가 일치하지 않습니다.");
+            throw new CustomException("토큰의 유저 정보가 일치하지 않습니다.", StatusCode.UNAUTHORIZED);
         }
 
         // 새로운 토큰 생성
