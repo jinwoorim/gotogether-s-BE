@@ -20,19 +20,19 @@ public class AuthController {
 
     //회원가입
     @PostMapping("/signup")
-    public DefaultRes signup(@RequestBody MemberDto.MemberRequest request){
-        return new DefaultRes(StatusCode.OK, ResponseMessage.CREATED_USER, authService.signup(request));
+    public DefaultRes<MemberDto.MemberResponse> signup(@RequestBody MemberDto.MemberRequest request){
+        return DefaultRes.res(StatusCode.OK, ResponseMessage.CREATED_USER, authService.signup(request));
     }
 
     //로그인
     @PostMapping("/login")
-    public DefaultRes login(@RequestBody LoginDto.LoginRequest request){
-        return new DefaultRes(StatusCode.OK, ResponseMessage.LOGIN_SUCCESS, authService.login(request));
+    public DefaultRes<TokenDto> login(@RequestBody LoginDto.LoginRequest request){
+        return DefaultRes.res(StatusCode.OK, ResponseMessage.LOGIN_SUCCESS, authService.login(request));
     }
 
     //토큰 재발급
     @PostMapping("/reissue")
-    public DefaultRes reissue(@RequestBody TokenDto tokenRequestDto) {
-        return new DefaultRes(StatusCode.OK, ResponseMessage.REISSUE_SUCCESS,authService.reissue(tokenRequestDto));
+    public DefaultRes<TokenDto> reissue(@RequestBody TokenDto tokenRequestDto) {
+        return DefaultRes.res(StatusCode.OK, ResponseMessage.REISSUE_SUCCESS,authService.reissue(tokenRequestDto));
     }
 }
