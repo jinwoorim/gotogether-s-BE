@@ -18,15 +18,16 @@ spring:
   #DB Setting
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://gotogether.cxufpxkyookv.ap-northeast-2.rds.amazonaws.com:3306/gotogether
-    username: master
-    password: rhxnrpejaktmxj2
+    url: jdbc:mysql://localhost:3306/gotogether?serverTimezone=Asia/Seoul
+    username: root
+    password: 1234
+ # jdbc:mysql://gotogether.cxufpxkyookv.ap-northeast-2.rds.amazonaws.com:3306/gotogether
 
   #JPA Setting
   jpa:
     show-sql: false #if true, Show DB processing
     hibernate:
-      ddl-auto: none  #DDL
+      ddl-auto: create  #DDL
     properties:
       hibernate:
         format_sql: false
