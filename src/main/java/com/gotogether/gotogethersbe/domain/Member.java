@@ -1,7 +1,5 @@
 package com.gotogether.gotogethersbe.domain;
 
-import com.gotogether.gotogethersbe.enums.Age;
-import com.gotogether.gotogethersbe.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,16 +19,12 @@ public class Member {
     @Column(name = "MEMBER_ID")
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "CURATION_ID")
+    private Curation curation;
+
     private String email;
     private String password;
     private String name;
     private LocalDate birth;
-
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
-
-    @Enumerated(EnumType.STRING)
-    private Age age;
-
-
 }

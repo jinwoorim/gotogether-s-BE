@@ -1,10 +1,12 @@
 package com.gotogether.gotogethersbe.domain;
 
+import com.gotogether.gotogethersbe.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -17,10 +19,6 @@ public class Book {
     @Column(name = "BOOK_ID")
     private Long id;
 
-    private String duration;
-    private long totalPrice;
-    private String optionList;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
@@ -32,4 +30,15 @@ public class Book {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BOOKER_ID")
     private Booker booker;
+
+    private LocalDate departureDate;
+    private LocalDate arrivalDate;
+    private String departureArea;
+    private String selection;
+    private long totalPrice;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+
 }
