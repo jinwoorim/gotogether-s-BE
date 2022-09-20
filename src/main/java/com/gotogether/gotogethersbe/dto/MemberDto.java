@@ -5,6 +5,7 @@ import com.gotogether.gotogethersbe.domain.enums.Authority;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ public class MemberDto {
         private String email;
         private String password;
         private String name;
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
         private LocalDate birth;
 
         public Member toMember(PasswordEncoder passwordEncoder) {
