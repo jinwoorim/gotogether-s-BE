@@ -2,23 +2,20 @@ package com.gotogether.gotogethersbe.enums;
 
 public enum CtgNation {
 
-    동남아시아,
-    괌_사이판_하와이,
-    호주_뉴질랜드,
+    SOUTH_EAST_ASIA_AND_PACIFIC("동남아/태평양"),
+    INDIA_AND_CENTRAL_ASIA("인도/중앙아시아"),
+    AFRICA_AND_MIDDLE_EAST("아프리카/중동"),
+    EUROPE_AND_CAUCASUS("유럽/코카서스"),
+    CENTRAL_SOUTH_AMERICA_AND_NORTH_AMERICA("중남미/북미"),
+    TAIWAN_AND_CHINA_AND_JAPAN("대만/중국/일본");
 
-    인도_주변국,
-    중앙아시아,
+    private final String koreanName;
 
-    동남아프리카,
-    북아프리카_중동,
+    CtgNation(String koreanName) {
+        this.koreanName = koreanName;
+    }
 
-    코카서스,
-    유럽,
-
-    중남미,
-    북미,
-
-    대만,
-    중국,
-    일본;
+    public String getKoreanName() {
+        return  koreanName;
+    }
 }
