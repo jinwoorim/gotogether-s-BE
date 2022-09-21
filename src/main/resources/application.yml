@@ -27,7 +27,7 @@ spring:
   jpa:
     show-sql: true #if true, Show DB processing
     hibernate:
-      ddl-auto: none  #DDL
+      ddl-auto: update  #DDL
     properties:
       hibernate:
         format_sql: false
