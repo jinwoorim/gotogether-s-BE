@@ -1,42 +1,83 @@
+# 배포 설정
+
 server:
   port: 8080
+
 spring:
-  profiles:
-    include: key
-  devtools:
-    livereload:
-      enabled: true
-  freemarker:
-    cache: false
-  thymeleaf:
-    cache: false
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
-  sql:
-    init:
-      mode: never
-
-  #DB Setting
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/gotogether?serverTimezone=Asia/Seoul
-    username: root
-    password: 1234
- # jdbc:mysql://gotogether.cxufpxkyookv.ap-northeast-2.rds.amazonaws.com:3306/gotogether
+    url: jdbc:mysql://gotogether.cxufpxkyookv.ap-northeast-2.rds.amazonaws.com:3306/gotogether?useSSL=false
+    username: master
+    password: rhxnrpejaktmxj2
 
-  #JPA Setting
+#  sql:
+#    init:
+#      mode: always
+
+  # JPA setting
   jpa:
-    show-sql: true #if true, Show DB processing
+    open-in-view: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
     hibernate:
-      ddl-auto: none  #DDL
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: create
+      use-new-id-generator-mappings: false
     properties:
       hibernate:
-        format_sql: false
-        highlight_sql: true
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-
-logging:
-  level:
-    org.hibernate.SQL: trace
+        format_sql: true
+        default_batch_fetch_size: 1000
+    defer-datasource-initialization: true
 
 jwt:
   secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
+
+
+# 로컬 설정
+
+#server:
+#  port: 8080
+#spring:
+#  profiles:
+#    include: key
+#  devtools:
+#    livereload:
+#      enabled: true
+#  freemarker:
+#    cache: false
+#  thymeleaf:
+#    cache: false
+#
+#  sql:
+#    init:
+#      mode: never
+#
+#  #DB Setting
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://gotogether.cxufpxkyookv.ap-northeast-2.rds.amazonaws.com:3306/gotogether
+#    username: master
+#    password: rhxnrpejaktmxj2
+#
+#  #JPA Setting
+#  jpa:
+#    show-sql: true #if true, Show DB processing
+#    hibernate:
+#      ddl-auto: none  #DDL
+#    properties:
+#      hibernate:
+#        format_sql: false
+#        highlight_sql: true
+#        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+#
+#logging:
+#  level:
+#    org.hibernate.SQL: trace
+#
+#jwt:
+#  secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
