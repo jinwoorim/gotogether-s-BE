@@ -14,15 +14,18 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
+    //커스텀 예외 처리
+    @ExceptionHandler(value = { CustomException.class })
+    protected ResponseEntity<ErrorResponse> handleCustomException(CustomException e) {
+        log.error("handleCustomException throw CustomException : {}", e.getErrorMessage());
+        return ErrorResponse.toResponseEntity(e.getErrorMessage(), e.getStatusCode());
+    }
+
+    //회원 가입 예외 처리
     @ExceptionHandler(value = { ConstraintViolationException.class, DataIntegrityViolationException.class})
     protected ResponseEntity<ErrorResponse> handleDataException() {
         log.error("handleDataException throw Exception : CREATED_FAIL");
         return ErrorResponse.toResponseEntity(ResponseMessage.CREATED_FAIL, StatusCode.BAD_REQUEST);
     }
 
-    @ExceptionHandler(value = { CustomException.class })
-    protected ResponseEntity<ErrorResponse> handleCustomException(CustomException e) {
-        log.error("handleCustomException throw CustomException : {}", e.getErrorMessage());
-        return ErrorResponse.toResponseEntity(e.getErrorMessage(), e.getStatusCode());
-    }
 }
