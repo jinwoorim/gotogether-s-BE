@@ -38,8 +38,4 @@ public class AuthController {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.REISSUE_SUCCESS,authService.reissue(tokenRequestDto));
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "sd";
-    }
 }
