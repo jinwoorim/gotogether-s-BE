@@ -1,11 +1,9 @@
 package com.gotogether.gotogethersbe.web.api;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
 @Builder
 public class DefaultRes<T> {
 
@@ -13,14 +11,11 @@ public class DefaultRes<T> {
     private String responseMessage;
     private T data;
 
-    public DefaultRes(final int statusCode, final String responseMessage) {
-        this.statusCode = statusCode;
-        this.responseMessage = responseMessage;
-        this.data = null;
-    }
-
     public static<T> DefaultRes<T> res(final int statusCode, final String responseMessage) {
-        return res(statusCode, responseMessage, null);
+        return DefaultRes.<T>builder()
+                .statusCode(statusCode)
+                .responseMessage(responseMessage)
+                .build();
     }
 
     public static<T> DefaultRes<T> res(final int statusCode, final String responseMessage, final T t) {
@@ -30,5 +25,4 @@ public class DefaultRes<T> {
                 .responseMessage(responseMessage)
                 .build();
     }
-
 }

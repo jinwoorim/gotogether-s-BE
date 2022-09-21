@@ -18,9 +18,10 @@ spring:
   #DB Setting
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/goto?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/gotogether?serverTimezone=Asia/Seoul
     username: root
     password: 1234
+ # jdbc:mysql://gotogether.cxufpxkyookv.ap-northeast-2.rds.amazonaws.com:3306/gotogether
 
   #JPA Setting
   jpa:
@@ -38,4 +39,4 @@ logging:
     org.hibernate.SQL: trace
 
 jwt:
-  secret:
+  secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
