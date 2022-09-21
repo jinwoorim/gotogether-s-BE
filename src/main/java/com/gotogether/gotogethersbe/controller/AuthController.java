@@ -8,6 +8,7 @@ import com.gotogether.gotogethersbe.web.api.DefaultRes;
 import com.gotogether.gotogethersbe.web.api.ResponseMessage;
 import com.gotogether.gotogethersbe.web.api.StatusCode;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,5 +36,10 @@ public class AuthController {
     @PostMapping("/reissue")
     public DefaultRes<TokenDto> reissue(@RequestBody TokenDto tokenRequestDto) {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.REISSUE_SUCCESS,authService.reissue(tokenRequestDto));
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        return "sd";
     }
 }
