@@ -47,6 +47,14 @@ public class Member {
         this.authority = authority;
     }
 
+
+    //회원 비밀번호 변경
+    public Member updatePassword(String password) {
+        this.password=password;
+        return this;
+    }
+
+    //큐레이션 정보 연결
     public void addCuration(Curation curation){
         this.curation=curation;
     }
