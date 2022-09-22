@@ -20,7 +20,7 @@ public class CurationController {
 
     private final CurationService curationService;
 
-    @PostMapping("/members/products")
+    @PostMapping("/members/curation")
     public DefaultRes insertCuration(@RequestBody CurationDto.CurationRequest curationRequest, HttpServletRequest request){
 
         //로그인 상태면 회원 정보에 큐레이션 데이터 연결
