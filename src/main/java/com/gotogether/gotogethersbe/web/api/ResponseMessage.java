@@ -8,8 +8,10 @@ public class ResponseMessage {
     public static final String CREATED_USER = "회원 가입 성공";
     public static final String CREATED_FAIL = "회원 가입 실패";
     public static final String REISSUE_SUCCESS = "토큰 재발급 성공";
-    public static final String UPDATE_MEMBER_SUCCESS = "회원 정보 수정 성공";
-    public static final String UPDATE_MEMBER_FAIL = "회원 정보 수정 실패";
+    public static final String CONFIRM_PASSWORD_SUCCESS = "패스워드 확인 성공";
+    public static final String CONFIRM_PASSWORD_FAIL = "패스워드 확인 실패";
+    public static final String UPDATE_MEMBER_SUCCESS = "회원 비밀번호 수정 성공";
+    public static final String UPDATE_MEMBER_FAIL = "회원 비밀번호 수정 실패";
     public static final String DELETE_USER = "회원 탈퇴 성공";
     public static final String RECO_DATA_SUCCESS_FOR_MEMBER = "회원을 위한 추천 데이터 입력 저장 완료";
     public static final String RECO_DATA_SUCCESS_FOR_NONMEMBER = "비회원을 위한 추천 데이터 입력 저장 완료";
