@@ -1,6 +1,6 @@
 package com.gotogether.gotogethersbe.domain.enums;
 
-public enum Together {
+public enum GenderGroup {
 
     FEMALE_ONLY("여자끼리"),
     MALE_ONLY("남자끼리"),
@@ -8,7 +8,7 @@ public enum Together {
 
     private final String koreanName;
 
-    Together(String koreanName) {
+    GenderGroup(String koreanName) {
         this.koreanName = koreanName;
     }
 
