@@ -45,4 +45,9 @@ public class ReservationDto {
         private Long reservation_id;
         private Status status;
     }
+    @Data
+    public static class DeleteReservationRequest {
+
+        private Long reservation_id;
+    }
 }

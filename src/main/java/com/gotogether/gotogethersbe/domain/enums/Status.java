@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 @JsonFormat
 public enum Status {
 
-    STANDBY("대기"),
-    CANCEL("취소"),
+    STANDBY("예약대기"),
+    CANCEL("예약취소"),
     COMPLETE("예약완료");
     @JsonValue
     private final String koreanName;

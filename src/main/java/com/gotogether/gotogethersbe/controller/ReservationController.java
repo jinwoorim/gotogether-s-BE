@@ -41,5 +41,11 @@ public class ReservationController {
     }
 
     // 예약 상품 삭제
+    @DeleteMapping("/reservations")
+    public DefaultRes deleteReservation(@RequestBody ReservationDto.UpdateReservationStatusRequest request) {
 
+        reservationService.deleteReservation(request);
+
+        return DefaultRes.res(StatusCode.OK, ResponseMessage.DELETE_RESERVATION);
+    }
 }

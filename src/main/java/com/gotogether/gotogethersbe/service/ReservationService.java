@@ -57,5 +57,11 @@ public class ReservationService {
         reservationRepository.save(reservation);
     }
 
+    // 예약 상품 삭제
+    public void deleteReservation(ReservationDto.UpdateReservationStatusRequest request) {
 
+        Reservation reservation = reservationRepository.findById(request.getReservation_id()).orElseThrow(NoSuchElementException::new);
+
+        reservationRepository.delete(reservation);
+    }
 }
