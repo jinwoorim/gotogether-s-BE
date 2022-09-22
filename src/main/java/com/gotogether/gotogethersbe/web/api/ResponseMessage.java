@@ -11,7 +11,8 @@ public class ResponseMessage {
     public static final String UPDATE_MEMBER_SUCCESS = "회원 정보 수정 성공";
     public static final String UPDATE_MEMBER_FAIL = "회원 정보 수정 실패";
     public static final String DELETE_USER = "회원 탈퇴 성공";
-    public static final String RECO_DATA_SUCCESS = "추천 데이터 입력 완료";
+    public static final String RECO_DATA_SUCCESS_FOR_MEMBER = "회원을 위한 추천 데이터 입력 저장 완료";
+    public static final String RECO_DATA_SUCCESS_FOR_NONMEMBER = "비회원을 위한 추천 데이터 입력 저장 완료";
     public static final String LOGOUT_SUCCESS = "로그아웃 성공";
 
     public static final String INTERNAL_SERVER_ERROR = "서버 내부 에러";
