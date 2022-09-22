@@ -1,4 +1,4 @@
-package com.gotogether.gotogethersbe.enums;
+package com.gotogether.gotogethersbe.domain.enums;
 
 public enum Country {
 
