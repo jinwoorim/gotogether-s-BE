@@ -32,4 +32,8 @@ public class ResponseMessage {
     public static final String READ_BOOKMARK = "찜 목록 조회 성공";
     public static final String NOT_FOUND_BOOKMARK = "찜 목록 없음";
     public static final String DELETE_BOOKMARK = "찜 목록 삭제 성공";
+
+    public static final String RESERVATION_SUCCESS = "예약 성공";
+    public static final String GET_RESERVATION_LIST = "예약 목록 조회 성공";
+    public static final String UPDATE_RESERVATION_STATUS = "예약 상품 상태 수정 성공";
 }
