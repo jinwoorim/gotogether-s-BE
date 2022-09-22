@@ -15,10 +15,14 @@ spring:
     init:
       mode: never
 
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
   #DB Setting
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/gotogether?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/goto?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: 1234
  # jdbc:mysql://gotogether.cxufpxkyookv.ap-northeast-2.rds.amazonaws.com:3306/gotogether
@@ -27,7 +31,7 @@ spring:
   jpa:
     show-sql: true #if true, Show DB processing
     hibernate:
-      ddl-auto: none  #DDL
+      ddl-auto: update  #DDL
     properties:
       hibernate:
         format_sql: false
