@@ -1,9 +1,11 @@
 package com.gotogether.gotogethersbe.domain;
 
-import com.gotogether.gotogethersbe.enums.Status;
+import com.gotogether.gotogethersbe.domain.enums.Status;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,11 +14,11 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Book {
+public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "BOOK_ID")
+    @Column(name = "RESERVATION_ID")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -27,18 +29,21 @@ public class Book {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "BOOKER_ID")
-    private Booker booker;
+    @CreationTimestamp
+    private LocalDate createdDate = LocalDate.now();
 
-    private LocalDate departureDate;
-    private LocalDate arrivalDate;
-    private String departureArea;
-    private String selection;
     private long totalPrice;
 
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    @Builder
+    public Reservation(Product product, Member member, long totalPrice, Status status){
+        this.product = product;
+        this.member = member;
+        this.totalPrice = totalPrice;
+        this.status = status;
+    }
 
 
 }
