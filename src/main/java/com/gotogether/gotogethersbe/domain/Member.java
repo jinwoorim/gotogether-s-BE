@@ -1,7 +1,6 @@
 package com.gotogether.gotogethersbe.domain;
 
 import com.gotogether.gotogethersbe.domain.enums.Authority;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +10,6 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 @Entity
 public class Member {
@@ -47,5 +45,9 @@ public class Member {
         this.name = name;
         this.birth = birth;
         this.authority = authority;
+    }
+
+    public void addCuration(Curation curation){
+        this.curation=curation;
     }
 }
