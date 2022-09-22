@@ -27,5 +27,4 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         log.error("handleDataException throw Exception : CREATED_FAIL");
         return ErrorResponse.toResponseEntity(ResponseMessage.CREATED_FAIL, StatusCode.BAD_REQUEST);
     }
-
 }
