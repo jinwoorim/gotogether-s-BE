@@ -36,4 +36,11 @@ public class AuthController {
     public DefaultRes<TokenDto> reissue(@RequestBody TokenDto tokenRequestDto) {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.REISSUE_SUCCESS,authService.reissue(tokenRequestDto));
     }
+
+    //로그아웃
+    @PostMapping("/logout")
+    public DefaultRes logout(@RequestBody TokenDto tokenRequestDto){
+        authService.logout(tokenRequestDto);
+        return DefaultRes.res(StatusCode.OK, ResponseMessage.LOGOUT_SUCCESS);
+    }
 }

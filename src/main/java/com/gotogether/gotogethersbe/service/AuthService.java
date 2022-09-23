@@ -97,4 +97,21 @@ public class AuthService {
         // 토큰 발급
         return tokenDto;
     }
+
+    //로그아웃
+    @Transactional
+    public void logout(TokenDto tokenRequestDto){
+        //Access Token 유효성 확인
+        if(!tokenManager.validateToken(tokenRequestDto.getAccessToken())){
+            throw new CustomException("Access Token이 유효하지 않습니다.", StatusCode.UNAUTHORIZED);
+        }
+        //Refresh Token 유효성 확인
+        Authentication authentication = tokenManager.getAuthentication(tokenRequestDto.getAccessToken());
+
+        RefreshToken refreshToken = refreshTokenRepository.findByKey(authentication.getName())
+                .orElseThrow(() -> new CustomException("이미 로그아웃한 사용자입니다.", StatusCode.UNAUTHORIZED));
+
+        //Refresh Toke 삭제
+        refreshTokenRepository.delete(refreshToken);
+    }
 }

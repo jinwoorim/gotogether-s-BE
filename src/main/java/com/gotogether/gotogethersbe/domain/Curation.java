@@ -1,7 +1,8 @@
 package com.gotogether.gotogethersbe.domain;
 
-import com.gotogether.gotogethersbe.enums.*;
+import com.gotogether.gotogethersbe.domain.enums.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,7 +23,7 @@ public class Curation {
     private Ages ages;
 
     @Enumerated(EnumType.STRING)
-    private Together together;
+    private GenderGroup genderGroup;
 
     @Enumerated(EnumType.STRING)
     private Companion companion;
@@ -32,4 +33,13 @@ public class Curation {
 
     @Enumerated(EnumType.STRING)
     private Theme theme;
+
+    @Builder
+    public Curation(Ages ages, GenderGroup genderGroup, Companion companion, Religion religion, Theme theme){
+        this.ages = ages;
+        this.genderGroup = genderGroup;
+        this.companion = companion;
+        this.religion = religion;
+        this.theme = theme;
+    }
 }

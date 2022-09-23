@@ -1,6 +1,6 @@
-package com.gotogether.gotogethersbe.enums;
+package com.gotogether.gotogethersbe.domain.enums;
 
-public enum CtgNation {
+public enum Country {
 
     SOUTH_EAST_ASIA_AND_PACIFIC("동남아/태평양"),
     INDIA_AND_CENTRAL_ASIA("인도/중앙아시아"),
@@ -11,7 +11,7 @@ public enum CtgNation {
 
     private final String koreanName;
 
-    CtgNation(String koreanName) {
+    Country(String koreanName) {
         this.koreanName = koreanName;
     }
 

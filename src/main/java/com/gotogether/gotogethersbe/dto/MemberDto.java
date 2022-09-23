@@ -2,10 +2,9 @@ package com.gotogether.gotogethersbe.dto;
 
 import com.gotogether.gotogethersbe.domain.Member;
 import com.gotogether.gotogethersbe.domain.enums.Authority;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -14,8 +13,6 @@ import java.time.LocalDate;
 public class MemberDto {
 
     @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
     public static class MemberRequest {
         private String email;
         private String password;
@@ -35,8 +32,6 @@ public class MemberDto {
     }
 
     @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
     @Builder
     public static class MemberResponse {
         private Long id;
@@ -53,5 +48,10 @@ public class MemberDto {
                     .birth(member.getBirth())
                     .build();
         }
+    }
+
+    @Getter
+    public static class passwordRequest{
+        private String password;
     }
 }

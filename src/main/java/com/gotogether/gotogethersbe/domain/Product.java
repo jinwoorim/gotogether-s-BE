@@ -1,6 +1,6 @@
 package com.gotogether.gotogethersbe.domain;
 
-import com.gotogether.gotogethersbe.enums.*;
+import com.gotogether.gotogethersbe.domain.enums.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,13 +23,13 @@ public class Product {
     private long amount;
 
     @Enumerated(EnumType.STRING)
-    private Country country;
+    private Region country;
 
     @Enumerated(EnumType.STRING)
     private Ages ages;
 
     @Enumerated(EnumType.STRING)
-    private Together together;
+    private GenderGroup together;
 
     @Enumerated(EnumType.STRING)
     private Companion companion;
@@ -41,7 +41,7 @@ public class Product {
     private Theme theme;
 
     @Enumerated(EnumType.STRING)
-    private CtgNation ctgNation;
+    private Country nation;
 
     private String summary;
     private String detail;
