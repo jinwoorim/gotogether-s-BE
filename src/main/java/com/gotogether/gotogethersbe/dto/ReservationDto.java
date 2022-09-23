@@ -22,20 +22,39 @@ public class ReservationDto {
     }
 
     @Data
-    public static class ReservationResponse {
+    public static class ReservationListResponse {
 
-        private Long id;
+        private Long reservation_id;
         private long totalPrice;
 
         @Enumerated(EnumType.STRING)
         private Status status;
 
-        private LocalDate createdDate;
-        public ReservationResponse(Reservation reservation){
-            id = reservation.getId();
+        private LocalDate reservationDate;
+
+        public ReservationListResponse(Reservation reservation){
+            reservation_id = reservation.getId();
             totalPrice = reservation.getTotalPrice();
             status = reservation.getStatus();
-            createdDate = reservation.getCreatedDate();
+            reservationDate = reservation.getReservationDate();
+        }
+    }
+
+    @Data
+    public static class ReservationDetailResponse {
+
+        private Long reservation_id;
+        private long totalPrice;
+
+        @Enumerated(EnumType.STRING)
+        private Status status;
+
+        private LocalDate reservationDate;
+        public ReservationDetailResponse(Reservation reservation){
+            reservation_id = reservation.getId();
+            totalPrice = reservation.getTotalPrice();
+            status = reservation.getStatus();
+            reservationDate = reservation.getReservationDate();
         }
     }
 

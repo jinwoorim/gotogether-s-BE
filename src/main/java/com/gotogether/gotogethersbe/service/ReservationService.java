@@ -34,17 +34,23 @@ public class ReservationService {
     }
 
     // 예약 상품 목록 조회
-    public List<ReservationDto.ReservationResponse> getReservationList() {
+    public List<ReservationDto.ReservationListResponse> getReservationList() {
 
         return mapToDto(reservationRepository.findByMember_id(SecurityUtil.getCurrentMemberId()));
     }
 
-    private List<ReservationDto.ReservationResponse> mapToDto(List<Reservation> reservationList) {
+    private List<ReservationDto.ReservationListResponse> mapToDto(List<Reservation> reservationList) {
 
         return reservationList
                 .stream()
-                .map(ReservationDto.ReservationResponse::new)
+                .map(ReservationDto.ReservationListResponse::new)
                 .toList();
+    }
+
+    // 예약 상품 상세 조회
+    public ReservationDto.ReservationDetailResponse getReservation(Long id) {
+        
+        return new ReservationDto.ReservationDetailResponse(reservationRepository.findById(id).get());
     }
 
     // 예약 상태(대기,예약완료,취소) 수정

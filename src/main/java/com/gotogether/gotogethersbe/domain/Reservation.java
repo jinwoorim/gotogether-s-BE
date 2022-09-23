@@ -30,7 +30,7 @@ public class Reservation {
     private Member member;
 
     @CreationTimestamp
-    private LocalDate createdDate = LocalDate.now();
+    private LocalDate reservationDate = LocalDate.now();
 
     private long totalPrice;
 

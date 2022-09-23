@@ -37,4 +37,5 @@ public class ResponseMessage {
     public static final String GET_RESERVATION_LIST = "예약 목록 조회 성공";
     public static final String UPDATE_RESERVATION_STATUS = "예약 상품 상태 수정 성공";
     public static final String DELETE_RESERVATION = "예약 상품 삭제 성공";
+    public static final String GET_RESERVATION = "예약 상품 상세 조회 성공";
 }

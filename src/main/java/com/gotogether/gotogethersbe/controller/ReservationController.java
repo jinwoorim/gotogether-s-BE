@@ -16,7 +16,7 @@ public class ReservationController {
 
     // 예약하기
     @PostMapping("/reservations")
-    public DefaultRes doReservation(@RequestBody ReservationDto.ReservationRequest request){
+    public DefaultRes doReservation(@RequestBody ReservationDto.ReservationRequest request) {
 
         reservationService.doReservation(request);
 
@@ -25,9 +25,16 @@ public class ReservationController {
 
     // 예약 상품 목록 조회
     @GetMapping("/reservations")
-    public DefaultRes getReservationList(){
+    public DefaultRes getReservationList() {
 
         return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_RESERVATION_LIST, reservationService.getReservationList());
+    }
+
+    // 예약 상품 상세 조회
+    @GetMapping("/reservations/{id}")
+    public DefaultRes getReservation(@PathVariable Long id) {
+
+        return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_RESERVATION, reservationService.getReservation(id));
     }
 
     // 예약 상태(대기,예약완료,취소) 수정
