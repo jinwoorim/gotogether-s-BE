@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 @Service
@@ -43,5 +44,17 @@ public class WishService {
                 .stream()
                 .map(WishDto.WishListResponse::new)
                 .toList();
+    }
+
+    // 찜 선택 삭제
+    public void deleteWishes(List<WishDto.WishDeleteRequest> list) {
+
+        for(WishDto.WishDeleteRequest wishDeleteRequest : list) {
+
+            Wish wish = wishRepository.findByIdAndMember_id(wishDeleteRequest.getWish_id(), SecurityUtil.getCurrentMemberId())
+                    .orElseThrow(NoSuchElementException::new);
+
+            wishRepository.delete(wish);
+        }
     }
 }

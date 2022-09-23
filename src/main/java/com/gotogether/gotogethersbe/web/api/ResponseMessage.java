@@ -36,4 +36,5 @@ public class ResponseMessage {
 
     public static final String WISH_SUCCESS= "찜 성공";
     public static final String GET_WISH_LIST= "찜 목록 조회 성공";
+    public static final String DELETE_WISHES= "찜 선택 삭제 성공";
 }

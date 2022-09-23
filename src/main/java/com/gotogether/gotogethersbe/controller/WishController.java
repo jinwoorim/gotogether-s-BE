@@ -6,10 +6,9 @@ import com.gotogether.gotogethersbe.web.api.DefaultRes;
 import com.gotogether.gotogethersbe.web.api.ResponseMessage;
 import com.gotogether.gotogethersbe.web.api.StatusCode;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -31,5 +30,14 @@ public class WishController {
     public DefaultRes getWishList() {
 
         return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_WISH_LIST, wishService.getWishList());
+    }
+
+    // 찜 선택 삭제
+    @DeleteMapping("/wishes")
+    public DefaultRes deleteWishes(@RequestBody List<WishDto.WishDeleteRequest> list) {
+
+        wishService.deleteWishes(list);
+
+        return DefaultRes.res(StatusCode.OK, ResponseMessage.DELETE_WISHES);
     }
 }
