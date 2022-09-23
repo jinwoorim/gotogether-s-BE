@@ -38,12 +38,10 @@ public class Reservation {
     private Status status;
 
     @Builder
-    public Reservation(Product product, Member member, long totalPrice, Status status){
+    public Reservation(Product product, Member member, long totalPrice, Status status) {
         this.product = product;
         this.member = member;
         this.totalPrice = totalPrice;
         this.status = status;
     }
-
-
 }

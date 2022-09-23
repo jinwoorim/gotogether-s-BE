@@ -7,21 +7,21 @@ import com.gotogether.gotogethersbe.repository.MemberRepository;
 import com.gotogether.gotogethersbe.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final MemberRepository memberRepository;
 
     // 예약하기
-    @Transactional
-    public void doReservation(ReservationDto.ReservationRequest request){
+    public void doReservation(ReservationDto.ReservationRequest request) {
 
         Reservation reservation = Reservation.builder()
                 .product(null)
@@ -34,6 +34,7 @@ public class ReservationService {
     }
 
     // 예약 상품 목록 조회
+    @Transactional(readOnly = true)
     public List<ReservationDto.ReservationListResponse> getReservationList() {
 
         return mapToDto(reservationRepository.findByMember_id(SecurityUtil.getCurrentMemberId()));
@@ -48,8 +49,9 @@ public class ReservationService {
     }
 
     // 예약 상품 상세 조회
+    @Transactional(readOnly = true)
     public ReservationDto.ReservationDetailResponse getReservation(Long id) {
-        
+
         return new ReservationDto.ReservationDetailResponse(reservationRepository.findById(id).get());
     }
 
