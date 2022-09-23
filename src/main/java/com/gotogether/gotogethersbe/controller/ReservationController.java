@@ -37,7 +37,7 @@ public class ReservationController {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_RESERVATION, reservationService.getReservation(id));
     }
 
-    // 예약 상태(대기,예약완료,취소) 수정
+    // 예약 상태(예약대기,예약완료,예약취소) 수정
 
     @PutMapping("/reservations/status")
     public DefaultRes updateReservationStatus(@RequestBody ReservationDto.UpdateReservationStatusRequest request) {

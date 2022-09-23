@@ -10,6 +10,7 @@ import java.time.LocalDate;
 
 public class ReservationDto {
 
+    // 예약하기
     @Data
     public static class ReservationRequest {
 
@@ -21,6 +22,7 @@ public class ReservationDto {
 
     }
 
+    // 예약 상품 목록 조회
     @Data
     public static class ReservationListResponse {
 
@@ -40,6 +42,7 @@ public class ReservationDto {
         }
     }
 
+    // 예약 상품 상세 조회
     @Data
     public static class ReservationDetailResponse {
 
@@ -58,6 +61,7 @@ public class ReservationDto {
         }
     }
 
+    // 예약 상태(예약대기, 예약완료, 예약취소) 수정
     @Data
     public static class UpdateReservationStatusRequest {
 
