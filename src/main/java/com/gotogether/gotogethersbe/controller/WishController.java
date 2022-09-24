@@ -8,8 +8,6 @@ import com.gotogether.gotogethersbe.web.api.StatusCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @RestController
 public class WishController {
@@ -33,10 +31,26 @@ public class WishController {
     }
 
     // 찜 선택 삭제
-    @DeleteMapping("/wishes")
-    public DefaultRes deleteWishes(@RequestBody List<WishDto.WishDeleteRequest> list) {
+//    @DeleteMapping("/wishes")
+//    public DefaultRes deleteWishes(@RequestBody List<WishDto.WishDeleteRequest> list) {
+//
+//        wishService.deleteWishes(list);
+//
+//        return DefaultRes.res(StatusCode.OK, ResponseMessage.DELETE_WISHES);
+//    }
 
-        wishService.deleteWishes(list);
+//    @DeleteMapping("/wishes")
+//    public DefaultRes deleteWishes(@RequestBody List<Long> wishIdList) {
+//
+//        wishService.deleteWishes(wishIdList);
+//
+//        return DefaultRes.res(StatusCode.OK, ResponseMessage.DELETE_WISHES);
+//    }
+
+    @DeleteMapping("/wishes")
+    public DefaultRes deleteWishes(@RequestBody WishDto.WishDeleteRequest request) {
+
+        wishService.deleteWishes(request.getWish_id());
 
         return DefaultRes.res(StatusCode.OK, ResponseMessage.DELETE_WISHES);
     }

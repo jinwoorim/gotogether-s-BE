@@ -4,6 +4,8 @@ import com.gotogether.gotogethersbe.domain.Product;
 import com.gotogether.gotogethersbe.domain.Wish;
 import lombok.Data;
 
+import java.util.List;
+
 public class WishDto {
 
     // 찜 하기
@@ -28,6 +30,6 @@ public class WishDto {
     @Data
     public static class WishDeleteRequest {
 
-        private Long wish_id;
+        private List<Long> wish_id;
     }
 }
