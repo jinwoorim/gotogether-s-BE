@@ -16,10 +16,6 @@ public class ReservationDto {
 
         private Long product_id;
         private long totalPrice;
-
-        @Enumerated(EnumType.STRING)
-        private Status status;
-
     }
 
     // 예약 상품 목록 조회
@@ -68,6 +64,8 @@ public class ReservationDto {
         private Long reservation_id;
         private Status status;
     }
+
+    // 에약 상품 삭제
     @Data
     public static class DeleteReservationRequest {
 
