@@ -14,13 +14,13 @@ import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 @Service
-@Transactional
 public class WishService {
 
     private final WishRepository wishRepository;
     private final MemberRepository memberRepository;
 
     // 찜 하기
+    @Transactional
     public void doWish(WishDto.WishRequest request) {
 
         Wish wish = Wish.builder()
@@ -47,6 +47,7 @@ public class WishService {
     }
 
     // 찜 선택 삭제
+    @Transactional
     public void deleteWishes(List<WishDto.WishDeleteRequest> list) {
 
         for(WishDto.WishDeleteRequest wishDeleteRequest : list) {
