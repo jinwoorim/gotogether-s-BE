@@ -37,6 +37,11 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    public Reservation updateReservationStatus(Status status) {
+        this.status = status;
+        return this;
+    }
+
     @Builder
     public Reservation(Product product, Member member, long totalPrice, Status status) {
         this.product = product;
