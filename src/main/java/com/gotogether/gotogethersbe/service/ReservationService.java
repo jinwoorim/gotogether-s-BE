@@ -1,17 +1,19 @@
 package com.gotogether.gotogethersbe.service;
 
+import com.gotogether.gotogethersbe.config.common.exception.CustomException;
 import com.gotogether.gotogethersbe.config.util.SecurityUtil;
 import com.gotogether.gotogethersbe.domain.Reservation;
 import com.gotogether.gotogethersbe.domain.enums.Status;
 import com.gotogether.gotogethersbe.dto.ReservationDto;
 import com.gotogether.gotogethersbe.repository.MemberRepository;
 import com.gotogether.gotogethersbe.repository.ReservationRepository;
+import com.gotogether.gotogethersbe.web.api.ResponseMessage;
+import com.gotogether.gotogethersbe.web.api.StatusCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 @Service
@@ -53,16 +55,18 @@ public class ReservationService {
     @Transactional(readOnly = true)
     public ReservationDto.ReservationDetailResponse getReservation(Long id) {
 
-        return new ReservationDto.ReservationDetailResponse(reservationRepository.findById(id).get());
+        return new ReservationDto.ReservationDetailResponse(reservationRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ResponseMessage.NOT_FOUND_RESERVATION, StatusCode.NOT_FOUND)));
     }
 
-    // 예약 상태(대기,예약완료,취소) 수정
+    // 예약 상태(예약대기,예약완료,예약취소) 수정
     @Transactional
     public void updateReservationStatus(ReservationDto.UpdateReservationStatusRequest request) {
 
-        Reservation reservation = reservationRepository.findById(request.getReservation_id()).orElseThrow(NoSuchElementException::new);
+        Reservation reservation = reservationRepository.findById(request.getReservation_id()).get();
 
         reservationRepository.save(reservation.updateReservationStatus(request.getStatus()));
+
     }
 
     // 예약 상품 삭제

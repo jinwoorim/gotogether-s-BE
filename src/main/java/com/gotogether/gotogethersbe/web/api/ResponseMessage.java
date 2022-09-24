@@ -28,11 +28,15 @@ public class ResponseMessage {
     public static final String DELETE_CART = "장바구니 삭제 성공";
     public static final String ORDER_CART = "장바구니 신청 성공";
 
+    public static final String NOT_FOUND_RESERVATION = "해당 상품을 찾을 수 없습니다";
+
     public static final String RESERVATION_SUCCESS = "예약 성공";
     public static final String GET_RESERVATION_LIST = "예약 목록 조회 성공";
     public static final String UPDATE_RESERVATION_STATUS = "예약 상품 상태 수정 성공";
     public static final String DELETE_RESERVATION = "예약 상품 삭제 성공";
     public static final String GET_RESERVATION = "예약 상품 상세 조회 성공";
+
+    public static final String NOT_FOUND_WISH = "해당 찜을 찾을 수 없습니다";
 
     public static final String WISH_SUCCESS= "찜 성공";
     public static final String GET_WISH_LIST= "찜 목록 조회 성공";
