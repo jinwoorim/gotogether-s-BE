@@ -2,6 +2,7 @@ package com.gotogether.gotogethersbe.service;
 
 import com.gotogether.gotogethersbe.config.util.SecurityUtil;
 import com.gotogether.gotogethersbe.domain.Reservation;
+import com.gotogether.gotogethersbe.domain.enums.Status;
 import com.gotogether.gotogethersbe.dto.ReservationDto;
 import com.gotogether.gotogethersbe.repository.MemberRepository;
 import com.gotogether.gotogethersbe.repository.ReservationRepository;
@@ -14,20 +15,20 @@ import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 @Service
-@Transactional
 public class ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final MemberRepository memberRepository;
 
     // 예약하기
+    @Transactional
     public void doReservation(ReservationDto.ReservationRequest request) {
 
         Reservation reservation = Reservation.builder()
                 .product(null)
                 .member(memberRepository.findById(SecurityUtil.getCurrentMemberId()).get())
                 .totalPrice(request.getTotalPrice())
-                .status(request.getStatus())
+                .status(Status.STANDBY)
                 .build();
 
         reservationRepository.save(reservation);
@@ -56,20 +57,18 @@ public class ReservationService {
     }
 
     // 예약 상태(대기,예약완료,취소) 수정
+    @Transactional
     public void updateReservationStatus(ReservationDto.UpdateReservationStatusRequest request) {
 
         Reservation reservation = reservationRepository.findById(request.getReservation_id()).orElseThrow(NoSuchElementException::new);
 
-        reservation.setStatus(request.getStatus());
-
-        reservationRepository.save(reservation);
+        reservationRepository.save(reservation.updateReservationStatus(request.getStatus()));
     }
 
     // 예약 상품 삭제
+    @Transactional
     public void deleteReservation(ReservationDto.UpdateReservationStatusRequest request) {
 
-        Reservation reservation = reservationRepository.findById(request.getReservation_id()).orElseThrow(NoSuchElementException::new);
-
-        reservationRepository.delete(reservation);
+        reservationRepository.deleteById(request.getReservation_id());
     }
 }
