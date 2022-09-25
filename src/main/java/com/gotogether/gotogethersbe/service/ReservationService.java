@@ -43,7 +43,7 @@ public class ReservationService {
     @Transactional(readOnly = true)
     public List<ReservationDto.ReservationListResponse> getReservationList() {
 
-        return mapToDto(reservationRepository.findByMember_id(SecurityUtil.getCurrentMemberId()));
+        return mapToDto(reservationRepository.findByMember_idOrderByIdDesc(SecurityUtil.getCurrentMemberId()));
     }
 
     // 최근 예약 상품 기간별 필터링(90일, 180일, 365일)
