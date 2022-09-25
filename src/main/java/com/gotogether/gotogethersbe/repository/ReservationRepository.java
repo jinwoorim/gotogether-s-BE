@@ -8,4 +8,6 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
     List<Reservation> findByMember_id(Long id);
+
+    List<Reservation> findByMember_idOrderByIdDesc(Long id);
 }

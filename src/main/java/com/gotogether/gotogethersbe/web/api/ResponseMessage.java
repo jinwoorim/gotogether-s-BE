@@ -35,6 +35,7 @@ public class ResponseMessage {
     public static final String UPDATE_RESERVATION_STATUS = "예약 상품 상태 수정 성공";
     public static final String DELETE_RESERVATION = "예약 상품 삭제 성공";
     public static final String GET_RESERVATION = "예약 상품 상세 조회 성공";
+    public static final String GET_RESERVATION_BY_PERIOD = "최근 예약 상품 기간별 조회 성공";
 
     public static final String NOT_FOUND_WISH = "해당 찜을 찾을 수 없습니다";
 

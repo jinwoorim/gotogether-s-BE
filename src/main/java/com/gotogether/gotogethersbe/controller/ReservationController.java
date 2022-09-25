@@ -30,6 +30,13 @@ public class ReservationController {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_RESERVATION_LIST, reservationService.getReservationList());
     }
 
+    // 최근 예약 상품 기간별 필터링(90일, 180일, 365일)
+    @GetMapping("/reservations/period/{period}")
+    public DefaultRes getReservationByPeriod(@PathVariable int period) {
+
+        return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_RESERVATION_BY_PERIOD, reservationService.getReservationByPeriod(period));
+    }
+
     // 예약 상품 상세 조회
     @GetMapping("/reservations/{id}")
     public DefaultRes getReservation(@PathVariable Long id) {

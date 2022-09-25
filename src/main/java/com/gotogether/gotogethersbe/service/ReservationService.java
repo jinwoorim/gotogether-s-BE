@@ -13,6 +13,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -41,6 +44,24 @@ public class ReservationService {
     public List<ReservationDto.ReservationListResponse> getReservationList() {
 
         return mapToDto(reservationRepository.findByMember_id(SecurityUtil.getCurrentMemberId()));
+    }
+
+    // 최근 예약 상품 기간별 필터링(90일, 180일, 365일)
+    @Transactional(readOnly = true)
+    public List<ReservationDto.ReservationListResponse> getReservationByPeriod(int period) {
+
+        List<Reservation> list = reservationRepository.findByMember_idOrderByIdDesc(SecurityUtil.getCurrentMemberId());
+
+        List<Reservation> recentReservationByPeriod = new ArrayList<>();
+
+        for (Reservation reservation : list) {
+
+            if(period >= Period.between(LocalDate.now(), reservation.getReservationDate()).getDays()) {
+
+                recentReservationByPeriod.add(reservation);
+            }
+        }
+        return mapToDto(recentReservationByPeriod);
     }
 
     private List<ReservationDto.ReservationListResponse> mapToDto(List<Reservation> reservationList) {

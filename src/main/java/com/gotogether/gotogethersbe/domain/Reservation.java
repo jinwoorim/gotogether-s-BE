@@ -9,6 +9,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 @Entity
 @Data
@@ -31,6 +33,9 @@ public class Reservation {
 
     @CreationTimestamp
     private LocalDate reservationDate = LocalDate.now();
+
+    private String reservationDayOfWeek = reservationDate.getDayOfWeek()
+            .getDisplayName(TextStyle.SHORT, Locale.KOREAN);
 
     private long totalPrice;
 

@@ -30,11 +30,14 @@ public class ReservationDto {
 
         private LocalDate reservationDate;
 
+        private String reservationDayOfWeek;
+
         public ReservationListResponse(Reservation reservation){
             reservation_id = reservation.getId();
             totalPrice = reservation.getTotalPrice();
             status = reservation.getStatus();
             reservationDate = reservation.getReservationDate();
+            reservationDayOfWeek = reservation.getReservationDayOfWeek();
         }
     }
 
@@ -49,11 +52,13 @@ public class ReservationDto {
         private Status status;
 
         private LocalDate reservationDate;
+        private String reservationDayOfWeek;
         public ReservationDetailResponse(Reservation reservation){
             reservation_id = reservation.getId();
             totalPrice = reservation.getTotalPrice();
             status = reservation.getStatus();
             reservationDate = reservation.getReservationDate();
+            reservationDayOfWeek = reservation.getReservationDayOfWeek();
         }
     }
 
