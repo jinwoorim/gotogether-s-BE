@@ -34,7 +34,7 @@ public class WishService {
     @Transactional(readOnly = true)
     public List<WishDto.WishListResponse> getWishList() {
 
-        return maptoDto(wishRepository.findByMember_id(SecurityUtil.getCurrentMemberId()));
+        return maptoDto(wishRepository.findByMember_idOrderByIdDesc(SecurityUtil.getCurrentMemberId()));
     }
 
     private List<WishDto.WishListResponse> maptoDto(List<Wish> wishList) {

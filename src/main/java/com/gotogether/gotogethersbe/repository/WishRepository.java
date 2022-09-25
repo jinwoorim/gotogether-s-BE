@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface WishRepository extends JpaRepository<Wish, Long> {
 
-    List<Wish> findByMember_id(Long id);
+    List<Wish> findByMember_idOrderByIdDesc(Long id);
 
   //  Optional<Wish> findByIdAndMember_id(Long wish_id, Long member_id);
     @Modifying

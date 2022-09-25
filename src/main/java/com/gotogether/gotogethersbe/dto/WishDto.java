@@ -19,9 +19,12 @@ public class WishDto {
     @Data
     public static class WishListResponse {
 
+        private Long wish_id;
         private Product product;
 
         public WishListResponse(Wish wish) {
+
+            wish_id = wish.getId();
             product = wish.getProduct();
         }
     }
