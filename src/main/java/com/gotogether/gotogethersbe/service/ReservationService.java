@@ -3,9 +3,11 @@ package com.gotogether.gotogethersbe.service;
 import com.gotogether.gotogethersbe.config.common.exception.CustomException;
 import com.gotogether.gotogethersbe.config.util.SecurityUtil;
 import com.gotogether.gotogethersbe.domain.Reservation;
+import com.gotogether.gotogethersbe.domain.ReservationPerson;
 import com.gotogether.gotogethersbe.domain.enums.Status;
 import com.gotogether.gotogethersbe.dto.ReservationDto;
 import com.gotogether.gotogethersbe.repository.MemberRepository;
+import com.gotogether.gotogethersbe.repository.ReservationPersonRepository;
 import com.gotogether.gotogethersbe.repository.ReservationRepository;
 import com.gotogether.gotogethersbe.web.api.ResponseMessage;
 import com.gotogether.gotogethersbe.web.api.StatusCode;
@@ -23,6 +25,7 @@ import java.util.List;
 public class ReservationService {
 
     private final ReservationRepository reservationRepository;
+    private final ReservationPersonRepository reservationPersonRepository;
     private final MemberRepository memberRepository;
 
     // 예약하기
@@ -30,13 +33,32 @@ public class ReservationService {
     public void doReservation(ReservationDto.ReservationRequest request) {
 
         Reservation reservation = Reservation.builder()
-                .product(null)
+                .product(request.getReservation().getProduct())
                 .member(memberRepository.findById(SecurityUtil.getCurrentMemberId()).get())
-                .totalPrice(request.getTotalPrice())
+                .totalPrice(request.getReservation().getTotalPrice())
                 .status(Status.STANDBY)
                 .build();
 
-        reservationRepository.save(reservation);
+        Reservation getReservation = reservationRepository.save(reservation);
+
+        List<ReservationPerson> reservationPersonList = new ArrayList<>();
+
+        for(ReservationPerson reservationPerson : request.getReservationPersonList()) {
+
+                ReservationPerson addReservationPerson = ReservationPerson.builder()
+                        .name(reservationPerson.getName())
+                        .phoneNumber(reservationPerson.getPhoneNumber())
+                        .firstSelectOption(reservationPerson.getFirstSelectOption())
+                        .secondSelectOption(reservationPerson.getSecondSelectOption())
+                        .thirdSelectOption(reservationPerson.getThirdSelectOption())
+                        .role(reservationPerson.getRole())
+                        .reservation(getReservation)
+                        .build();
+
+                reservationPersonList.add(addReservationPerson);
+        }
+
+        reservationPersonRepository.saveAll(reservationPersonList);
     }
 
     // 예약 상품 목록 조회
