@@ -67,7 +67,6 @@ public class WishService {
     @Transactional
     public void deleteWishes(List<Long> wishIdList) {
 
-        wishRepository.deleteWishWithMemberId(wishIdList, SecurityUtil.getCurrentMemberId());
-
+        wishRepository.deleteWishes(wishIdList);
     }
 }
