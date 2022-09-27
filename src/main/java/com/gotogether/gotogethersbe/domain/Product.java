@@ -29,8 +29,7 @@ public class Product {
     private String points;
     private String info;
 
-    @OneToMany
-    @JoinColumn(name="OPTION_ID")
+    @OneToMany(mappedBy = "product", cascade=CascadeType.REMOVE)
     private List<Option> optionList;
 
     @Enumerated(EnumType.STRING)
@@ -50,17 +49,18 @@ public class Product {
     public Product(String thumbnail, String productName, Long amount, String country,
                    String region, String points, String airport, String info, Ages ages,
                    Companion companion, Continent continent, GenderGroup genderGroup,
-                   Religion religion, Theme theme){
+                   Religion religion, Theme theme, List<Option> optionList){
 
         this.thumbnail = thumbnail;
         this.productName = productName;
         this.amount = amount;
         this.country = country;
-        this.region = region;
+        this.info = info;
+        this.optionList = optionList;
         //요약설명쪽 정보
         this.points = points;
         this.airport = airport;
-        this.info = info;
+        this.region = region;
         // 카테고리 쪽 정보
         this.ages = ages;
         this.companion = companion;
