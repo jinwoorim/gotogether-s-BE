@@ -51,6 +51,7 @@ public class ReservationService {
                         .firstSelectOption(reservationPerson.getFirstSelectOption())
                         .secondSelectOption(reservationPerson.getSecondSelectOption())
                         .thirdSelectOption(reservationPerson.getThirdSelectOption())
+                        .fourthSelectOption(reservationPerson.getFourthSelectOption())
                         .role(reservationPerson.getRole())
                         .reservation(getReservation)
                         .build();
