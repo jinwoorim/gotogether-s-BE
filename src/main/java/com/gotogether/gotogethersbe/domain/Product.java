@@ -2,6 +2,7 @@ package com.gotogether.gotogethersbe.domain;
 
 import com.gotogether.gotogethersbe.domain.enums.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,31 +22,49 @@ public class Product {
     private String thumbnail;
     private String productName;
     private long amount;
-
-    @Enumerated(EnumType.STRING)
-    private Region country;
+    private String country;
+    private String region;
+    private String airport;
+    private String points;
+    private String info;
 
     @Enumerated(EnumType.STRING)
     private Ages ages;
-
-    @Enumerated(EnumType.STRING)
-    private GenderGroup together;
-
     @Enumerated(EnumType.STRING)
     private Companion companion;
-
+    @Enumerated(EnumType.STRING)
+    private Continent continent;
+    @Enumerated(EnumType.STRING)
+    private GenderGroup genderGroup;
     @Enumerated(EnumType.STRING)
     private Religion religion;
-
     @Enumerated(EnumType.STRING)
     private Theme theme;
 
-    @Enumerated(EnumType.STRING)
-    private Country nation;
+    @Builder
+    public Product(String thumbnail, String productName, Long amount, String country,
+                   String region, String points, String airport, String info, Ages ages,
+                   Companion companion, Continent continent, GenderGroup genderGroup,
+                   Religion religion, Theme theme){
 
-    private String summary;
-    private String detail;
-    private String info;
-    private String way;
-    private String infoImage;
+        this.thumbnail = thumbnail;
+        this.productName = productName;
+        this.amount = amount;
+        this.country = country;
+        this.region = region;
+        //요약설명쪽 정보
+        this.points = points;
+        this.airport = airport;
+        this.info = info;
+        // 카테고리 쪽 정보
+        this.ages = ages;
+        this.companion = companion;
+        this.continent = continent;
+        this.genderGroup = genderGroup;
+        this.religion = religion;
+        this.theme = theme;
+
+
+    }
+
 }
