@@ -85,7 +85,7 @@ public class ProductService{
     public List<ProductDto.ProductResponse> recommendGolf() {
         Theme golf = Theme.GOLF;
 
-        return productRepository.findThemeProducts(golf)
+        return productRepository.findByTheme(golf)
                 .stream()
                 .map(ProductDto.ProductResponse::of)
                 .collect(Collectors.toList());
@@ -98,7 +98,7 @@ public class ProductService{
     public List<ProductDto.ProductResponse> recommendCulture() {
         Theme culture = Theme.CULTURE;
 
-        return productRepository.findThemeProducts(culture)
+        return productRepository.findByTheme(culture)
                 .stream()
                 .map(ProductDto.ProductResponse::of)
                 .collect(Collectors.toList());
@@ -111,7 +111,7 @@ public class ProductService{
     public List<ProductDto.ProductResponse> recommendHealing() {
         Theme healing = Theme.HEALING;
 
-        return productRepository.findThemeProducts(healing)
+        return productRepository.findByTheme(healing)
                 .stream()
                 .map(ProductDto.ProductResponse::of)
                 .collect(Collectors.toList());
