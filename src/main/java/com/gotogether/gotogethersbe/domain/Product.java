@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,6 +28,10 @@ public class Product {
     private String airport;
     private String points;
     private String info;
+
+    @OneToMany
+    @JoinColumn(name="OPTION_ID")
+    private List<Option> optionList;
 
     @Enumerated(EnumType.STRING)
     private Ages ages;
@@ -63,8 +68,5 @@ public class Product {
         this.genderGroup = genderGroup;
         this.religion = religion;
         this.theme = theme;
-
-
     }
-
 }
