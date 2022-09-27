@@ -33,13 +33,17 @@ public class AuthService {
     //회원 가입
     @Transactional
     public MemberDto.MemberResponse signup(MemberDto.MemberRequest request){
-        //이메일 유효성 검사
-        if (memberRepository.existsByEmail(request.getEmail())) {
-            throw new CustomException(ResponseMessage.CREATED_FAIL, StatusCode.BAD_REQUEST);
-        }
         //패스워드 암호화 후 저장
         Member member = request.toMember(passwordEncoder);
         return MemberDto.MemberResponse.of(memberRepository.save(member));
+    }
+
+    //이메일 유효성 검사
+    @Transactional
+    public void checkPassword(MemberDto.emailRequest request){
+        if (memberRepository.existsByEmail(request.getEmail())) {
+            throw new CustomException(ResponseMessage.CHECK_EMAIL_FAIL, StatusCode.BAD_REQUEST);
+        }
     }
 
     // 로그인
