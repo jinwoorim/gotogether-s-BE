@@ -22,7 +22,6 @@ public class ProductDto {
         private Companion companion;
         private Theme theme;
 
-
         public static ProductResponse of(Product product) {
             return ProductResponse.builder()
                     .id(product.getId())
@@ -38,8 +37,6 @@ public class ProductDto {
                     .build();
         }
     }
-
-
 
     @Data
     @AllArgsConstructor
