@@ -74,3 +74,5 @@
                             productId      bigint,
                             memberId       bigint
     );
+
+    insert into Member(email, password, name, authority) values("admin@admin", "admin", "ADMIN", "ROLE_ADMIN");
