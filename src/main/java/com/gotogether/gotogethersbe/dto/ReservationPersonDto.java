@@ -11,20 +11,20 @@ public class ReservationPersonDto {
 
         private String name;
         private String phoneNumber;
+        private String duration;
         private String firstSelectOption;
         private String secondSelectOption;
         private String thirdSelectOption;
-        private String fourthSelectOption;
         private Boolean role;
 
         public ReservationPersonListResponse(ReservationPerson reservationPerson) {
 
             name = reservationPerson.getName();
             phoneNumber = reservationPerson.getPhoneNumber();
+            duration = reservationPerson.getDuration();
             firstSelectOption = reservationPerson.getFirstSelectOption();
             secondSelectOption = reservationPerson.getSecondSelectOption();
             thirdSelectOption = reservationPerson.getThirdSelectOption();
-            fourthSelectOption = reservationPerson.getFourthSelectOption();
             role = reservationPerson.getRole();
         }
     }

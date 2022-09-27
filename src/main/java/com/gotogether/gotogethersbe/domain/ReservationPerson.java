@@ -23,10 +23,10 @@ public class ReservationPerson {
 
     private String name;
     private String phoneNumber;
+    private String duration;
     private String firstSelectOption;
     private String secondSelectOption;
     private String thirdSelectOption;
-    private String fourthSelectOption;
     private Boolean role;
 
     @ManyToOne(fetch = FetchType.LAZY)

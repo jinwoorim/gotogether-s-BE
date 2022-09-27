@@ -48,10 +48,10 @@ public class ReservationService {
                 ReservationPerson addReservationPerson = ReservationPerson.builder()
                         .name(reservationPerson.getName())
                         .phoneNumber(reservationPerson.getPhoneNumber())
+                        .duration(reservationPerson.getDuration())
                         .firstSelectOption(reservationPerson.getFirstSelectOption())
                         .secondSelectOption(reservationPerson.getSecondSelectOption())
                         .thirdSelectOption(reservationPerson.getThirdSelectOption())
-                        .fourthSelectOption(reservationPerson.getFourthSelectOption())
                         .role(reservationPerson.getRole())
                         .reservation(getReservation)
                         .build();
