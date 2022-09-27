@@ -53,7 +53,8 @@ public class ReservationDto {
 
         private String reservationDayOfWeek;
 
-        public ReservationListResponse(Reservation reservation){
+        public ReservationListResponse(Reservation reservation) {
+
             reservation_id = reservation.getId();
             totalPrice = reservation.getTotalPrice();
             status = reservation.getStatus();
@@ -74,6 +75,7 @@ public class ReservationDto {
 
         private LocalDate reservationDate;
         private String reservationDayOfWeek;
+
         public ReservationDetailResponse(Reservation reservation){
             reservation_id = reservation.getId();
             totalPrice = reservation.getTotalPrice();
