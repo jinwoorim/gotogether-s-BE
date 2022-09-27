@@ -31,6 +31,10 @@ public class Reservation {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
+//
+//    @OneToMany(mappedBy = "reservation", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+//    private List<ReservationPerson> reservations = new ArrayList<ReservationPerson>();
+
     @CreationTimestamp
     private LocalDate reservationDate = LocalDate.now();
 
