@@ -25,7 +25,4 @@ public class Option {
     private String value;
 
     private Long additional;
-
-    private Boolean required;
-
 }
