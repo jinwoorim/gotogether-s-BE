@@ -51,6 +51,11 @@ public class MemberDto {
     }
 
     @Getter
+    public static class emailRequest{
+        private String email;
+    }
+
+    @Getter
     public static class passwordRequest{
         private String password;
     }
