@@ -26,6 +26,7 @@ public class ReservationPerson {
     private String firstSelectOption;
     private String secondSelectOption;
     private String thirdSelectOption;
+    private String fourthSelectOption;
     private Boolean role;
 
     @ManyToOne(fetch = FetchType.LAZY)
