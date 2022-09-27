@@ -21,7 +21,7 @@ public class ProductController {
     private final ProductService productService;
 
     // 연령대별 상품 추천
-    @GetMapping("/Ages")
+    @GetMapping("/ages")
     public DefaultRes<List<ProductDto.ProductResponse>> getAgesProductList(ProductDto.RecommendationRequest request) {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_CUSTOM_PRODUCT_LIST, productService.recommendByAges(request));
     }
@@ -29,13 +29,13 @@ public class ProductController {
     // 유형별 상품 추천
 
     // 골프 상품 추천
-    @GetMapping("/Golf")
+    @GetMapping("/golf")
     public DefaultRes<List<ProductDto.ProductResponse>> getGolfProductList() {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_CUSTOM_PRODUCT_LIST, productService.recommendGolf());
     }
 
     // 문화탐방 상품 추천
-    @GetMapping("/Culture")
+    @GetMapping("/culture")
     public DefaultRes<List<ProductDto.ProductResponse>> getCultureProductList() {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_CUSTOM_PRODUCT_LIST, productService.recommendCulture());
     }
