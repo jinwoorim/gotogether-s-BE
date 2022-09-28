@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
+@Builder
 @Entity
 @Data
 @NoArgsConstructor
@@ -19,7 +20,6 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PRODUCT_ID")
     private Long id;
-
     private String thumbnail;
     private String productName;
     private long amount;
@@ -28,7 +28,6 @@ public class Product {
     private String airport;
     private String points;
     private String info;
-
     @OneToMany(mappedBy = "product", cascade=CascadeType.REMOVE)
     private List<Option> optionList;
     private String ages;
