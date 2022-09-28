@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Builder
 @Entity
 @Getter
 @NoArgsConstructor
@@ -24,13 +25,6 @@ public class Option {
     @ManyToOne
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
-
-    @Builder
-    public Option(String name, String value, Long additional){
-        this.name = name;
-        this.value = value;
-        this.additional = additional;
-    }
 
     public Option addProduct(Product product){
         this.product = product;
