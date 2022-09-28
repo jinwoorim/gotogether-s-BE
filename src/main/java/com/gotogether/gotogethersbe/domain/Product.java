@@ -31,9 +31,7 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade=CascadeType.REMOVE)
     private List<Option> optionList;
-
-    @Enumerated(EnumType.STRING)
-    private Ages ages;
+    private String ages;
     @Enumerated(EnumType.STRING)
     private Companion companion;
     @Enumerated(EnumType.STRING)
@@ -47,7 +45,7 @@ public class Product {
 
     @Builder
     public Product(String thumbnail, String productName, Long amount, String country,
-                   String region, String points, String airport, String info, Ages ages,
+                   String region, String points, String airport, String info, String ages,
                    Companion companion, Continent continent, GenderGroup genderGroup,
                    Religion religion, Theme theme, List<Option> optionList){
 

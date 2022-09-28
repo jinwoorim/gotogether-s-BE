@@ -17,7 +17,7 @@ public class ProductDto {
         private String productName;
         private long amount;
         private String country;
-        private Ages ages;
+        private String ages;
         private GenderGroup genderGruop;
         private Companion companion;
         private Theme theme;
@@ -53,7 +53,7 @@ public class ProductDto {
         private String detail;
         private String info;
 
-        private Ages ages;
+        private String ages;
         private GenderGroup genderGruop;
         private Companion companion;
         private Religion religion;
