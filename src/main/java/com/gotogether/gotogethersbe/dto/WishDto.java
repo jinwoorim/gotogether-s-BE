@@ -1,6 +1,5 @@
 package com.gotogether.gotogethersbe.dto;
 
-import com.gotogether.gotogethersbe.domain.Product;
 import com.gotogether.gotogethersbe.domain.Wish;
 import lombok.Data;
 
@@ -20,12 +19,16 @@ public class WishDto {
     public static class WishListResponse {
 
         private Long wish_id;
-        private Product product;
+        private String productName;
+        private String thumbnail;
+        private long basicPrice;
 
         public WishListResponse(Wish wish) {
 
             wish_id = wish.getId();
-            product = wish.getProduct();
+            productName = wish.getProduct().getProductName();
+            thumbnail = wish.getProduct().getThumbnail();
+            basicPrice = wish.getProduct().getAmount();
         }
     }
 

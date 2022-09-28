@@ -1,10 +1,14 @@
 package com.gotogether.gotogethersbe.service;
 
+import com.gotogether.gotogethersbe.config.common.exception.CustomException;
 import com.gotogether.gotogethersbe.config.util.SecurityUtil;
 import com.gotogether.gotogethersbe.domain.Wish;
 import com.gotogether.gotogethersbe.dto.WishDto;
 import com.gotogether.gotogethersbe.repository.MemberRepository;
+import com.gotogether.gotogethersbe.repository.ProductRepository;
 import com.gotogether.gotogethersbe.repository.WishRepository;
+import com.gotogether.gotogethersbe.web.api.ResponseMessage;
+import com.gotogether.gotogethersbe.web.api.StatusCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,13 +21,15 @@ public class WishService {
 
     private final WishRepository wishRepository;
     private final MemberRepository memberRepository;
+    private final ProductRepository productRepository;
 
     // 찜 하기
     @Transactional
     public void doWish(WishDto.WishRequest request) {
 
         Wish wish = Wish.builder()
-                .product(null)
+                .product(productRepository.findById(request.getProduct_id())
+                        .orElseThrow(() -> new CustomException(ResponseMessage.NOT_FOUND_WISH, StatusCode.NOT_FOUND)))
                 .member(memberRepository.findById(SecurityUtil.getCurrentMemberId()).get())
                 .build();
 
