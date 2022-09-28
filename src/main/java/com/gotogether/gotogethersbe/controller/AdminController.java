@@ -40,7 +40,7 @@ public class AdminController {
 
     //상품 리스트 조회
     @GetMapping("/products")
-    public DefaultRes<List<AdminProductDto.ProductResponse>> getProductList(){
+    public DefaultRes<List<AdminProductDto.ProductListResponse>> getProductList(){
         return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_PRODUCTS_SUCCESS, adminService.getProductList());
     }
 
