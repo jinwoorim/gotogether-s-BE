@@ -14,7 +14,7 @@ public interface WishRepository extends JpaRepository<Wish, Long> {
     @Modifying(clearAutomatically = true, flushAutomatically = true) // 기존 delete는 조회를하고 delete하는 두번의 쿼리가 날라가지만,
     @Query("delete from Wish u where u.id in ?1")                    // bulk delete를 해주게되면 쿼리는 한번 날라가지만 영속성 컨텍스트와 DB의 데이터의 싱크가 맞지않게 되므로
     void deleteWishes(List<Long> list);                              // @Modifying(clearAutomatically = true, flushAutomatically = true)를 해주어
-                                                                   // 연산 직 후 영속성 컨텍스트를 clear하고 DB에 flush 할것을 명시해야한다
+                                                                     // 연산 직 후 영속성 컨텍스트를 clear하고 DB에 flush 할것을 명시해야한다
 
 
 

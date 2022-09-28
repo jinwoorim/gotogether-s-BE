@@ -12,14 +12,6 @@ import java.util.List;
 
 public class ReservationDto {
 
-    // 예약하기
-//    @Data
-//    public static class ReservationRequest {
-//
-//        private Long product_id;
-//        private long totalPrice;
-//    }
-
     @Data
     public static class ReservationRequest {
 
@@ -27,18 +19,6 @@ public class ReservationDto {
         private Reservation reservation;
         private List<ReservationPerson> reservationPersonList;
     }
-
-    // 예약자
-//    @Data
-//    public static class ReservationPersonRequest {
-//
-//        private String name;
-//        private String phoneNumber;
-//        private String firstSelectOption;
-//        private String secondSelectOption;
-//        private String thirdSelectOption;
-//        private boolean role;
-//    }
 
     // 예약 상품 목록 조회
     @Data

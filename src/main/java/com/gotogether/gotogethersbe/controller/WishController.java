@@ -31,22 +31,6 @@ public class WishController {
     }
 
     // 찜 선택 삭제
-//    @DeleteMapping("/wishes")
-//    public DefaultRes deleteWishes(@RequestBody List<WishDto.WishDeleteRequest> list) {
-//
-//        wishService.deleteWishes(list);
-//
-//        return DefaultRes.res(StatusCode.OK, ResponseMessage.DELETE_WISHES);
-//    }
-
-//    @DeleteMapping("/wishes")
-//    public DefaultRes deleteWishes(@RequestBody List<Long> wishIdList) {
-//
-//        wishService.deleteWishes(wishIdList);
-//
-//        return DefaultRes.res(StatusCode.OK, ResponseMessage.DELETE_WISHES);
-//    }
-
     @DeleteMapping("/wishes")
     public DefaultRes deleteWishes(@RequestBody WishDto.WishDeleteRequest request) {
 

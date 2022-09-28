@@ -52,24 +52,6 @@ public class WishService {
     }
 
     // 찜 선택 삭제
-//    @Transactional
-//    public void deleteWishes(List<WishDto.WishDeleteRequest> list) {
-//
-//        for(WishDto.WishDeleteRequest wishDeleteRequest : list) {
-//
-//            Wish wish = wishRepository.findByIdAndMember_id(wishDeleteRequest.getWish_id(), SecurityUtil.getCurrentMemberId())
-//                    .orElseThrow(() -> new CustomException(ResponseMessage.NOT_FOUND_WISH, StatusCode.NOT_FOUND));
-//
-//            wishRepository.delete(wish);
-//        }
-
-//    @Transactional
-//    public void deleteWishes(List<Long> wishIdList) {
-//
-//            wishRepository.deleteWishWithMemberId(wishIdList, SecurityUtil.getCurrentMemberId());
-//
-//    }
-
     @Transactional
     public void deleteWishes(List<Long> wishIdList) {
 
