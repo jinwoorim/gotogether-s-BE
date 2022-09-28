@@ -17,11 +17,8 @@ public class Option {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "OPTION_ID")
     private Long id;
-
     private String name;
-
     private String value;
-
     private Long additional;
 
     @ManyToOne
