@@ -15,6 +15,7 @@ public class ReservationPersonService {
 
     private final ReservationPersonRepository reservationPersonRepository;
 
+    // 예약자 목록 조회
     @Transactional(readOnly = true)
     public List<ReservationPersonDto.ReservationPersonListResponse> getReservationPersonList(Long reservationId) {
 

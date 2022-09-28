@@ -23,6 +23,7 @@ public class ReservationDto {
     @Data
     public static class ReservationRequest {
 
+        private Long product_id;
         private Reservation reservation;
         private List<ReservationPerson> reservationPersonList;
     }
@@ -43,23 +44,26 @@ public class ReservationDto {
     @Data
     public static class ReservationListResponse {
 
+        private LocalDate reservationDate;
+        private String reservationDayOfWeek;
         private Long reservation_id;
-        private long totalPrice;
+        private String thumbnail;
 
         @Enumerated(EnumType.STRING)
         private Status status;
 
-        private LocalDate reservationDate;
-
-        private String reservationDayOfWeek;
+        private String productName;
+        private String duration;
 
         public ReservationListResponse(Reservation reservation) {
 
-            reservation_id = reservation.getId();
-            totalPrice = reservation.getTotalPrice();
-            status = reservation.getStatus();
             reservationDate = reservation.getReservationDate();
             reservationDayOfWeek = reservation.getReservationDayOfWeek();
+            reservation_id = reservation.getId();
+            thumbnail = reservation.getProduct().getThumbnail();
+            status = reservation.getStatus();
+            productName = reservation.getProduct().getProductName();
+            duration = reservation.getDuration();
         }
     }
 
@@ -67,21 +71,54 @@ public class ReservationDto {
     @Data
     public static class ReservationDetailResponse {
 
+        private LocalDate reservationDate;
+        private String reservationDayOfWeek;
         private Long reservation_id;
-        private long totalPrice;
+        private String thumbnail;
 
         @Enumerated(EnumType.STRING)
         private Status status;
 
-        private LocalDate reservationDate;
-        private String reservationDayOfWeek;
+        private String productName;
+        private String duration;
+        private int totalReservationPeople;
+        private long totalPrice;
+
+        private String firstSelectOption;
+        private int totalFirstSelectOptionCount;
+        private long totalFirstSelectOptionPrice;
+
+        private String secondSelectOption;
+        private int totalSecondSelectOptionCount;
+        private long totalSecondSelectOptionPrice;
+
+        private String thirdSelectOption;
+        private int totalThirdSelectOptionCount;
+        private long totalThirdSelectOptionPrice;
+
 
         public ReservationDetailResponse(Reservation reservation){
-            reservation_id = reservation.getId();
-            totalPrice = reservation.getTotalPrice();
-            status = reservation.getStatus();
             reservationDate = reservation.getReservationDate();
             reservationDayOfWeek = reservation.getReservationDayOfWeek();
+            reservation_id = reservation.getId();
+            thumbnail = reservation.getProduct().getThumbnail();
+            status = reservation.getStatus();
+            productName = reservation.getProduct().getProductName();
+            duration = reservation.getDuration();
+            totalReservationPeople = reservation.getTotalReservationPeople();
+            totalPrice = reservation.getTotalPrice();
+
+            firstSelectOption = reservation.getFirstSelectOption();
+            totalFirstSelectOptionCount = reservation.getTotalFirstSelectOptionCount();
+            totalFirstSelectOptionPrice = reservation.getTotalFirstSelectOptionPrice();
+
+            secondSelectOption = reservation.getSecondSelectOption();
+            totalSecondSelectOptionCount = reservation.getTotalSecondSelectOptionCount();
+            totalSecondSelectOptionPrice = reservation.getTotalSecondSelectOptionPrice();
+
+            thirdSelectOption = reservation.getThirdSelectOption();
+            totalThirdSelectOptionCount = reservation.getTotalThirdSelectOptionCount();
+            totalThirdSelectOptionPrice = reservation.getTotalThirdSelectOptionPrice();
         }
     }
 

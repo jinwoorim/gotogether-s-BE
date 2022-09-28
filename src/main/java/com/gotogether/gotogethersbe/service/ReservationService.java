@@ -7,6 +7,7 @@ import com.gotogether.gotogethersbe.domain.ReservationPerson;
 import com.gotogether.gotogethersbe.domain.enums.Status;
 import com.gotogether.gotogethersbe.dto.ReservationDto;
 import com.gotogether.gotogethersbe.repository.MemberRepository;
+import com.gotogether.gotogethersbe.repository.ProductRepository;
 import com.gotogether.gotogethersbe.repository.ReservationPersonRepository;
 import com.gotogether.gotogethersbe.repository.ReservationRepository;
 import com.gotogether.gotogethersbe.web.api.ResponseMessage;
@@ -27,16 +28,36 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final ReservationPersonRepository reservationPersonRepository;
     private final MemberRepository memberRepository;
+    private final ProductRepository productRepository;
 
     // 예약하기
     @Transactional
     public void doReservation(ReservationDto.ReservationRequest request) {
 
         Reservation reservation = Reservation.builder()
-                .product(request.getReservation().getProduct())
+                .product(productRepository.findById(request.getProduct_id())
+                        .orElseThrow(() -> new CustomException(ResponseMessage.NOT_FOUND_PRODUCT, StatusCode.NOT_FOUND)))
                 .member(memberRepository.findById(SecurityUtil.getCurrentMemberId()).get())
+
+                .totalReservationPeople(request.getReservation().getTotalReservationPeople())
+                .totalBasicPrice(request.getReservation().getTotalBasicPrice())
+
+                .firstSelectOption(request.getReservation().getFirstSelectOption())
+                .totalFirstSelectOptionCount(request.getReservation().getTotalFirstSelectOptionCount())
+                .totalFirstSelectOptionPrice(request.getReservation().getTotalFirstSelectOptionPrice())
+
+                .secondSelectOption(request.getReservation().getSecondSelectOption())
+                .totalSecondSelectOptionCount(request.getReservation().getTotalSecondSelectOptionCount())
+                .totalSecondSelectOptionPrice(request.getReservation().getTotalSecondSelectOptionPrice())
+
+                .thirdSelectOption(request.getReservation().getThirdSelectOption())
+                .totalThirdSelectOptionCount(request.getReservation().getTotalThirdSelectOptionCount())
+                .totalThirdSelectOptionPrice(request.getReservation().getTotalThirdSelectOptionPrice())
+
                 .totalPrice(request.getReservation().getTotalPrice())
                 .status(Status.STANDBY)
+                .duration(request.getReservation().getDuration())
+
                 .build();
 
         Reservation getReservation = reservationRepository.save(reservation);
@@ -48,10 +69,6 @@ public class ReservationService {
                 ReservationPerson addReservationPerson = ReservationPerson.builder()
                         .name(reservationPerson.getName())
                         .phoneNumber(reservationPerson.getPhoneNumber())
-                        .duration(reservationPerson.getDuration())
-                        .firstSelectOption(reservationPerson.getFirstSelectOption())
-                        .secondSelectOption(reservationPerson.getSecondSelectOption())
-                        .thirdSelectOption(reservationPerson.getThirdSelectOption())
                         .role(reservationPerson.getRole())
                         .reservation(getReservation)
                         .build();
