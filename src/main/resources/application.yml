@@ -1,12 +1,15 @@
-# 배포 설정
-
 server:
   port: 8080
-
 spring:
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
+  profiles:
+    include: key
+  devtools:
+    livereload:
+      enabled: true
+  freemarker:
+    cache: false
+  thymeleaf:
+    cache: false
 
   sql:
     init:
@@ -18,22 +21,18 @@ spring:
     url: jdbc:mysql://localhost:3306/gotogether?serverTimezone=Asia/Seoul
     username: root
     password: 1234
+  # jdbc:mysql://gotogether.cxufpxkyookv.ap-northeast-2.rds.amazonaws.com:3306/gotogether
 
   #JPA Setting
   jpa:
-    open-in-view: true
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    show-sql: true
+    show-sql: true #if true, Show DB processing
     hibernate:
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      ddl-auto: create
-      use-new-id-generator-mappings: false
+      ddl-auto: create  #DDL
     properties:
       hibernate:
-        format_sql: true
-        default_batch_fetch_size: 1000
-    defer-datasource-initialization: true
+        format_sql: false
+        highlight_sql: true
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
 logging:
   level:
@@ -41,6 +40,7 @@ logging:
 
 jwt:
   secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
+
 
 
 # 로컬 설정
