@@ -27,13 +27,18 @@ public class WishService {
     @Transactional
     public void doWish(WishDto.WishRequest request) {
 
-        Wish wish = Wish.builder()
+        Wish wish = wishBuilder(request);
+
+        wishRepository.save(wish);
+    }
+
+    private Wish wishBuilder(WishDto.WishRequest request) {
+
+        return Wish.builder()
                 .product(productRepository.findById(request.getProduct_id())
                         .orElseThrow(() -> new CustomException(ResponseMessage.NOT_FOUND_WISH, StatusCode.NOT_FOUND)))
                 .member(memberRepository.findById(SecurityUtil.getCurrentMemberId()).get())
                 .build();
-
-        wishRepository.save(wish);
     }
 
     // 찜 목록 조회
