@@ -18,7 +18,6 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PRODUCT_ID")
     private Long id;
     private String thumbnail;
     private String productName;
@@ -28,8 +27,8 @@ public class Product {
     private String airport;
     private String points;
     private String info;
-    @OneToMany(mappedBy = "product", cascade=CascadeType.REMOVE)
-    private List<Option> optionList;
+    @OneToMany(mappedBy = "product", cascade=CascadeType.ALL)
+    private List<ProductOption> productOptionList;
     private String ages;
     @Enumerated(EnumType.STRING)
     private Companion companion;
@@ -46,14 +45,14 @@ public class Product {
     public Product(String thumbnail, String productName, Long amount, String country,
                    String region, String points, String airport, String info, String ages,
                    Companion companion, Continent continent, GenderGroup genderGroup,
-                   Religion religion, Theme theme, List<Option> optionList){
+                   Religion religion, Theme theme, List<ProductOption> productOptionList){
 
         this.thumbnail = thumbnail;
         this.productName = productName;
         this.basicPrice = amount;
         this.country = country;
         this.info = info;
-        this.optionList = optionList;
+        this.productOptionList = productOptionList;
         //요약설명쪽 정보
         this.points = points;
         this.airport = airport;
