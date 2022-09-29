@@ -24,6 +24,8 @@ public class AdminController {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.INSERT_PRODUCT_SUCCESS);
     }
 
+    //아래 로직은 추후 프론트 구현 예정
+
     //상품 수정
     @PutMapping("/products")
     public DefaultRes updateProduct(@RequestBody AdminProductDto.ProductRequest request){
