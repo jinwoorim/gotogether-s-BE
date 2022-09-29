@@ -37,7 +37,7 @@ public class AdminController {
     @DeleteMapping("/products/{productId}")
     public DefaultRes deleteProduct(@PathVariable Long productId){
         adminService.deleteProduct(productId);
-        return DefaultRes.res(StatusCode.OK, ResponseMessage.UPDATE_PRODUCT_SUCCESS);
+        return DefaultRes.res(StatusCode.OK, ResponseMessage.DELETE_PRODUCT_SUCCESS);
     }
 
     //상품 리스트 조회
