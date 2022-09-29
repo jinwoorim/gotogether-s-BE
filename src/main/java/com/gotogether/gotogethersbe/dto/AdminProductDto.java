@@ -1,7 +1,7 @@
 package com.gotogether.gotogethersbe.dto;
 
-import com.gotogether.gotogethersbe.domain.Option;
 import com.gotogether.gotogethersbe.domain.Product;
+import com.gotogether.gotogethersbe.domain.ProductOption;
 import com.gotogether.gotogethersbe.domain.enums.*;
 import lombok.Getter;
 
@@ -18,7 +18,7 @@ public class AdminProductDto {
         private String info;
         private String country;
         private Continent continent;
-        private List<OptionDto.OptionRequest> optionDtoList;
+        private List<ProductOptionDto.OptionRequest> optionDtoList;
 
         //요약 정보
         private String region;
@@ -32,7 +32,7 @@ public class AdminProductDto {
         private Religion religion;
         private Theme theme;
 
-        public Product toProduct(List<Option> optionList){
+        public Product toProduct(List<ProductOption> productOptionList){
             return Product.builder()
                     .id(id)
                     .thumbnail(thumbnail)
@@ -41,7 +41,7 @@ public class AdminProductDto {
                     .info(info)
                     .country(country)
                     .continent(continent)
-                    .optionList(optionList)
+                    .productOptionList(productOptionList)
                     .region(region)
                     .airport(airport)
                     .points(points)
@@ -63,7 +63,7 @@ public class AdminProductDto {
         private String info;
         private String country;
         private Continent continent;
-        private List<OptionDto.OptionResponse> optionDtoList;
+        private List<ProductOptionDto.OptionResponse> optionDtoList;
 
         //요약 데이터
         private String region;
@@ -77,7 +77,7 @@ public class AdminProductDto {
         private Religion religion;
         private Theme theme;
 
-        public ProductResponse(Product product, List<OptionDto.OptionResponse> optionDtoList ) {
+        public ProductResponse(Product product, List<ProductOptionDto.OptionResponse> optionDtoList ) {
             this.id = product.getId();
             this.thumbnail = product.getThumbnail();
             this.productName = product.getProductName();
