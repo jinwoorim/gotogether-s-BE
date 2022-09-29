@@ -1,7 +1,9 @@
 package com.gotogether.gotogethersbe.dto;
 
 import com.gotogether.gotogethersbe.domain.Option;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 public class OptionDto {
 
@@ -21,6 +23,8 @@ public class OptionDto {
         }
     }
 
+    @AllArgsConstructor
+    @NoArgsConstructor
     @Builder
     public static class OptionResponse{
         private Long id;
