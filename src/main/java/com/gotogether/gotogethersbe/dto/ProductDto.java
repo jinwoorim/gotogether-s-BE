@@ -15,7 +15,7 @@ public class ProductDto {
 
         private String thumbnail;
         private String productName;
-        private long amount;
+        private long basicPrice;
         private String country;
         private String ages;
         private GenderGroup genderGruop;
@@ -27,7 +27,7 @@ public class ProductDto {
                     .id(product.getId())
                     .thumbnail(product.getThumbnail())
                     .productName(product.getProductName())
-                    .amount(product.getAmount())
+                    .basicPrice(product.getBasicPrice())
                     .country(product.getCountry())
                     .ages(product.getAges())
                     .genderGruop(product.getGenderGroup())
@@ -47,7 +47,7 @@ public class ProductDto {
 
         private String thumbnail;
         private String productName;
-        private long amount;
+        private long basicPrice;
         private String country;
         private String summary;
         private String detail;
@@ -67,7 +67,7 @@ public class ProductDto {
                     .thumbnail(product.getThumbnail())
                     .productName(product.getProductName())
                     .continent(product.getContinent())
-                    .amount(product.getAmount())
+                    .basicPrice(product.getBasicPrice())
                     .country(product.getCountry())
                     .ages(product.getAges())
                     .genderGruop(product.getGenderGroup())

@@ -22,7 +22,7 @@ public class Product {
     private Long id;
     private String thumbnail;
     private String productName;
-    private long amount;
+    private long basicPrice;
     private String country;
     private String region;
     private String airport;
@@ -50,7 +50,7 @@ public class Product {
 
         this.thumbnail = thumbnail;
         this.productName = productName;
-        this.amount = amount;
+        this.basicPrice = amount;
         this.country = country;
         this.info = info;
         this.optionList = optionList;

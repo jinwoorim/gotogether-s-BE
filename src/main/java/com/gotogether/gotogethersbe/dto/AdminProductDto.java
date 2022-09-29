@@ -14,7 +14,7 @@ public class AdminProductDto {
         private Long id;
         private String thumbnail;
         private String productName;
-        private long amount;
+        private long basicPrice;
         private String info;
         private String country;
         private Continent continent;
@@ -37,7 +37,7 @@ public class AdminProductDto {
                     .id(id)
                     .thumbnail(thumbnail)
                     .productName(productName)
-                    .amount(amount)
+                    .basicPrice(basicPrice)
                     .info(info)
                     .country(country)
                     .continent(continent)
@@ -59,7 +59,7 @@ public class AdminProductDto {
         private Long id;
         private String thumbnail;
         private String productName;
-        private long amount;
+        private long basicPrice;
         private String info;
         private String country;
         private Continent continent;
@@ -81,7 +81,7 @@ public class AdminProductDto {
             this.id = product.getId();
             this.thumbnail = product.getThumbnail();
             this.productName = product.getProductName();
-            this.amount = product.getAmount();
+            this.basicPrice = product.getBasicPrice();
             this.info = product.getInfo();
             this.country = product.getCountry();
             this.continent = product.getContinent();
