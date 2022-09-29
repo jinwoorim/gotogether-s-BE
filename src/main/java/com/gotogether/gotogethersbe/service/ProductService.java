@@ -1,18 +1,12 @@
 package com.gotogether.gotogethersbe.service;
 
-import com.gotogether.gotogethersbe.domain.Product;
-import com.gotogether.gotogethersbe.dto.ProductDto;
-import com.gotogether.gotogethersbe.domain.enums.Ages;
-import com.gotogether.gotogethersbe.domain.enums.Companion;
 import com.gotogether.gotogethersbe.domain.enums.Theme;
-import com.gotogether.gotogethersbe.repository.MemberRepository;
+import com.gotogether.gotogethersbe.dto.ProductDto;
 import com.gotogether.gotogethersbe.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,7 +53,7 @@ public class ProductService{
      */
     @Transactional(readOnly = true)
     public List<ProductDto.ProductResponse> recommendByAges(ProductDto.RecommendationRequest request) {
-        return productRepository.findByAges(Ages.valueOf(request.getKeyword()))
+        return productRepository.findByAges(request.getKeyword())
                 .stream()
                 .map(ProductDto.ProductResponse::of)
                 .collect(Collectors.toList());

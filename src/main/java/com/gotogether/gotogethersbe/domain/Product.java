@@ -7,7 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
+@Builder
 @Entity
 @Data
 @NoArgsConstructor
@@ -16,20 +18,18 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PRODUCT_ID")
     private Long id;
-
     private String thumbnail;
     private String productName;
-    private long amount;
+    private long basicPrice;
     private String country;
     private String region;
     private String airport;
     private String points;
     private String info;
-
-    @Enumerated(EnumType.STRING)
-    private Ages ages;
+    @OneToMany(mappedBy = "product", cascade=CascadeType.ALL)
+    private List<ProductOption> productOptionList;
+    private String ages;
     @Enumerated(EnumType.STRING)
     private Companion companion;
     @Enumerated(EnumType.STRING)
@@ -43,19 +43,20 @@ public class Product {
 
     @Builder
     public Product(String thumbnail, String productName, Long amount, String country,
-                   String region, String points, String airport, String info, Ages ages,
+                   String region, String points, String airport, String info, String ages,
                    Companion companion, Continent continent, GenderGroup genderGroup,
-                   Religion religion, Theme theme){
+                   Religion religion, Theme theme, List<ProductOption> productOptionList){
 
         this.thumbnail = thumbnail;
         this.productName = productName;
-        this.amount = amount;
+        this.basicPrice = amount;
         this.country = country;
-        this.region = region;
+        this.info = info;
+        this.productOptionList = productOptionList;
         //요약설명쪽 정보
         this.points = points;
         this.airport = airport;
-        this.info = info;
+        this.region = region;
         // 카테고리 쪽 정보
         this.ages = ages;
         this.companion = companion;
@@ -63,8 +64,5 @@ public class Product {
         this.genderGroup = genderGroup;
         this.religion = religion;
         this.theme = theme;
-
-
     }
-
 }

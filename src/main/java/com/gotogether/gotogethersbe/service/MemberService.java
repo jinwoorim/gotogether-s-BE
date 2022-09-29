@@ -23,7 +23,7 @@ public class MemberService {
     @Transactional(readOnly = true)
     public MemberDto.MemberResponse getMyInfo() {
         return memberRepository.findById(SecurityUtil.getCurrentMemberId())
-                .map(MemberDto.MemberResponse::of)
+                .map(MemberDto.MemberResponse::new)
                 .orElseThrow(() -> new CustomException(ResponseMessage.NOT_FOUND_USER,StatusCode.FORBIDDEN));
     }
 

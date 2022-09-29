@@ -37,4 +37,14 @@ public class ResponseMessage {
     public static final String READ_BOOKMARK = "찜 목록 조회 성공";
     public static final String NOT_FOUND_BOOKMARK = "찜 목록 없음";
     public static final String DELETE_BOOKMARK = "찜 목록 삭제 성공";
+
+    public static final String INSERT_PRODUCT_SUCCESS = "상품 등록 성공";
+    public static final String INSERT_PRODUCT_FAIL = "상품 등록 실패";
+    public static final String UPDATE_PRODUCT_SUCCESS = "상품 수정 성공";
+    public static final String UPDATE_PRODUCT_FAIL = "상품 수정 실패";
+    public static final String DELETE_PRODUCT_SUCCESS = "상품 삭제 성공";
+    public static final String DELETE_PRODUCT_FAIL = "상품 삭제 실패";
+    public static final String GET_PRODUCTS_SUCCESS = "상품 리스트 조회 성공";
+    public static final String GET_PRODUCT_SUCCESS = "상품 상세 조회 성공";
+    public static final String GET_PRODUCT_FAIL = "상품 상세 조회 실패";
 }

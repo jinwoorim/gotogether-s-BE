@@ -2,12 +2,25 @@ package com.gotogether.gotogethersbe.domain.enums;
 
 public enum Continent {
 
-    SOUTH_EAST_ASIA_AND_PACIFIC("동남아/태평양"),
-    INDIA_AND_CENTRAL_ASIA("인도/중앙아시아"),
-    AFRICA_AND_MIDDLE_EAST("아프리카/중동"),
-    EUROPE_AND_CAUCASUS("유럽/코카서스"),
-    CENTRAL_SOUTH_AMERICA_AND_NORTH_AMERICA("중남미/북미"),
-    TAIWAN_AND_CHINA_AND_JAPAN("대만/중국/일본");
+    SOUTH_EAST_ASIA("동남아시아"),
+    GUAM_AND_SAIPAN_AND_HAWAII("괌&사이판&하와이"),
+    AUSTRALIA_AND_NEW_ZEALAND("호주&뉴질랜드"),
+
+    INDIA_AND_MARGINAL_STATE("인도&주변국"),
+    CENTRAL_ASIA("중앙아시아"),
+
+    SOUTHEAST_AFRICA("동남아프리카"),
+    NORTH_AFRICA_AND_MIDDLE_EAST("북아프리카&중동"),
+
+    CAUCASUS("코카서스"),
+    EUROPE("유럽"),
+
+    CENTRAL_SOUTH_AMERICA("중남미"),
+    NORTH_AMERICA("북미"),
+
+    TAIWAN("대만"),
+    CHINA("중국"),
+    JAPAN("일본");
 
     private final String koreanName;
 
@@ -18,4 +31,5 @@ public enum Continent {
     public String getKoreanName() {
         return  koreanName;
     }
+
 }

@@ -35,7 +35,7 @@ public class AuthService {
     public MemberDto.MemberResponse signup(MemberDto.MemberRequest request){
         //패스워드 암호화 후 저장
         Member member = request.toMember(passwordEncoder);
-        return MemberDto.MemberResponse.of(memberRepository.save(member));
+        return new MemberDto.MemberResponse(memberRepository.save(member));
     }
 
     //이메일 유효성 검사
