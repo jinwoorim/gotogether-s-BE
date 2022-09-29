@@ -63,7 +63,6 @@ public class AdminProductDto {
         private String info;
         private String country;
         private Continent continent;
-        private List<ProductOptionDto.OptionResponse> optionDtoList;
 
         //요약 데이터
         private String region;
@@ -77,6 +76,9 @@ public class AdminProductDto {
         private Religion religion;
         private Theme theme;
 
+        //옵션리스트
+        private List<ProductOptionDto.OptionResponse> optionDtoList;
+
         public ProductResponse(Product product, List<ProductOptionDto.OptionResponse> optionDtoList ) {
             this.id = product.getId();
             this.thumbnail = product.getThumbnail();
@@ -87,7 +89,7 @@ public class AdminProductDto {
             this.continent = product.getContinent();
             this.optionDtoList = optionDtoList;
             //요약 데이터
-            this.ages = product.getRegion();
+            this.region = product.getRegion();
             this.airport = product.getAirport();
             this.points = product.getPoints();
             //추천데이터
@@ -99,6 +101,7 @@ public class AdminProductDto {
         }
     }
 
+    @Getter
     public static class ProductListResponse{
         private Long id;
         private String productName;
