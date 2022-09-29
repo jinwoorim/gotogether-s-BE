@@ -34,9 +34,27 @@ public class ReservationService {
     @Transactional
     public void doReservation(ReservationDto.ReservationRequest request) {
 
-        Reservation reservation = Reservation.builder()
+        Reservation reservation = reservationBuilder(request);
+
+        Reservation getReservation = reservationRepository.save(reservation);
+
+        List<ReservationPerson> reservationPersonList = new ArrayList<>();
+
+        for(ReservationPerson reservationPerson : request.getReservationPersonList()) {
+
+            ReservationPerson addReservationPerson = reservationPersonBuilder(reservationPerson, getReservation);
+
+            reservationPersonList.add(addReservationPerson);
+        }
+
+        reservationPersonRepository.saveAll(reservationPersonList);
+    }
+
+    private Reservation reservationBuilder(ReservationDto.ReservationRequest request) {
+
+        return Reservation.builder()
                 .product(productRepository.findById(request.getProduct_id())
-                        .orElseThrow(() -> new CustomException(ResponseMessage.NOT_FOUND_PRODUCT, StatusCode.NOT_FOUND)))
+                .orElseThrow(() -> new CustomException(ResponseMessage.NOT_FOUND_PRODUCT, StatusCode.NOT_FOUND)))
                 .member(memberRepository.findById(SecurityUtil.getCurrentMemberId()).get())
 
                 .totalReservationPeople(request.getReservation().getTotalReservationPeople())
@@ -59,24 +77,16 @@ public class ReservationService {
                 .duration(request.getReservation().getDuration())
 
                 .build();
+    }
 
-        Reservation getReservation = reservationRepository.save(reservation);
+    private ReservationPerson reservationPersonBuilder(ReservationPerson reservationPerson, Reservation reservation) {
 
-        List<ReservationPerson> reservationPersonList = new ArrayList<>();
-
-        for(ReservationPerson reservationPerson : request.getReservationPersonList()) {
-
-                ReservationPerson addReservationPerson = ReservationPerson.builder()
-                        .name(reservationPerson.getName())
-                        .phoneNumber(reservationPerson.getPhoneNumber())
-                        .role(reservationPerson.getRole())
-                        .reservation(getReservation)
-                        .build();
-
-                reservationPersonList.add(addReservationPerson);
-        }
-
-        reservationPersonRepository.saveAll(reservationPersonList);
+        return ReservationPerson.builder()
+                .name(reservationPerson.getName())
+                .phoneNumber(reservationPerson.getPhoneNumber())
+                .role(reservationPerson.getRole())
+                .reservation(reservation)
+                .build();
     }
 
     // 예약 상품 목록 조회
@@ -84,6 +94,14 @@ public class ReservationService {
     public List<ReservationDto.ReservationListResponse> getReservationList() {
 
         return mapToDto(reservationRepository.findByMember_idOrderByIdDesc(SecurityUtil.getCurrentMemberId()));
+    }
+
+    private List<ReservationDto.ReservationListResponse> mapToDto(List<Reservation> reservationList) {
+
+        return reservationList
+                .stream()
+                .map(ReservationDto.ReservationListResponse::new)
+                .toList();
     }
 
     // 최근 예약 상품 기간별 필터링(90일, 180일, 365일)
@@ -102,14 +120,6 @@ public class ReservationService {
             }
         }
         return mapToDto(recentReservationByPeriod);
-    }
-
-    private List<ReservationDto.ReservationListResponse> mapToDto(List<Reservation> reservationList) {
-
-        return reservationList
-                .stream()
-                .map(ReservationDto.ReservationListResponse::new)
-                .toList();
     }
 
     // 예약 상품 상세 조회
