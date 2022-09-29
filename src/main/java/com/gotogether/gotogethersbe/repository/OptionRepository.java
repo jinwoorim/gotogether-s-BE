@@ -1,11 +1,11 @@
 package com.gotogether.gotogethersbe.repository;
 
-import com.gotogether.gotogethersbe.domain.Option;
+import com.gotogether.gotogethersbe.domain.ProductOption;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface OptionRepository extends JpaRepository<Option, Long> {
+public interface OptionRepository extends JpaRepository<ProductOption, Long> {
 
-    List<Option> findByProduct_Id(Long productId);
+    List<ProductOption> findByProduct_Id(Long productId);
 }
