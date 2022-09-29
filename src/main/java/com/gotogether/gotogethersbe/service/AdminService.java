@@ -60,13 +60,15 @@ public class AdminService {
     //상품 삭제
     @Transactional
     public void deleteProduct(Long productId){
-        productRepository.deleteById(productId);
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new CustomException(ResponseMessage.DELETE_PRODUCT_FAIL,StatusCode.BAD_REQUEST));
+        productRepository.delete(product);
     }
 
     //상품 상세 조회
     @Transactional(readOnly = true)
     public AdminProductDto.ProductResponse getProduct(Long productId){
-        List<ProductOptionDto.OptionResponse> optionDtoList  = optionRepository.findByProduct_Id(productId)
+        List<ProductOptionDto.OptionResponse> optionDtoList  = optionRepository.findAllByProduct_Id(productId)
                                                    .stream()
                                                    .map(ProductOptionDto.OptionResponse::new)
                                                    .toList();
