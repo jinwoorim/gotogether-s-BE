@@ -12,21 +12,20 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Option {
+public class ProductOption {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "OPTION_ID")
     private Long id;
     private String name;
     private String value;
-    private Long additional;
+    private long additional;
 
-    @ManyToOne
-    @JoinColumn(name = "PRODUCT_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="product_id")
     private Product product;
 
-    public Option addProduct(Product product){
+    public ProductOption addProduct(Product product){
         this.product = product;
         return this;
     }
