@@ -2,7 +2,6 @@ package com.gotogether.gotogethersbe.dto;
 
 import com.gotogether.gotogethersbe.domain.ProductOption;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,12 +26,12 @@ public class ProductOptionDto {
 
     @AllArgsConstructor
     @NoArgsConstructor
-    @Builder
+    @Getter
     public static class OptionResponse{
         private Long id;
         private String name;
         private String value;
-        private Long additional;
+        private long additional;
 
         public OptionResponse(ProductOption productOption){
             this.id = productOption.getId();
