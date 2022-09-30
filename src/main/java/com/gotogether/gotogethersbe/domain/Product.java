@@ -21,7 +21,7 @@ public class Product {
     private Long id;
     private String thumbnail;
     private String productName;
-    private long basicPrice;
+    private String basicPrice;
     private String country;
     private String region;
     private String airport;
@@ -42,14 +42,14 @@ public class Product {
     private Theme theme;
 
     @Builder
-    public Product(String thumbnail, String productName, Long amount, String country,
+    public Product(String thumbnail, String productName, String basicPrice, String country,
                    String region, String points, String airport, String info, String ages,
                    Companion companion, Continent continent, GenderGroup genderGroup,
                    Religion religion, Theme theme, List<ProductOption> productOptionList){
 
         this.thumbnail = thumbnail;
         this.productName = productName;
-        this.basicPrice = amount;
+        this.basicPrice = basicPrice;
         this.country = country;
         this.info = info;
         this.productOptionList = productOptionList;

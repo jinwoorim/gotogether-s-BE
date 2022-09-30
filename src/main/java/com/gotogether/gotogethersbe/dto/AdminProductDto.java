@@ -14,7 +14,7 @@ public class AdminProductDto {
         private Long id;
         private String thumbnail;
         private String productName;
-        private long basicPrice;
+        private String basicPrice;
         private String info;
         private String country;
         private Continent continent;
@@ -59,7 +59,7 @@ public class AdminProductDto {
         private Long id;
         private String thumbnail;
         private String productName;
-        private long basicPrice;
+        private String basicPrice;
         private String info;
         private String country;
         private Continent continent;
