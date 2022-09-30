@@ -26,8 +26,8 @@ public class AuthController {
     }
 
     //이메일 유효성 검사
-    @PostMapping("/members/password")
-    public DefaultRes checkPassword(@RequestBody MemberDto.emailRequest request){
+    @PostMapping("/members/validation")
+    public DefaultRes checkEmail(@RequestBody MemberDto.emailRequest request){
         authService.checkPassword(request);
         return DefaultRes.res(StatusCode.OK, ResponseMessage.CHECK_EMAIL_SUCCESS);
     }
