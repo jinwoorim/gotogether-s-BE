@@ -1,7 +1,6 @@
 package com.gotogether.gotogethersbe.dto;
 
 import com.gotogether.gotogethersbe.domain.Reservation;
-import com.gotogether.gotogethersbe.domain.ReservationPerson;
 import com.gotogether.gotogethersbe.domain.enums.Status;
 import lombok.Data;
 
@@ -12,14 +11,45 @@ import java.util.List;
 
 public class ReservationDto {
 
+    // 예약하기
     @Data
     public static class ReservationRequest {
 
         private Long product_id;
-        private Reservation reservation;
-        private List<ReservationPerson> reservationPersonList;
+        private ReservationDtoForReservationRequest reservation;
+        private List<ReservationPersonDtoForReservationRequest> reservationPersonList;
     }
 
+    @Data
+    public static class ReservationDtoForReservationRequest {
+
+        private int totalReservationPeople;
+        private long totalBasicPrice;
+
+        private String firstSelectOption;
+        private int totalFirstSelectOptionCount;
+        private long totalFirstSelectOptionPrice;
+
+        private String secondSelectOption;
+        private int totalSecondSelectOptionCount;
+        private long totalSecondSelectOptionPrice;
+
+        private String thirdSelectOption;
+        private int totalThirdSelectOptionCount;
+        private long totalThirdSelectOptionPrice;
+
+        private long totalPrice;
+
+        private String duration;
+    }
+
+    @Data
+    public static class ReservationPersonDtoForReservationRequest {
+
+        private String name;
+        private String phoneNumber;
+        private Boolean role;
+    }
     // 예약 상품 목록 조회
     @Data
     public static class ReservationListResponse {

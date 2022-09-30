@@ -40,9 +40,9 @@ public class ReservationService {
 
         List<ReservationPerson> reservationPersonList = new ArrayList<>();
 
-        for(ReservationPerson reservationPerson : request.getReservationPersonList()) {
+        for(ReservationDto.ReservationPersonDtoForReservationRequest reservationPersonDtoForReservationRequest : request.getReservationPersonList()) {
 
-            ReservationPerson addReservationPerson = reservationPersonBuilder(reservationPerson, getReservation);
+            ReservationPerson addReservationPerson = reservationPersonBuilder(reservationPersonDtoForReservationRequest, getReservation);
 
             reservationPersonList.add(addReservationPerson);
         }
@@ -79,12 +79,12 @@ public class ReservationService {
                 .build();
     }
 
-    private ReservationPerson reservationPersonBuilder(ReservationPerson reservationPerson, Reservation reservation) {
+    private ReservationPerson reservationPersonBuilder(ReservationDto.ReservationPersonDtoForReservationRequest reservationPersonDtoForReservationPerson, Reservation reservation) {
 
         return ReservationPerson.builder()
-                .name(reservationPerson.getName())
-                .phoneNumber(reservationPerson.getPhoneNumber())
-                .role(reservationPerson.getRole())
+                .name(reservationPersonDtoForReservationPerson.getName())
+                .phoneNumber(reservationPersonDtoForReservationPerson.getPhoneNumber())
+                .role(reservationPersonDtoForReservationPerson.getRole())
                 .reservation(reservation)
                 .build();
     }
