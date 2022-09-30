@@ -40,7 +40,7 @@ public class AuthService {
 
     //이메일 유효성 검사
     @Transactional
-    public void checkPassword(MemberDto.emailRequest request){
+    public void checkEmail(MemberDto.emailRequest request){
         if (memberRepository.existsByEmail(request.getEmail())) {
             throw new CustomException(ResponseMessage.CHECK_EMAIL_FAIL, StatusCode.BAD_REQUEST);
         }
