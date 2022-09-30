@@ -1,5 +1,11 @@
 package com.gotogether.gotogethersbe.domain.enums;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.RequiredArgsConstructor;
+
+@JsonFormat
+@RequiredArgsConstructor
 public enum Theme {
 
     CULTURE("문화탐방"),
@@ -10,13 +16,6 @@ public enum Theme {
     VOLUNTEER("봉사활동"),
     HOLYLAND("성지순례");
 
+    @JsonValue
     private final String koreanName;
-
-    Theme(String koreanName) {
-        this.koreanName = koreanName;
-    }
-
-    public String getKoreanName() {
-        return  koreanName;
-    }
 }
