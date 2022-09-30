@@ -10,7 +10,7 @@ public enum GenderGroup {
 
     FEMALE_ONLY("여자끼리"),
     MALE_ONLY("남자끼리"),
-    NO_MATTER("상관없음");
+    NO_MATTER("상관 없음");
 
     @JsonValue
     private final String koreanName;
