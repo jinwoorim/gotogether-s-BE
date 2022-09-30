@@ -15,9 +15,9 @@ spring:
   #DB Setting
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://gotogether.cxufpxkyookv.ap-northeast-2.rds.amazonaws.com:3306/gotogether?useSSL=false
-    username: master
-    password: rhxnrpejaktmxj2
+    url: ENC(nt5xZZn7LkBOUImW9fSZlulaecfM+/+VlNoeouTqtONqvo+/H7Vc2XSTvTJAa3B9Bf64m/A7/pw9UKz86TCbchmi6SKM1TY/IAmM04SOmGDHZgob41jTrBTEIXQYrDH7kbVDcVauLS8l+t3JmcEqDw==)
+    username: ENC(V5pbaP8CqZWJlgU+JQSqWA==)
+    password: ENC(1l5bc2bVZiTeIktnlK6ZylLCpHPwFiDY)
 
   #JPA Setting
   jpa:
@@ -41,6 +41,10 @@ logging:
 
 jwt:
   secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
 
 
 # 로컬 설정
