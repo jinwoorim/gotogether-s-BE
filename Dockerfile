@@ -10,5 +10,5 @@ EXPOSE 8080
 ADD build/libs/*.jar app.jar
 
 # Run the jar file
-#ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
-ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /app.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+#ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /app.jar"]
