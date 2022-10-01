@@ -16,8 +16,8 @@ public class ReservationDto {
     public static class ReservationRequest {
 
         private Long product_id;
-        private ReservationDtoForReservationRequest reservation;
-        private List<ReservationPersonDtoForReservationRequest> reservationPersonList;
+        private ReservationDtoForReservationRequest reservationDto;
+        private List<ReservationPersonDtoForReservationRequest> reservationPersonListDto;
     }
 
     @Data

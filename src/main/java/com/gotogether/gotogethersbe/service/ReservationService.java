@@ -40,13 +40,12 @@ public class ReservationService {
 
         List<ReservationPerson> reservationPersonList = new ArrayList<>();
 
-        for(ReservationDto.ReservationPersonDtoForReservationRequest reservationPersonDtoForReservationRequest : request.getReservationPersonList()) {
+        for(ReservationDto.ReservationPersonDtoForReservationRequest reservationPersonDtoForReservationRequest : request.getReservationPersonListDto()) {
 
             ReservationPerson addReservationPerson = reservationPersonBuilder(reservationPersonDtoForReservationRequest, getReservation);
 
             reservationPersonList.add(addReservationPerson);
         }
-
         reservationPersonRepository.saveAll(reservationPersonList);
     }
 
@@ -57,24 +56,24 @@ public class ReservationService {
                 .orElseThrow(() -> new CustomException(ResponseMessage.NOT_FOUND_PRODUCT, StatusCode.NOT_FOUND)))
                 .member(memberRepository.findById(SecurityUtil.getCurrentMemberId()).get())
 
-                .totalReservationPeople(request.getReservation().getTotalReservationPeople())
-                .totalBasicPrice(request.getReservation().getTotalBasicPrice())
+                .totalReservationPeople(request.getReservationDto().getTotalReservationPeople())
+                .totalBasicPrice(request.getReservationDto().getTotalBasicPrice())
 
-                .firstSelectOption(request.getReservation().getFirstSelectOption())
-                .totalFirstSelectOptionCount(request.getReservation().getTotalFirstSelectOptionCount())
-                .totalFirstSelectOptionPrice(request.getReservation().getTotalFirstSelectOptionPrice())
+                .firstSelectOption(request.getReservationDto().getFirstSelectOption())
+                .totalFirstSelectOptionCount(request.getReservationDto().getTotalFirstSelectOptionCount())
+                .totalFirstSelectOptionPrice(request.getReservationDto().getTotalFirstSelectOptionPrice())
 
-                .secondSelectOption(request.getReservation().getSecondSelectOption())
-                .totalSecondSelectOptionCount(request.getReservation().getTotalSecondSelectOptionCount())
-                .totalSecondSelectOptionPrice(request.getReservation().getTotalSecondSelectOptionPrice())
+                .secondSelectOption(request.getReservationDto().getSecondSelectOption())
+                .totalSecondSelectOptionCount(request.getReservationDto().getTotalSecondSelectOptionCount())
+                .totalSecondSelectOptionPrice(request.getReservationDto().getTotalSecondSelectOptionPrice())
 
-                .thirdSelectOption(request.getReservation().getThirdSelectOption())
-                .totalThirdSelectOptionCount(request.getReservation().getTotalThirdSelectOptionCount())
-                .totalThirdSelectOptionPrice(request.getReservation().getTotalThirdSelectOptionPrice())
+                .thirdSelectOption(request.getReservationDto().getThirdSelectOption())
+                .totalThirdSelectOptionCount(request.getReservationDto().getTotalThirdSelectOptionCount())
+                .totalThirdSelectOptionPrice(request.getReservationDto().getTotalThirdSelectOptionPrice())
 
-                .totalPrice(request.getReservation().getTotalPrice())
+                .totalPrice(request.getReservationDto().getTotalPrice())
                 .status(Status.STANDBY)
-                .duration(request.getReservation().getDuration())
+                .duration(request.getReservationDto().getDuration())
 
                 .build();
     }
