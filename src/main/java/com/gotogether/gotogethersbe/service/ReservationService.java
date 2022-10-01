@@ -144,6 +144,6 @@ public class ReservationService {
     @Transactional
     public void deleteReservation(ReservationDto.UpdateReservationStatusRequest request) {
 
-        reservationRepository.deleteById(request.getReservation_id());
+        reservationRepository.deleteReservation(request.getReservation_id());  // bulk delete라 조회를 안하므로 예외처리를 못함
     }
 }
