@@ -133,7 +133,8 @@ public class ReservationService {
     @Transactional
     public void updateReservationStatus(ReservationDto.UpdateReservationStatusRequest request) {
 
-        Reservation reservation = reservationRepository.findById(request.getReservation_id()).get();
+        Reservation reservation = reservationRepository.findById(request.getReservation_id())
+                .orElseThrow(() -> new CustomException(ResponseMessage.NOT_FOUND_RESERVATION, StatusCode.NOT_FOUND));
 
         reservationRepository.save(reservation.updateReservationStatus(request.getStatus()));
 
