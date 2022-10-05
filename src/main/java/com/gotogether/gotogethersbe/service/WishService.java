@@ -36,7 +36,7 @@ public class WishService {
 
         return Wish.builder()
                 .product(productRepository.findById(request.getProduct_id())
-                        .orElseThrow(() -> new CustomException(ResponseMessage.NOT_FOUND_WISH, StatusCode.NOT_FOUND)))
+                        .orElseThrow(() -> new CustomException(ResponseMessage.NOT_FOUND_PRODUCT, StatusCode.NOT_FOUND)))
                 .member(memberRepository.findById(SecurityUtil.getCurrentMemberId()).get())
                 .build();
     }
