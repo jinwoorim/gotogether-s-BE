@@ -8,10 +8,15 @@ public class ResponseMessage {
     public static final String CREATED_USER = "회원 가입 성공";
     public static final String CREATED_FAIL = "회원 가입 실패";
     public static final String REISSUE_SUCCESS = "토큰 재발급 성공";
-    public static final String UPDATE_MEMBER_SUCCESS = "회원 정보 수정 성공";
-    public static final String UPDATE_MEMBER_FAIL = "회원 정보 수정 실패";
+    public static final String CONFIRM_PASSWORD_SUCCESS = "패스워드 확인 성공";
+    public static final String CONFIRM_PASSWORD_FAIL = "패스워드 확인 실패";
+    public static final String UPDATE_MEMBER_SUCCESS = "회원 비밀번호 수정 성공";
+    public static final String CHECK_EMAIL_SUCCESS = "사용할 수 있는 이메일입니다.";
+    public static final String CHECK_EMAIL_FAIL = "사용할 수 없는 이메일입니다.";
+    public static final String UPDATE_MEMBER_FAIL = "회원 비밀번호 수정 실패";
     public static final String DELETE_USER = "회원 탈퇴 성공";
-    public static final String RECO_DATA_SUCCESS = "추천 데이터 입력 완료";
+    public static final String RECO_DATA_SUCCESS_FOR_MEMBER = "회원을 위한 추천 데이터 입력 저장 완료";
+    public static final String RECO_DATA_SUCCESS_FOR_NONMEMBER = "비회원을 위한 추천 데이터 입력 저장 완료";
     public static final String LOGOUT_SUCCESS = "로그아웃 성공";
 
     public static final String INTERNAL_SERVER_ERROR = "서버 내부 에러";
@@ -28,6 +33,20 @@ public class ResponseMessage {
     public static final String DELETE_CART = "장바구니 삭제 성공";
     public static final String ORDER_CART = "장바구니 신청 성공";
 
+    public static final String ADD_BOOKMARK = "찜 등록 성공";
+    public static final String READ_BOOKMARK = "찜 목록 조회 성공";
+    public static final String NOT_FOUND_BOOKMARK = "찜 목록 없음";
+    public static final String DELETE_BOOKMARK = "찜 목록 삭제 성공";
+
+    public static final String INSERT_PRODUCT_SUCCESS = "상품 등록 성공";
+    public static final String INSERT_PRODUCT_FAIL = "상품 등록 실패";
+    public static final String UPDATE_PRODUCT_SUCCESS = "상품 수정 성공";
+    public static final String UPDATE_PRODUCT_FAIL = "상품 수정 실패";
+    public static final String DELETE_PRODUCT_SUCCESS = "상품 삭제 성공";
+    public static final String DELETE_PRODUCT_FAIL = "상품 삭제 실패";
+    public static final String GET_PRODUCTS_SUCCESS = "상품 리스트 조회 성공";
+    public static final String GET_PRODUCT_SUCCESS = "상품 상세 조회 성공";
+    public static final String GET_PRODUCT_FAIL = "상품 상세 조회 실패";
     public static final String NOT_FOUND_PRODUCT = "해당 상품을 찾을 수 없습니다";
 
     public static final String RESERVATION_SUCCESS = "예약 성공";

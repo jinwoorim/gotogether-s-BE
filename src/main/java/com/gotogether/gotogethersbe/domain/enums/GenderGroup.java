@@ -6,15 +6,11 @@ import lombok.RequiredArgsConstructor;
 
 @JsonFormat
 @RequiredArgsConstructor
-public enum Theme {
+public enum GenderGroup {
 
-    CULTURE("문화탐방"),
-    GOLF("골프여행"),
-    HEALING("휴양지"),
-    ADVANTURE("오지탐험"),
-    TRACKING("트래킹여행"),
-    VOLUNTEER("봉사활동"),
-    HOLYLAND("성지순례");
+    FEMALE_ONLY("여자끼리"),
+    MALE_ONLY("남자끼리"),
+    NO_MATTER("상관 없음");
 
     @JsonValue
     private final String koreanName;

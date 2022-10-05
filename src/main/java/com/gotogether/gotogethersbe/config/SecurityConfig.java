@@ -41,11 +41,12 @@ public class SecurityConfig {
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
-        http.csrf().disable() //csrf 토큰 막기
+            http.csrf().disable() //csrf 토큰 막기
                 .authorizeRequests((authz) -> authz
-                        .antMatchers("/login", "/members", "/reissue", "/logout","/products").permitAll()
+                        .antMatchers("/login", "/members", "/reissue", "/logout","/products/*","/members/curation").permitAll()
+                        .antMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-                ) //아래 요청은 모두 허용, 이외 요청은 인증 필수
+                ) //위 요청은 모두 허용, 이외 요청은 인증 필수
                 .authorizeRequests((authz) -> authz
                         .anyRequest().authenticated()
                 )
@@ -58,16 +59,9 @@ public class SecurityConfig {
                 .sessionManagement() //기본제공 세션 막음
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/")//로그아웃 성공시 메인 페이지로 이동
-                .and()
                 .apply(new JwtSecurityConfig(tokenManager))
                 .and()
-                .formLogin().disable().headers().frameOptions().disable();
-
-//                    .and()
-//                .headers()
-//                .frameOptions()
-//                .sameOrigin() //iFrame 기반 솔루션
+                .logout().disable();
 
         return http.build();
     }

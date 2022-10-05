@@ -33,13 +33,17 @@ public class AuthService {
     //회원 가입
     @Transactional
     public MemberDto.MemberResponse signup(MemberDto.MemberRequest request){
-        //이메일 유효성 검사
-        if (memberRepository.existsByEmail(request.getEmail())) {
-            throw new CustomException(ResponseMessage.CREATED_FAIL, StatusCode.BAD_REQUEST);
-        }
         //패스워드 암호화 후 저장
         Member member = request.toMember(passwordEncoder);
-        return MemberDto.MemberResponse.of(memberRepository.save(member));
+        return new MemberDto.MemberResponse(memberRepository.save(member));
+    }
+
+    //이메일 유효성 검사
+    @Transactional
+    public void checkEmail(MemberDto.emailRequest request){
+        if (memberRepository.existsByEmail(request.getEmail())) {
+            throw new CustomException(ResponseMessage.CHECK_EMAIL_FAIL, StatusCode.BAD_REQUEST);
+        }
     }
 
     // 로그인
@@ -96,5 +100,22 @@ public class AuthService {
 
         // 토큰 발급
         return tokenDto;
+    }
+
+    //로그아웃
+    @Transactional
+    public void logout(TokenDto tokenRequestDto){
+        //Access Token 유효성 확인
+        if(!tokenManager.validateToken(tokenRequestDto.getAccessToken())){
+            throw new CustomException("Access Token이 유효하지 않습니다.", StatusCode.UNAUTHORIZED);
+        }
+        //Refresh Token 유효성 확인
+        Authentication authentication = tokenManager.getAuthentication(tokenRequestDto.getAccessToken());
+
+        RefreshToken refreshToken = refreshTokenRepository.findByKey(authentication.getName())
+                .orElseThrow(() -> new CustomException("이미 로그아웃한 사용자입니다.", StatusCode.UNAUTHORIZED));
+
+        //Refresh Toke 삭제
+        refreshTokenRepository.delete(refreshToken);
     }
 }

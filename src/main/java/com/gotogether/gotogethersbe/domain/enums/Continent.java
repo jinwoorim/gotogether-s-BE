@@ -1,5 +1,11 @@
 package com.gotogether.gotogethersbe.domain.enums;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.RequiredArgsConstructor;
+
+@JsonFormat
+@RequiredArgsConstructor
 public enum Continent {
 
     SOUTH_EAST_ASIA("동남아시아"),
@@ -9,7 +15,7 @@ public enum Continent {
     INDIA_AND_MARGINAL_STATE("인도&주변국"),
     CENTRAL_ASIA("중앙아시아"),
 
-    SOUTHEAST_AFRICA("동남아시아"),
+    SOUTHEAST_AFRICA("동남아프리카"),
     NORTH_AFRICA_AND_MIDDLE_EAST("북아프리카&중동"),
 
     CAUCASUS("코카서스"),
@@ -22,14 +28,6 @@ public enum Continent {
     CHINA("중국"),
     JAPAN("일본");
 
+    @JsonValue
     private final String koreanName;
-
-    Continent(String koreanName) {
-        this.koreanName = koreanName;
-    }
-
-    public String getKoreanName() {
-        return  koreanName;
-    }
-
 }
