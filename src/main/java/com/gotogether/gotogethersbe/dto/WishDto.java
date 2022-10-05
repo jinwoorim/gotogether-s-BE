@@ -21,14 +21,14 @@ public class WishDto {
         private Long wish_id;
         private String productName;
         private String thumbnail;
-        private long basicPrice;
+        private String basicPrice;
 
         public WishListResponse(Wish wish) {
 
             wish_id = wish.getId();
             productName = wish.getProduct().getProductName();
             thumbnail = wish.getProduct().getThumbnail();
-            basicPrice = wish.getProduct().getAmount();
+            basicPrice = wish.getProduct().getBasicPrice();
         }
     }
 
