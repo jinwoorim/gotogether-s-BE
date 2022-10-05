@@ -58,8 +58,7 @@ public class ResponseMessage {
     public static final String NOT_FOUND_RESERVATION = "해당 예약 상품을 찾을 수 없습니다";
 
     public static final String GET_RESERVATION_PERSON_LIST = "예약자 목록 조회 성공";
-
-    public static final String NOT_FOUND_WISH = "해당 찜을 찾을 수 없습니다";
+    public static final String ALREADY_EXIST_WISH = "이미 존재하는 찜입니다";
     public static final String WISH_SUCCESS= "찜 성공";
     public static final String GET_WISH_LIST= "찜 목록 조회 성공";
     public static final String DELETE_WISHES= "찜 선택 삭제 성공";

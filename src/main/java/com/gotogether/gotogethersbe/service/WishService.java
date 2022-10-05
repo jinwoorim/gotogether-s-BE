@@ -7,6 +7,7 @@ import com.gotogether.gotogethersbe.dto.WishDto;
 import com.gotogether.gotogethersbe.repository.MemberRepository;
 import com.gotogether.gotogethersbe.repository.ProductRepository;
 import com.gotogether.gotogethersbe.repository.WishRepository;
+import com.gotogether.gotogethersbe.web.api.DefaultRes;
 import com.gotogether.gotogethersbe.web.api.ResponseMessage;
 import com.gotogether.gotogethersbe.web.api.StatusCode;
 import lombok.RequiredArgsConstructor;
@@ -25,11 +26,16 @@ public class WishService {
 
     // 찜 하기
     @Transactional
-    public void doWish(WishDto.WishRequest request) {
+    public DefaultRes doWish(WishDto.WishRequest request) {
 
-        Wish wish = wishBuilder(request);
+        if(wishRepository.findByProduct_id(request.getProduct_id()).isEmpty()) {
 
-        wishRepository.save(wish);
+            Wish wish = wishBuilder(request);
+            wishRepository.save(wish);
+
+            return DefaultRes.res(StatusCode.OK, ResponseMessage.WISH_SUCCESS);
+        }
+        return DefaultRes.res(StatusCode.BAD_REQUEST, ResponseMessage.ALREADY_EXIST_WISH);
     }
 
     private Wish wishBuilder(WishDto.WishRequest request) {

@@ -18,9 +18,7 @@ public class WishController {
     @PostMapping("/wishes")
     public DefaultRes doWish(@RequestBody WishDto.WishRequest request) {
 
-        wishService.doWish(request);
-
-        return DefaultRes.res(StatusCode.OK, ResponseMessage.WISH_SUCCESS);
+        return wishService.doWish(request);
     }
 
     // 찜 목록 조회
