@@ -23,10 +23,9 @@ public class Product {
     private long amount;
 
     @Enumerated(EnumType.STRING)
-    private Country country;
+    private Continent continent;
 
-    @Enumerated(EnumType.STRING)
-    private Ages ages;
+    private String ages;
 
     @Enumerated(EnumType.STRING)
     private Together together;
@@ -39,9 +38,6 @@ public class Product {
 
     @Enumerated(EnumType.STRING)
     private Theme theme;
-
-    @Enumerated(EnumType.STRING)
-    private CtgNation ctgNation;
 
     private String summary;
     private String detail;
