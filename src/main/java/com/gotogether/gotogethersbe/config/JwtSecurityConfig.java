@@ -14,7 +14,7 @@ public class JwtSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurity
     private final TokenManager tokenManager;
     private final RedisTemplate redisTemplate;
 
-    // 직접만든 TokenManager, JwtFilter 를 통해 Security 로직에 필터를 등록
+    //TokenManager, RedisTemplate을 JwtFilter를 이용해 Security 로직에 필터를 등록
     @Override
     public void configure(HttpSecurity http) {
         JwtFilter customFilter = new JwtFilter(tokenManager, redisTemplate);
