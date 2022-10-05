@@ -21,6 +21,7 @@ public class WishDto {
         private Long wish_id;
         private String productName;
         private String thumbnail;
+        private String airport;
         private String basicPrice;
 
         public WishListResponse(Wish wish) {
@@ -29,6 +30,7 @@ public class WishDto {
             productName = wish.getProduct().getProductName();
             thumbnail = wish.getProduct().getThumbnail();
             basicPrice = wish.getProduct().getBasicPrice();
+            airport = wish.getProduct().getAirport();
         }
     }
 

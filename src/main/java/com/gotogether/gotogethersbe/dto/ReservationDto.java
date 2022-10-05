@@ -63,6 +63,7 @@ public class ReservationDto {
         private Status status;
 
         private String productName;
+        private String airport;
         private String duration;
 
         public ReservationListResponse(Reservation reservation) {
@@ -74,6 +75,7 @@ public class ReservationDto {
             status = reservation.getStatus();
             productName = reservation.getProduct().getProductName();
             duration = reservation.getDuration();
+            airport = reservation.getProduct().getAirport();
         }
     }
 
@@ -90,6 +92,7 @@ public class ReservationDto {
         private Status status;
 
         private String productName;
+        private String airport;
         private String duration;
         private int totalReservationPeople;
         private long totalPrice;
@@ -114,6 +117,7 @@ public class ReservationDto {
             thumbnail = reservation.getProduct().getThumbnail();
             status = reservation.getStatus();
             productName = reservation.getProduct().getProductName();
+            airport = reservation.getProduct().getAirport();
             duration = reservation.getDuration();
             totalReservationPeople = reservation.getTotalReservationPeople();
             totalPrice = reservation.getTotalPrice();
