@@ -20,6 +20,7 @@ public class ProductOption {
     private String name;
     private String value;
     private long additional;
+    private boolean required;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="product_id")
