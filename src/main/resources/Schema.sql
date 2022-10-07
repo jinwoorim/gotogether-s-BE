@@ -74,6 +74,5 @@
                             productId      bigint,
                             memberId       bigint
     );
-
-    insert into Member(email, password, name, authority) values("admin@admin", "$2a$12$oGkrW/rTkpaCSFDE1BWJHeZuKh3mymMAZpKsuEEKjUMZhyCqEM1Da", "ADMIN", "ROLE_ADMIN");
+    insert into gotogether.member(email, password, name, authority) values("admin@admin", "$2a$12$oGkrW/rTkpaCSFDE1BWJHeZuKh3mymMAZpKsuEEKjUMZhyCqEM1Da", "ADMIN", "ROLE_ADMIN");
     -- 비밀 번호는 admin을 암호화해놨습니다.

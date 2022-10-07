@@ -13,6 +13,7 @@ public class ProductOptionDto {
         private String name;
         private String value;
         private long additional;
+        private boolean required;
 
         public ProductOption toProductOption(){
             return ProductOption.builder()
@@ -20,6 +21,7 @@ public class ProductOptionDto {
                     .name(name)
                     .value(value)
                     .additional(additional)
+                    .required(required)
                     .build();
         }
     }
@@ -32,12 +34,14 @@ public class ProductOptionDto {
         private String name;
         private String value;
         private long additional;
+        private boolean required;
 
         public OptionResponse(ProductOption productOption){
             this.id = productOption.getId();
             this.name = productOption.getName();
             this.value = productOption.getValue();
             this.additional = productOption.getAdditional();
+            this.required = productOption.isRequired();
         }
     }
 }

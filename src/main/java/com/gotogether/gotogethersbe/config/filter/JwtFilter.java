@@ -2,8 +2,10 @@ package com.gotogether.gotogethersbe.config.filter;
 
 import com.gotogether.gotogethersbe.config.auth.TokenManager;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -20,17 +22,23 @@ public class JwtFilter extends OncePerRequestFilter {
     public static final String BEARER_PREFIX = "Bearer ";
 
     private final TokenManager tokenManager;
+    private final RedisTemplate redisTemplate;
 
     // 실제 필터링 로직
     // JWT 토큰의 인증 정보를 현재 쓰레드의 SecurityContext 에 저장
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
 
+        // JWT 토큰 추출
         String jwt = resolveToken(request);
-
+        // 토큰 유효성 확인
         if (StringUtils.hasText(jwt) && tokenManager.validateToken(jwt)) {
-            Authentication authentication = tokenManager.getAuthentication(jwt);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            // Redis에 해당 Access Token logout 여부 확인
+            String isLogout = (String) redisTemplate.opsForValue().get(jwt);
+            if (ObjectUtils.isEmpty(isLogout)) {
+                Authentication authentication = tokenManager.getAuthentication(jwt);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
         }
         filterChain.doFilter(request, response);
     }
