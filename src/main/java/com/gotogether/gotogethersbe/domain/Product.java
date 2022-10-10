@@ -5,8 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,18 +19,15 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PRODUCT_ID")
     private Long id;
-
     private String thumbnail;
     private String productName;
-    private long amount;
+    private String basicPrice;
     private String country;
     private String region;
     private String airport;
     private String points;
     private String info;
-
-    @Enumerated(EnumType.STRING)
-    private Ages ages;
+    private String ages;
     @Enumerated(EnumType.STRING)
     private Companion companion;
     @Enumerated(EnumType.STRING)
@@ -41,15 +39,19 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private Theme theme;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<ProductOption> productOptionList = new ArrayList<>();
+
+
     @Builder
-    public Product(String thumbnail, String productName, Long amount, String country,
-                   String region, String points, String airport, String info, Ages ages,
+    public Product(String thumbnail, String productName, String basicPrice, String country,
+                   String region, String points, String airport, String info, String ages,
                    Companion companion, Continent continent, GenderGroup genderGroup,
                    Religion religion, Theme theme){
 
         this.thumbnail = thumbnail;
         this.productName = productName;
-        this.amount = amount;
+        this.basicPrice = basicPrice;
         this.country = country;
         this.region = region;
         //요약설명쪽 정보
