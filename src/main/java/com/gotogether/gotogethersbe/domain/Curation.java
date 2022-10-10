@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,9 +20,7 @@ public class Curation {
     @Column(name = "CURATION_ID")
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private Ages ages;
-
+    private String ages;
     @Enumerated(EnumType.STRING)
     private GenderGroup genderGroup;
 
@@ -35,7 +34,7 @@ public class Curation {
     private Theme theme;
 
     @Builder
-    public Curation(Ages ages, GenderGroup genderGroup, Companion companion, Religion religion, Theme theme){
+    public Curation(String ages, GenderGroup genderGroup, Companion companion, Religion religion, Theme theme){
         this.ages = ages;
         this.genderGroup = genderGroup;
         this.companion = companion;

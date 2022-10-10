@@ -8,7 +8,7 @@ public class CurationDto {
 
     @Data
     public static class CurationRequest{
-        private Ages ages;
+        private String ages;
         private GenderGroup genderGroup;
         private Companion companion;
         private Religion religion;
