@@ -10,22 +10,22 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Option {
+public class ProductOption {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "OPTION_ID")
+    @Column(name = "PRODUCT_OPTION_ID")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRODUCT_ID")
     private Product product;
 
     private String name;
 
+    private String additional;
+
     private String value;
 
-    private Long additional;
-
     private Boolean required;
-
 }
