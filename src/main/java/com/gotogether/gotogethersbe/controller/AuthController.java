@@ -25,6 +25,13 @@ public class AuthController {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.CREATED_USER);
     }
 
+    //이메일 유효성 검사
+    @PostMapping("/members/validation")
+    public DefaultRes checkEmail(@RequestBody MemberDto.emailRequest request){
+        authService.checkEmail(request);
+        return DefaultRes.res(StatusCode.OK, ResponseMessage.CHECK_EMAIL_SUCCESS);
+    }
+
     //로그인
     @PostMapping("/login")
     public DefaultRes<TokenDto> login(@RequestBody LoginDto.LoginRequest request){

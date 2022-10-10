@@ -1,7 +1,10 @@
 package com.gotogether.gotogethersbe.dto;
 
 import com.gotogether.gotogethersbe.domain.Curation;
-import com.gotogether.gotogethersbe.domain.enums.*;
+import com.gotogether.gotogethersbe.domain.enums.Companion;
+import com.gotogether.gotogethersbe.domain.enums.GenderGroup;
+import com.gotogether.gotogethersbe.domain.enums.Religion;
+import com.gotogether.gotogethersbe.domain.enums.Theme;
 import lombok.Data;
 
 public class CurationDto {

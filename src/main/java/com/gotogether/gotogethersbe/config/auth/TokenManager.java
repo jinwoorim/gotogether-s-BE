@@ -31,6 +31,7 @@ public class TokenManager {
 
     private final Key key;
 
+
     public TokenManager(
             @Value("${jwt.secret}") String secret){
         byte[] keyBytes = Decoders.BASE64.decode(secret);
@@ -61,6 +62,7 @@ public class TokenManager {
         return TokenDto.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
+                .refreshTokenExpirationTime(REFRESH_TOKEN_EXPIRE_TIME)
                 .build();
     }
 
@@ -106,5 +108,13 @@ public class TokenManager {
         } catch (ExpiredJwtException e) {
             return e.getClaims();
         }
+    }
+
+    public Long getExpiration(String accessToken) {
+        // accessToken 남은 유효시간
+        Date expiration = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(accessToken).getBody().getExpiration();
+        // 현재 시간
+        Long now = new Date().getTime();
+        return (expiration.getTime() - now);
     }
 }

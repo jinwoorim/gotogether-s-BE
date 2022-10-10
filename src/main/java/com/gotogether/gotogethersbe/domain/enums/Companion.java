@@ -24,4 +24,3 @@ public enum Companion implements EnumCuration{
                         .orElse(null);
     }
 }
-

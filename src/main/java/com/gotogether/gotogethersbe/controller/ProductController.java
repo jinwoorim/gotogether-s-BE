@@ -23,7 +23,7 @@ public class ProductController {
     // 설문응답시 맞춤상품
     // 설문미응답시 전체상품 추천
     @GetMapping("/recommended-custom")
-    public DefaultRes<List<ProductDto.ProductResponse>> getCustomProductList(Pageable pageable, HttpServletRequest request) {
+    public DefaultRes<List<ProductDto.ProductResponse>> getCustomProductList(HttpServletRequest request) {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_CUSTOM_PRODUCT_LIST, productService.recommendByCustom(request));
     }
     //메인페이지 여행지 종류

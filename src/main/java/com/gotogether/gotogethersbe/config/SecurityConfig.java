@@ -5,6 +5,7 @@ import com.gotogether.gotogethersbe.config.auth.JwtAuthenticationEntryPoint;
 import com.gotogether.gotogethersbe.config.auth.TokenManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -23,6 +24,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityConfig {
 
     private final TokenManager tokenManager;
+    private final RedisTemplate redisTemplate;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
@@ -43,7 +45,8 @@ public class SecurityConfig {
 
             http.csrf().disable() //csrf 토큰 막기
                 .authorizeRequests((authz) -> authz
-                        .antMatchers("/login", "/members", "/reissue", "/logout","/products/*","/members/curation").permitAll()
+                        .antMatchers("/login", "/members", "/reissue", "/logout","/products/*","/members/curation", "/awsrb").permitAll()
+                        .antMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 ) //위 요청은 모두 허용, 이외 요청은 인증 필수
                 .authorizeRequests((authz) -> authz
@@ -58,7 +61,7 @@ public class SecurityConfig {
                 .sessionManagement() //기본제공 세션 막음
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .apply(new JwtSecurityConfig(tokenManager))
+                .apply(new JwtSecurityConfig(tokenManager, redisTemplate))
                 .and()
                 .logout().disable();
 

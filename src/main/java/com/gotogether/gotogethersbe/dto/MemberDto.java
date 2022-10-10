@@ -2,7 +2,6 @@ package com.gotogether.gotogethersbe.dto;
 
 import com.gotogether.gotogethersbe.domain.Member;
 import com.gotogether.gotogethersbe.domain.enums.Authority;
-import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,7 +31,6 @@ public class MemberDto {
     }
 
     @Data
-    @Builder
     public static class MemberResponse {
         private Long id;
         private String email;
@@ -40,14 +38,17 @@ public class MemberDto {
         @DateTimeFormat(pattern = "yyyy-MM-dd")
         private LocalDate birth;
 
-        public static MemberResponse of(Member member) {
-            return MemberResponse.builder()
-                    .id(member.getId())
-                    .email(member.getEmail())
-                    .name(member.getName())
-                    .birth(member.getBirth())
-                    .build();
+        public MemberResponse(Member member) {
+            this.id = member.getId();
+            this.email = member.getEmail();
+            this.name = member.getName();
+            this.birth = member.getBirth();
         }
+    }
+
+    @Getter
+    public static class emailRequest{
+        private String email;
     }
 
     @Getter

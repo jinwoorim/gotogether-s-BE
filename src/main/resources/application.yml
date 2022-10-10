@@ -7,6 +7,9 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  redis:
+    host: 3.37.18.145
+    port: 6379
 
   sql:
     init:
@@ -15,9 +18,9 @@ spring:
   #DB Setting
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://gotogether.cxufpxkyookv.ap-northeast-2.rds.amazonaws.com:3306/gotogether?useSSL=false
-    username: master
-    password: rhxnrpejaktmxj2
+    url: ENC(nt5xZZn7LkBOUImW9fSZlulaecfM+/+VlNoeouTqtONqvo+/H7Vc2XSTvTJAa3B9Bf64m/A7/pw9UKz86TCbchmi6SKM1TY/IAmM04SOmGDHZgob41jTrBTEIXQYrDH7kbVDcVauLS8l+t3JmcEqDw==)
+    username: ENC(V5pbaP8CqZWJlgU+JQSqWA==)
+    password: ENC(1l5bc2bVZiTeIktnlK6ZylLCpHPwFiDY)
 
   #JPA Setting
   jpa:
@@ -42,47 +45,6 @@ logging:
 jwt:
   secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
 
-
-# 로컬 설정
-
-#server:
-#  port: 8080
-#spring:
-#  profiles:
-#    include: key
-#  devtools:
-#    livereload:
-#      enabled: true
-#  freemarker:
-#    cache: false
-#  thymeleaf:
-#    cache: false
-#
-#  sql:
-#    init:
-#      mode: never
-#
-#  #DB Setting
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://gotogether.cxufpxkyookv.ap-northeast-2.rds.amazonaws.com:3306/gotogether
-#    username: master
-#    password: rhxnrpejaktmxj2
-#
-#  #JPA Setting
-#  jpa:
-#    show-sql: true #if true, Show DB processing
-#    hibernate:
-#      ddl-auto: none  #DDL
-#    properties:
-#      hibernate:
-#        format_sql: false
-#        highlight_sql: true
-#        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-#
-#logging:
-#  level:
-#    org.hibernate.SQL: trace
-#
-#jwt:
-#  secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor

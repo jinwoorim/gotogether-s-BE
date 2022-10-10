@@ -10,15 +10,15 @@ import java.time.LocalDateTime;
 @Builder
 public class ErrorResponse {
     private final LocalDateTime timestamp = LocalDateTime.now();
-    private final int status;
-    private final String message;
+    private final int statusCode;
+    private final String errorMessage;
 
     public static ResponseEntity<ErrorResponse> toResponseEntity(String errorMessage, int statusCode) {
         return ResponseEntity
                 .status(statusCode)
                 .body(ErrorResponse.builder()
-                        .status(statusCode)
-                        .message(errorMessage)
+                        .statusCode(statusCode)
+                        .errorMessage(errorMessage)
                         .build()
                 );
     }

@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
@@ -21,6 +20,7 @@ public class Curation {
     private Long id;
 
     private String ages;
+
     @Enumerated(EnumType.STRING)
     private GenderGroup genderGroup;
 
