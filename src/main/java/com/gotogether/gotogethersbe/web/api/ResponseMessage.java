@@ -17,11 +17,19 @@ public class ResponseMessage {
     public static final String RECO_DATA_SUCCESS_FOR_NONMEMBER = "비회원을 위한 추천 데이터 입력 저장 완료";
     public static final String LOGOUT_SUCCESS = "로그아웃 성공";
 
+
+
     public static final String INTERNAL_SERVER_ERROR = "서버 내부 에러";
     public static final String DB_ERROR = "데이터베이스 에러";
+    public static final String GET_CUSTOM_BANNER_LIST = " 베너 이미지 조회 성공";
     public static final String GET_PRODUCT_LIST = "상품목록 조회 성공";
     public static final String GET_PRODUCT = "상품조회 성공";
-    public static final String GET_CUSTOM_PRODUCT_LIST = "맞춤상품 조회 성공";
+    public static final String GET_CUSTOM_PRODUCT_LIST = "맞춤 상품목록 조회 성공";
+    public static final String Get_Continent_Category_List = "여행지 카테고리목록 조회 성공";
+    public static final String GET_PRODUCT_CATEGORY = "카태고리별 상품목록 조회 성공";
+    public static final String GET_PRODUCT_THEME_GOLF = "골프 테마 상품목록 조회 성공";
+    public static final String GET_PRODUCT_CATEGORY_CULTURE = "문화탐방 테마 상품목록 조회 성공";
+    public static final String GET_PRODUCT_THEME_HEALING = "휴양지 테마 상품 조회 성공";
     public static final String GET_PRODUCT_SEARCH = "상품검색 성공";
 
     public static final String ADD_CART = "장바구니 등록 성공";
