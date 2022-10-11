@@ -1,9 +1,6 @@
 package com.gotogether.gotogethersbe.domain;
 
-import com.gotogether.gotogethersbe.domain.enums.Companion;
-import com.gotogether.gotogethersbe.domain.enums.GenderGroup;
-import com.gotogether.gotogethersbe.domain.enums.Religion;
-import com.gotogether.gotogethersbe.domain.enums.Theme;
+import com.gotogether.gotogethersbe.domain.enums.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

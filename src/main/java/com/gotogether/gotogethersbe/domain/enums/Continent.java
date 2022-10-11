@@ -1,12 +1,12 @@
 package com.gotogether.gotogethersbe.domain.enums;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@JsonFormat
+import java.util.Arrays;
+@Getter
 @RequiredArgsConstructor
-public enum Continent {
+public enum Continent implements EnumCuration {
 
     SOUTH_EAST_ASIA("동남아시아"),
     GUAM_AND_SAIPAN_AND_HAWAII("괌&사이판&하와이"),
@@ -28,6 +28,14 @@ public enum Continent {
     CHINA("중국"),
     JAPAN("일본");
 
-    @JsonValue
     private final String koreanName;
+
+    @Override
+    public Continent TypeChecker(String koreanName) {
+        return
+                Arrays.stream((Continent.values()))
+                        .filter(continent -> continent.getKoreanName().equals(koreanName))
+                        .findAny()
+                        .orElse(null);
+    }
 }
