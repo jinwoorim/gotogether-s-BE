@@ -1,6 +1,8 @@
 package com.gotogether.gotogethersbe.domain;
 
+import jdk.jshell.Snippet;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,9 +25,23 @@ public class ProductOption {
 
     private String name;
 
-    private String additional;
-
     private String value;
 
-    private Boolean required;
+    private long additional;
+
+    private boolean required;
+
+    @Builder
+    ProductOption (Long id, String name, String value, long additional, boolean required) {
+        this.id = id;
+        this.name = name;
+        this.value = value;
+        this.additional = additional;
+        this.required = required;
+    }
+
+    public ProductOption addProduct(Product product){
+        this.product = product;
+        return this;
+    }
 }

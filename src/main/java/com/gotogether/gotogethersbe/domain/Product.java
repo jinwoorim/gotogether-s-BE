@@ -12,7 +12,6 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Product {
 
     @Id
@@ -44,11 +43,12 @@ public class Product {
 
 
     @Builder
-    public Product(String thumbnail, String productName, String basicPrice, String country,
+    public Product(Long id, String thumbnail, String productName, String basicPrice, String country,
                    String region, String points, String airport, String info, String ages,
                    Companion companion, Continent continent, GenderGroup genderGroup,
-                   Religion religion, Theme theme){
+                   Religion religion, Theme theme, List<ProductOption> productOptionList){
 
+        this.id = id;
         this.thumbnail = thumbnail;
         this.productName = productName;
         this.basicPrice = basicPrice;
@@ -65,8 +65,7 @@ public class Product {
         this.genderGroup = genderGroup;
         this.religion = religion;
         this.theme = theme;
-
-
+        this.productOptionList = productOptionList;
     }
 
 }
