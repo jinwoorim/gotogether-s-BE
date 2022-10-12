@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ProductDto {
-    @Data
+    @Getter
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
@@ -40,7 +40,7 @@ public class ProductDto {
         }
     }
 
-    @Data
+    @Getter
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder

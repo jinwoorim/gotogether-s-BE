@@ -1,6 +1,7 @@
 package com.gotogether.gotogethersbe.controller;
 
 
+import com.gotogether.gotogethersbe.domain.enums.Continent;
 import com.gotogether.gotogethersbe.dto.ProductDto;
 import com.gotogether.gotogethersbe.service.ProductService;
 import com.gotogether.gotogethersbe.web.api.DefaultRes;
@@ -22,14 +23,14 @@ public class ProductController {
 
     // 설문응답시 맞춤상품
     // 설문미응답시 전체상품 추천
-    @GetMapping("/recommended-custom")
+    @GetMapping("/product-list/custom")
     public DefaultRes<List<ProductDto.ProductResponse>> getCustomProductList(HttpServletRequest request) {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_CUSTOM_PRODUCT_LIST, productService.recommendByCustom(request));
     }
     //메인페이지 여행지 종류
-    @GetMapping("/product-list/continent")
+    @GetMapping("/continent-list")
     public DefaultRes<List<String>> getContinentList(){
-        return DefaultRes.res(StatusCode.OK, ResponseMessage.Get_Continent_Category_List, productService.continentCategory());
+        return DefaultRes.res(StatusCode.OK, ResponseMessage.Get_Continent_Category_List, productService.continentList());
     }
 
     // 메인페이지, 카테고리 유형별 상품 목록
@@ -45,7 +46,7 @@ public class ProductController {
     }
     // 상품 상세정보 보기
     @GetMapping("/product-list/details")
-    public DefaultRes<List<ProductDto.DetailResponse>> getProductDetail(@RequestBody ProductDto.DetailRequest request) {
-        return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_PRODUCT, productService.productDetail(request));
+    public DefaultRes<List<ProductDto.DetailResponse>> getProductDetail(@PathVariable Long productId) {
+        return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_PRODUCT, productService.productDetail(productId));
     }
 }

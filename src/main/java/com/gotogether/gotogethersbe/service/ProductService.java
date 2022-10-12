@@ -2,6 +2,7 @@ package com.gotogether.gotogethersbe.service;
 
 import com.gotogether.gotogethersbe.config.util.SecurityUtil;
 import com.gotogether.gotogethersbe.domain.Member;
+import com.gotogether.gotogethersbe.domain.enums.Continent;
 import com.gotogether.gotogethersbe.dto.CurationDto;
 import com.gotogether.gotogethersbe.dto.ProductDto;
 import com.gotogether.gotogethersbe.repository.MemberRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -85,8 +87,8 @@ public class ProductService {
      * @return 메인페이지 여행지 종류 리스트
      */
     @Transactional(readOnly = true)
-    public List<String> continentCategory() {
-        return productRepository.findDistinctContinent();
+    public List<String> continentList() {
+        return Continent.getContinentList();
     }
 
     @Transactional(readOnly = true)
@@ -110,12 +112,12 @@ public class ProductService {
     /**
      * 상품 상세정보 보기
      *
-     * @param request 상품테이블 기본키인 productId
+     * @param productId
      * @retrun 상품 상세 정보
      */
     @Transactional(readOnly = true)
-    public List<ProductDto.DetailResponse> productDetail(ProductDto.DetailRequest request) {
-        return productRepository.findById(request.getProductId())
+    public List<ProductDto.DetailResponse> productDetail(Long productId) {
+        return productRepository.findById(productId)
                 .stream().map(ProductDto.DetailResponse::of)
                 .collect(Collectors.toList());
     }

@@ -1,7 +1,6 @@
 package com.gotogether.gotogethersbe.domain;
 
 import com.gotogether.gotogethersbe.domain.enums.*;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
