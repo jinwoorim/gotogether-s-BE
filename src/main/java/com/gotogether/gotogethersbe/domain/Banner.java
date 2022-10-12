@@ -16,4 +16,6 @@ public class Banner {
     private Long id;
 
     private String BannerImage;
+
+    private String URL;
 }
