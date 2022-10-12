@@ -20,7 +20,7 @@ public class Product {
     private Long id;
     private String thumbnail;
     private String productName;
-    private String basicPrice;
+    private long basicPrice;
     private String country;
     private String region;
     private String airport;
@@ -43,7 +43,7 @@ public class Product {
 
 
     @Builder
-    public Product(Long id, String thumbnail, String productName, String basicPrice, String country,
+    public Product(Long id, String thumbnail, String productName, long basicPrice, String country,
                    String region, String points, String airport, String info, String ages,
                    Companion companion, Continent continent, GenderGroup genderGroup,
                    Religion religion, Theme theme, List<ProductOption> productOptionList){

@@ -6,7 +6,6 @@ import lombok.Data;
 import java.util.List;
 
 public class WishDto {
-
     // 찜 하기
     @Data
     public static class WishRequest {
@@ -22,7 +21,7 @@ public class WishDto {
         private String productName;
         private String thumbnail;
         private String airport;
-        private String basicPrice;
+        private long basicPrice;
 
         public WishListResponse(Wish wish) {
 

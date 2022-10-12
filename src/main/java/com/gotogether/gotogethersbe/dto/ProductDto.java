@@ -17,7 +17,7 @@ public class ProductDto {
         private Long id;
         private String thumbnail;
         private String productName;
-        private String basicPrice;
+        private long basicPrice;
         private String country;
         private String ages;
         private GenderGroup genderGroup;
@@ -44,11 +44,11 @@ public class ProductDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class DetailResponse<E> {
+    public static class DetailResponse {
         private Long id;
         private String thumbnail;
         private String productName;
-        private String basicPrice;
+        private long basicPrice;
         private String country;
         private String detail;
         private String region;
@@ -89,24 +89,6 @@ public class ProductDto {
         }
     }
 
-
-    @Getter
-    public static class ContinentRequest {
-        private Continent continent;
-    }
-    @Getter
-    public static class CompanionRequest {
-        private Companion companion;
-    }
-    @Getter
-    public static class GenderGroupRequest {
-        private GenderGroup genderGroup;
-    }
-
-    @Getter
-    public static class ThemeRequest {
-        private Theme theme;
-    }
     @Getter
     public static class SearchRequest {
         private String keyword;
