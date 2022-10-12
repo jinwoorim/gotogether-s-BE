@@ -1,18 +1,18 @@
 package com.gotogether.gotogethersbe.repository;
 
-import com.gotogether.gotogethersbe.domain.enums.Companion;
-import com.gotogether.gotogethersbe.domain.enums.GenderGroup;
-import com.gotogether.gotogethersbe.domain.enums.Religion;
-import com.gotogether.gotogethersbe.domain.enums.Theme;
+import com.gotogether.gotogethersbe.domain.enums.*;
 import com.gotogether.gotogethersbe.dto.ProductDto;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.support.PageableExecutionUtils;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -26,8 +26,8 @@ public class ProductRepositoryImpl implements ProductRepositoryQueryDsl {
 
     @Override
     public List<ProductDto.ProductResponse> findCustom(String ages, GenderGroup genderGroup, Companion companion, Religion religion, Theme theme) {
-        GenderGroup g = NoMatterChecker(genderGroup);
         Companion c = NoMatterChecker(companion);
+        GenderGroup g = NoMatterChecker(genderGroup);
         Religion r = NoMatterChecker(religion);
         Theme t = NoMatterChecker(theme);
 
@@ -43,23 +43,61 @@ public class ProductRepositoryImpl implements ProductRepositoryQueryDsl {
     }
 
     @Override
-    public List<ProductDto.ProductResponse> findAgesContains(String ages) {
+    public Page<ProductDto.ProductResponse> findAllCategoriesComplex(Pageable pageable, String category) {
+        List<ProductDto.ProductResponse> content = findAllCategories(pageable, category);
+
+        JPAQuery<Long> countQuery = getCount(category);
+
+        return PageableExecutionUtils.getPage(content, pageable, () -> countQuery.fetchOne());
+    }
+
+    public List<ProductDto.ProductResponse> findAllCategories(Pageable pageable, String category) {
+        Continent continent = Continent.typeChecker(category);
+        Companion companion = Companion.typeChecker(category);
+        GenderGroup genderGroup = GenderGroup.typeChecker(category);
+        Theme theme = Theme.typeChecker(category);
+
         return jpaQueryFactory.selectFrom(product)
-                .where(safeNull(() -> product.ages.contains(ages)))
+                .where(safeNull(() -> product.ages.contains(category))
+                        .or(safeNull(() -> product.continent.eq(continent)))
+                        .or(safeNull(() -> product.companion.eq(companion)))
+                        .or(safeNull(() -> product.genderGroup.eq(genderGroup)))
+                        .or(safeNull(() -> product.theme.eq(theme))))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .orderBy(priceSort(pageable))
                 .fetch().stream()
                 .map(ProductDto.ProductResponse::of)
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<ProductDto.ProductResponse> findCompanion(String companion) {
-        Companion c = NoMatterChecker(Companion.valueOf(companion));
+    private JPAQuery<Long> getCount(String category) {
+        JPAQuery<Long> countQuery = jpaQueryFactory.select(product.count()).from(product)
+                .where(safeNull(() -> product.ages.contains(category)),
+                        safeNull(() -> product.continent.eq(Continent.valueOf(category))),
+                        safeNull(() -> product.companion.eq(Companion.valueOf(category))),
+                        safeNull(() -> product.genderGroup.eq(GenderGroup.valueOf(category))),
+                        safeNull(() -> product.theme.eq(Theme.valueOf(category))));
+        return countQuery;
+    }
+
+    public List<ProductDto.ProductResponse> findCompanion(Companion companion) {
         return jpaQueryFactory.selectFrom(product)
-                .where(safeNull(() -> product.companion.eq(c)))// 맞나?
-                //.orderBy(productSort())
+                .where(safeNull(() -> product.companion.eq(companion)))
                 .fetch().stream()
                 .map(ProductDto.ProductResponse::of)
                 .collect(Collectors.toList());
+    }
+
+    private OrderSpecifier<?> priceSort(Pageable pageable) {
+        //서비스에서 보내준 Pageable 객체에 정렬조건 null 값 체크
+        if (!pageable.getSort().isEmpty()) {
+            for (Sort.Order order : pageable.getSort()) { // 멘토님
+                Order direction = order.getDirection().isAscending() ? Order.ASC : Order.DESC;
+                return new OrderSpecifier(direction, product.basicPrice);
+            }
+        }
+        return null;
     }
 
     public <T extends Enum> T NoMatterChecker(T t) {
