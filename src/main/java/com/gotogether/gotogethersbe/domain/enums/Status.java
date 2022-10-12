@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @JsonFormat
 public enum Status {
 
-    STANDBY("예약대기"),
+    STANDBY("예대기"),
     CANCEL("예약취소"),
     COMPLETE("예약완료");
 
