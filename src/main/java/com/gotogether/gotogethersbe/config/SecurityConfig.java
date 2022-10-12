@@ -45,7 +45,7 @@ public class SecurityConfig {
 
             http.csrf().disable() //csrf 토큰 막기
                 .authorizeRequests((authz) -> authz
-                        .antMatchers("/login", "/members", "/reissue", "/logout","/products/*","/members/curation", "/awsrb").permitAll()
+                        .antMatchers("/login", "/members", "/reissue", "/logout","/product-list/*","/members/curation", "/awsrb").permitAll()
                         .antMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 ) //위 요청은 모두 허용, 이외 요청은 인증 필수
