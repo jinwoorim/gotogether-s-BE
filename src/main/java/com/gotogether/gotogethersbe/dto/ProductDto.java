@@ -17,7 +17,7 @@ public class ProductDto {
         private Long id;
         private String thumbnail;
         private String productName;
-        private String basicPrice;
+        private long basicPrice;
         private String country;
         private String ages;
         private GenderGroup genderGroup;
@@ -48,7 +48,7 @@ public class ProductDto {
         private Long id;
         private String thumbnail;
         private String productName;
-        private String basicPrice;
+        private long basicPrice;
         private String country;
         private String detail;
         private String region;

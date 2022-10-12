@@ -22,7 +22,7 @@ public class WishDto {
         private String productName;
         private String thumbnail;
         private String airport;
-        private String basicPrice;
+        private long basicPrice;
 
         public WishListResponse(Wish wish) {
 
