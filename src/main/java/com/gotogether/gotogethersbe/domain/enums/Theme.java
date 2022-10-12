@@ -8,7 +8,8 @@ import lombok.RequiredArgsConstructor;
 import java.util.Arrays;
 @Getter
 @RequiredArgsConstructor
-public enum Theme implements EnumCuration {
+@JsonFormat
+public enum Theme {
 
     CULTURE("문화탐방"),
     GOLF("골프여행"),
@@ -19,12 +20,12 @@ public enum Theme implements EnumCuration {
     HOLYLAND("성지순례"),
     NO_MATTER("상관 없음");
 
+    @JsonValue
     private final String koreanName;
 
-    @Override
-    public Theme TypeChecker(String koreanName) {
+    public static Theme typeChecker(String koreanName) {
         return
-                Arrays.stream((Theme.values()))
+                Arrays.stream(Theme.values())
                         .filter(theme -> theme.getKoreanName().equals(koreanName))
                         .findAny()
                         .orElse(null);
