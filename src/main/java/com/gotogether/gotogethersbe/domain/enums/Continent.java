@@ -1,11 +1,15 @@
 package com.gotogether.gotogethersbe.domain.enums;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
+
 @Getter
 @RequiredArgsConstructor
+@JsonFormat
 public enum Continent implements EnumCuration {
 
     SOUTH_EAST_ASIA("동남아시아"),
@@ -28,6 +32,7 @@ public enum Continent implements EnumCuration {
     CHINA("중국"),
     JAPAN("일본");
 
+    @JsonValue
     private final String koreanName;
 
     @Override

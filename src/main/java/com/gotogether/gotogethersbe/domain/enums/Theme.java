@@ -6,8 +6,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
+
 @Getter
 @RequiredArgsConstructor
+@JsonFormat
 public enum Theme implements EnumCuration {
 
     CULTURE("문화탐방"),
@@ -19,6 +21,7 @@ public enum Theme implements EnumCuration {
     HOLYLAND("성지순례"),
     NO_MATTER("상관 없음");
 
+    @JsonValue
     private final String koreanName;
 
     @Override
