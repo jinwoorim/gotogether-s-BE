@@ -1,7 +1,6 @@
 package com.gotogether.gotogethersbe.domain;
 
 import com.gotogether.gotogethersbe.domain.enums.*;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,7 +36,6 @@ public class Product {
     private Religion religion;
     @Enumerated(EnumType.STRING)
     private Theme theme;
-
     @OneToMany(fetch = FetchType.LAZY)
     private List<ProductOption> productOptionList = new ArrayList<>();
 
@@ -67,5 +65,4 @@ public class Product {
         this.theme = theme;
         this.productOptionList = productOptionList;
     }
-
 }

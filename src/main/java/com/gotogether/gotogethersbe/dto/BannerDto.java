@@ -16,12 +16,12 @@ public class BannerDto {
     public static class BannerResponse {
         private Long id;
         private String bannerImage;
-
+        private String bannerUrl;
         public static BannerResponse of(Banner banner) {
             return BannerResponse.builder()
                     .id(banner.getId())
                     .bannerImage(banner.getBannerImage())
-
+                    .bannerUrl(banner.getURL())
                     .build();
         }
     }
