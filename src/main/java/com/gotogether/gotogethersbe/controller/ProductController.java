@@ -1,7 +1,6 @@
 package com.gotogether.gotogethersbe.controller;
 
 
-import com.gotogether.gotogethersbe.domain.enums.Continent;
 import com.gotogether.gotogethersbe.dto.ProductDto;
 import com.gotogether.gotogethersbe.service.ProductService;
 import com.gotogether.gotogethersbe.web.api.DefaultRes;
@@ -10,7 +9,10 @@ import com.gotogether.gotogethersbe.web.api.StatusCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -23,13 +25,14 @@ public class ProductController {
 
     // 설문응답시 맞춤상품
     // 설문미응답시 전체상품 추천
-//    @GetMapping("/product-list/custom")
-//    public DefaultRes<List<ProductDto.ProductResponse>> getCustomProductList(Pageable pageable, HttpServletRequest request) {
-//        return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_CUSTOM_PRODUCT_LIST, productService.recommendByCustom(pageable, request));
-//    }
+    @GetMapping("/product-list/custom")
+    public DefaultRes<Page<ProductDto.ProductResponse>> getCustomProductList(Pageable pageable, HttpServletRequest request) {
+        return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_CUSTOM_PRODUCT_LIST, productService.recommendByCustom(pageable, request));
+    }
+
     //메인페이지 여행지 종류
     @GetMapping("/continent-list")
-    public DefaultRes<List<String>> getContinentList(){
+    public DefaultRes<List<String>> getContinentList() {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.Get_Continent_Category_List, productService.continentList());
     }
 
@@ -74,6 +77,7 @@ public class ProductController {
     public DefaultRes<Page<ProductDto.ProductResponse>> getSearchProducts(Pageable pageable, @RequestParam String keyword) {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_PRODUCT_SEARCH, productService.searchProducts(pageable, keyword));
     }
+
     //상품 상세정보 보기
     @GetMapping("/product-details/{productId}")
     public DefaultRes<ProductDto.DetailResponse> getProductDetail(@PathVariable Long productId) {

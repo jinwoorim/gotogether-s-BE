@@ -19,21 +19,22 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import static com.gotogether.gotogethersbe.domain.QProduct.product;
+
 @RequiredArgsConstructor
 public class ProductRepositoryImpl implements ProductRepositoryQueryDsl {
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
     public Page<ProductDto.ProductResponse> findCustomComplex(Pageable pageable, String ages, GenderGroup genderGroup, Companion companion, Religion religion, Theme theme) {
-//        List<ProductDto.ProductResponse> content = findCustom(pageable, ages, genderGroup, companion, religion, theme);
-//
-//        JPAQuery<Long> countQuery = getCount(ages, genderGroup, companion, religion);
-//
-//        return PageableExecutionUtils.getPage(content, pageable, () -> countQuery.fetchOne());
-        return null;
+        List<ProductDto.ProductResponse> content = findCustom(pageable, ages, genderGroup, companion, religion, theme);
+
+        JPAQuery<Long> countQuery = getCount(ages, genderGroup, companion, religion, theme);
+
+        return PageableExecutionUtils.getPage(content, pageable, () -> countQuery.fetchOne());
+
     }
 
-    List<ProductDto.ProductResponse> findCustom(Pageable pageable, String ages, GenderGroup genderGroup, Companion companion, Religion religion, Theme theme){
+    List<ProductDto.ProductResponse> findCustom(Pageable pageable, String ages, GenderGroup genderGroup, Companion companion, Religion religion, Theme theme) {
         Companion c = NoMatterChecker(companion);
         GenderGroup g = NoMatterChecker(genderGroup);
         Religion r = NoMatterChecker(religion);
@@ -51,6 +52,7 @@ public class ProductRepositoryImpl implements ProductRepositoryQueryDsl {
                 .fetch().stream().map(ProductDto.ProductResponse::of)
                 .collect(Collectors.toList());
     }
+
     @Override
     public Page<ProductDto.ProductResponse> findAllCategoriesComplex(Pageable pageable, String category) {
         List<ProductDto.ProductResponse> content = findAllCategories(pageable, category);
@@ -88,6 +90,7 @@ public class ProductRepositoryImpl implements ProductRepositoryQueryDsl {
 
         return PageableExecutionUtils.getPage(content, pageable, () -> countQuery.fetchOne());
     }
+
     public List<ProductDto.ProductResponse> findAllCategories(Pageable pageable, String category1, String category2, String category3, String category4) {
         Continent continent = Continent.typeChecker(category1);
         Companion companion = Companion.typeChecker(category3);
@@ -116,7 +119,8 @@ public class ProductRepositoryImpl implements ProductRepositoryQueryDsl {
 
         return PageableExecutionUtils.getPage(content, pageable, () -> countQuery.fetchOne());
     }
-    public List<ProductDto.ProductResponse> findByProductNameContains(Pageable pageable, String keyword){
+
+    public List<ProductDto.ProductResponse> findByProductNameContains(Pageable pageable, String keyword) {
         return jpaQueryFactory.selectFrom(product)
                 .where(safeNull(() -> product.productName.contains(keyword)))
                 .offset(pageable.getOffset())
@@ -137,6 +141,16 @@ public class ProductRepositoryImpl implements ProductRepositoryQueryDsl {
         return countQuery;
     }
 
+    private JPAQuery<Long> getCount(String ages, GenderGroup genderGroup, Companion companion, Religion religion, Theme theme) {
+        JPAQuery<Long> countQuery = jpaQueryFactory.select(product.count()).from(product)
+                .where(safeNull(() -> product.ages.contains(ages)),
+                        safeNull(() -> product.genderGroup.eq(genderGroup)),
+                        safeNull(() -> product.companion.eq(companion)),
+                        safeNull(() -> product.religion.eq(religion)),
+                        safeNull(() -> product.theme.eq(theme)));
+        return countQuery;
+    }
+
     private JPAQuery<Long> getCount(String category1, String category2, String category3, String category4) {
         JPAQuery<Long> countQuery = jpaQueryFactory.select(product.count()).from(product)
                 .where(
@@ -147,6 +161,7 @@ public class ProductRepositoryImpl implements ProductRepositoryQueryDsl {
                         safeNull(() -> product.theme.eq(Theme.valueOf(category4))));
         return countQuery;
     }
+
     private OrderSpecifier<?> priceSort(Pageable pageable) {
         //서비스에서 보내준 Pageable 객체에 정렬조건 null 값 체크
         if (!pageable.getSort().isEmpty()) {

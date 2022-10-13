@@ -43,42 +43,38 @@ public class ProductService {
      * case 2-1. 세션에 설문 응답값이 있는 경우 -> 큐레이션 맞춤 상품 리스트 리턴
      * case 2-2. 세선에 설문 응답값이 없는 경우 -> 오늘의 추천리스트(전체) 상품 리스트 리턴
      */
-//    @Transactional(readOnly = true)
-//    public Page<ProductDto.ProductResponse> recommendByCustom(Pageable pageable, HttpServletRequest request) {
-//        if (isMemberLogin()) {
-//            //case 1-1
-//            Member findMember = memberRepository.findByIdComplex(pageable, SecurityUtil.getCurrentMemberId()).get();
-//            if (findMember.getCuration() != null) {
-//                return productRepository.findCustom(pageable,
-//                        findMember.getCuration().getAges(),
-//                        findMember.getCuration().getGenderGroup(),
-//                        findMember.getCuration().getCompanion(),
-//                        findMember.getCuration().getReligion(),
-//                        findMember.getCuration().getTheme()
-//                );
-//            }
-//            return productRepository.findAll()
-//                    .stream().map(ProductDto.ProductResponse::of)
-//                    .collect(Collectors.toList());
-//        }
-//
-//        HttpSession session = request.getSession(false);
-//        //case 2-1
-//        if (hasCurationData(session)) {
-//            CurationDto.CurationRequest cRequest = (CurationDto.CurationRequest) session.getAttribute("curation");
-//            return productRepository.findCustom(pageable,
-//                    cRequest.getAges(),
-//                    cRequest.getGenderGroup(),
-//                    cRequest.getCompanion(),
-//                    cRequest.getReligion(),
-//                    cRequest.getTheme()
-//            );
-//        }
-//        //case 2-2
-//        return productRepository.findAll()
-//                .stream().map(ProductDto.ProductResponse::of)
-//                .collect(Collectors.toList());
-//    }
+    @Transactional(readOnly = true)
+    public Page<ProductDto.ProductResponse> recommendByCustom(Pageable pageable, HttpServletRequest request) {
+        if (isMemberLogin()) {
+            //case 1-1
+            Member findMember = memberRepository.findById(SecurityUtil.getCurrentMemberId()).get();
+            if (findMember.getCuration() != null) {
+                return productRepository.findCustomComplex(pageable,
+                        findMember.getCuration().getAges(),
+                        findMember.getCuration().getGenderGroup(),
+                        findMember.getCuration().getCompanion(),
+                        findMember.getCuration().getReligion(),
+                        findMember.getCuration().getTheme()
+                );
+            }
+            return productRepository.findAllCategoriesComplex(pageable, "");
+        }
+
+        HttpSession session = request.getSession(false);
+        //case 2-1
+        if (hasCurationData(session)) {
+            CurationDto.CurationRequest cRequest = (CurationDto.CurationRequest) session.getAttribute("curation");
+            return productRepository.findCustomComplex(pageable,
+                    cRequest.getAges(),
+                    cRequest.getGenderGroup(),
+                    cRequest.getCompanion(),
+                    cRequest.getReligion(),
+                    cRequest.getTheme()
+            );
+        }
+        //case 2-2
+        return productRepository.findAllCategoriesComplex(pageable, "");
+    }
 
     private boolean isMemberLogin() {
         return SecurityUtil.getCurrentMemberId() != null;
