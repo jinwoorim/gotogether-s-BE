@@ -37,7 +37,7 @@ public class Product {
     private Religion religion;
     @Enumerated(EnumType.STRING)
     private Theme theme;
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     private List<ProductOption> productOptionList = new ArrayList<>();
 
     @Builder
