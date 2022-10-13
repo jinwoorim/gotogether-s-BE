@@ -10,9 +10,9 @@ import java.util.List;
 public interface ProductRepositoryQueryDsl {
 
 
-    List<ProductDto.ProductResponse> findCustom(
-            String ages, GenderGroup genderGroup, Companion companion, Religion religion, Theme theme);
+    Page<ProductDto.ProductResponse> findCustomComplex(Pageable pageable, String ages, GenderGroup genderGroup,
+                                                Companion companion, Religion religion, Theme theme);
     Page<ProductDto.ProductResponse> findAllCategoriesComplex(Pageable pageable, String category);
-
+    Page<ProductDto.ProductResponse> findAllCategoriesComplex(Pageable pageable, String category1, String category2, String category3, String category4);
     Page<ProductDto.ProductResponse> findByProductNameContainsComplex(Pageable pageable, String keyword);
 }
