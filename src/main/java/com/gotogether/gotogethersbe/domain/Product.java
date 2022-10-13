@@ -4,6 +4,7 @@ import com.gotogether.gotogethersbe.domain.enums.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +37,8 @@ public class Product {
     private Religion religion;
     @Enumerated(EnumType.STRING)
     private Theme theme;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY , cascade=CascadeType.ALL)
     private List<ProductOption> productOptionList = new ArrayList<>();
-
 
     @Builder
     public Product(Long id, String thumbnail, String productName, long basicPrice, String country,

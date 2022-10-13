@@ -22,11 +22,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ErrorResponse.toResponseEntity(e.getErrorMessage(), e.getStatusCode());
     }
 
-    //회원 가입 예외 처리
+    //회원 가입 및 요청값 에러
     @ExceptionHandler(value = { ConstraintViolationException.class, DataIntegrityViolationException.class})
     protected ResponseEntity<ErrorResponse> handleDataException() {
-        log.error("handleDataException throw Exception : CREATED_FAIL");
-        return ErrorResponse.toResponseEntity(ResponseMessage.CREATED_FAIL, StatusCode.BAD_REQUEST);
+        log.error("handleDataException throw Exception : REQUEST_ERROR");
+        return ErrorResponse.toResponseEntity(ResponseMessage.REQUEST_ERROR, StatusCode.BAD_REQUEST);
     }
 
     //로그인 예외 처리
