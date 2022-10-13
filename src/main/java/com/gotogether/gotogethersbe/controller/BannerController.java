@@ -18,7 +18,7 @@ public class BannerController {
     private final BannerService bannerService;
 
     @GetMapping("/banner")
-    public DefaultRes<List<BannerDto.BannerResponse>> getBannerImage() {
+    public DefaultRes<List<BannerDto.BannerResponse>> getBanner() {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_CUSTOM_BANNER_LIST, bannerService.getBanner());
     }
 }

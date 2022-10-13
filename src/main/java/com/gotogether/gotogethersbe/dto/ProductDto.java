@@ -1,6 +1,7 @@
 package com.gotogether.gotogethersbe.dto;
 
 import com.gotogether.gotogethersbe.domain.Product;
+import com.gotogether.gotogethersbe.domain.ProductOption;
 import com.gotogether.gotogethersbe.domain.enums.*;
 import lombok.*;
 
@@ -9,7 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ProductDto {
-    @Data
+    @Getter
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
@@ -40,7 +41,7 @@ public class ProductDto {
         }
     }
 
-    @Data
+    @Getter
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
@@ -65,11 +66,7 @@ public class ProductDto {
 
         private Map<String, List<ProductOptionDto.OptionResponse>> productOptionList;
 
-        public static DetailResponse of(Product product) {
-            Map<String, List<ProductOptionDto.OptionResponse>> optionList
-                    = product.getProductOptionList()
-                    .stream().map(ProductOptionDto.OptionResponse::new)
-                    .collect(Collectors.groupingBy(ProductOptionDto.OptionResponse::getName));
+        public static DetailResponse of(Product product, Map<String, List<ProductOptionDto.OptionResponse>> productOptionList) {
 
             return DetailResponse.builder()
                     .id(product.getId())
@@ -84,19 +81,8 @@ public class ProductDto {
                     .religion(product.getReligion())
                     .continent(product.getContinent())
                     .info(product.getInfo())
-                    .productOptionList(optionList)
+                    .productOptionList(productOptionList)
                     .build();
         }
     }
-
-    @Getter
-    public static class SearchRequest {
-        private String keyword;
-    }
-    @Getter
-    public static class DetailRequest {
-        private Long productId;
-    }
-
-
 }

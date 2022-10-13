@@ -5,7 +5,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 @Getter
 @RequiredArgsConstructor
 @JsonFormat
@@ -40,5 +43,14 @@ public enum Continent {
                         .filter(continent -> continent.getKoreanName().equals(koreanName))
                         .findAny()
                         .orElse(null);
+    }
+
+    public static List<String> getContinentList(){
+        Continent continent[] = Continent.values();
+        List<String> continentValues = new ArrayList<>();
+        for( Continent c : continent){
+            continentValues.add(c.getKoreanName());
+        }
+        return continentValues;
     }
 }
