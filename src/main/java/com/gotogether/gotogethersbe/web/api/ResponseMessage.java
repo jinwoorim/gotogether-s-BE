@@ -18,6 +18,7 @@ public class ResponseMessage {
     public static final String RECO_DATA_SUCCESS_FOR_MEMBER = "회원을 위한 추천 데이터 입력 저장 완료";
     public static final String RECO_DATA_SUCCESS_FOR_NONMEMBER = "비회원을 위한 추천 데이터 입력 저장 완료";
     public static final String LOGOUT_SUCCESS = "로그아웃 성공";
+    public static final String REQUEST_ERROR = "요청 에러";
 
 
 
