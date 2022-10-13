@@ -37,19 +37,16 @@ spring:
         format_sql: true
         default_batch_fetch_size: 1000
     defer-datasource-initialization: true
-
-logging:
-  level:
-    org.hibernate.SQL: trace
-
   #Pageable Setting
   data:
     web:
       pageable:
         default-page-size: 10
+
+logging:
+  level:
+    org.hibernate.SQL: trace
+
 jwt:
   secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
 
-jasypt:
-  encryptor:
-    bean: jasyptStringEncryptor
