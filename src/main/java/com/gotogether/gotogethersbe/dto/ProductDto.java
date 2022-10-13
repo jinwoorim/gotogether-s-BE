@@ -66,11 +66,7 @@ public class ProductDto {
 
         private Map<String, List<ProductOptionDto.OptionResponse>> productOptionList;
 
-        public static DetailResponse of(Product product) {
-            Map<String, List<ProductOptionDto.OptionResponse>> optionList
-                    = product.getProductOptionList()
-                    .stream().map(ProductOptionDto.OptionResponse::new)
-                    .collect(Collectors.groupingBy(ProductOptionDto.OptionResponse::getName));
+        public static DetailResponse of(Product product, Map<String, List<ProductOptionDto.OptionResponse>> productOptionList) {
 
             return DetailResponse.builder()
                     .id(product.getId())
@@ -85,7 +81,7 @@ public class ProductDto {
                     .religion(product.getReligion())
                     .continent(product.getContinent())
                     .info(product.getInfo())
-                    .productOptionList(optionList)
+                    .productOptionList(productOptionList)
                     .build();
         }
     }

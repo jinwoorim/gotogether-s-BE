@@ -2,26 +2,33 @@ package com.gotogether.gotogethersbe.service;
 
 import com.gotogether.gotogethersbe.config.util.SecurityUtil;
 import com.gotogether.gotogethersbe.domain.Member;
+import com.gotogether.gotogethersbe.domain.Product;
+import com.gotogether.gotogethersbe.domain.ProductOption;
 import com.gotogether.gotogethersbe.domain.enums.Continent;
 import com.gotogether.gotogethersbe.dto.CurationDto;
 import com.gotogether.gotogethersbe.dto.ProductDto;
+import com.gotogether.gotogethersbe.dto.ProductOptionDto;
 import com.gotogether.gotogethersbe.repository.MemberRepository;
+import com.gotogether.gotogethersbe.repository.OptionRepository;
 import com.gotogether.gotogethersbe.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
+    private final OptionRepository optionRepository;
     private final MemberRepository memberRepository;
 
     //메인 페이지 추천상품 관련 API
@@ -114,9 +121,14 @@ public class ProductService {
      * @retrun 상품 상세 정보
      */
     @Transactional(readOnly = true)
-    public List<ProductDto.DetailResponse> productDetail(Long productId) {
-        return productRepository.findByIdWithProductOption(productId)
-                .stream().map(ProductDto.DetailResponse::of)
-                .collect(Collectors.toList());
+    public ProductDto.DetailResponse productDetail(Long productId) {
+        Map<String, List<ProductOptionDto.OptionResponse>> productOptionList = optionRepository.findAllByProduct_Id(productId)
+                .stream().map(ProductOptionDto.OptionResponse::new)
+                .collect(Collectors.groupingBy(ProductOptionDto.OptionResponse::getName));
+
+        Optional<Product> product = productRepository.findById(productId);
+
+
+        return ProductDto.DetailResponse.of(product.get(), productOptionList);
     }
 }
