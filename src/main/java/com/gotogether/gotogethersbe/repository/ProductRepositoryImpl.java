@@ -1,8 +1,11 @@
 package com.gotogether.gotogethersbe.repository;
 
+import com.gotogether.gotogethersbe.domain.Product;
+import com.gotogether.gotogethersbe.domain.ProductOption;
 import com.gotogether.gotogethersbe.domain.enums.*;
 import com.gotogether.gotogethersbe.dto.ProductDto;
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.NullExpression;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -15,11 +18,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.support.PageableExecutionUtils;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import static com.gotogether.gotogethersbe.domain.QProduct.product;
-
+import static com.gotogether.gotogethersbe.domain.QProductOption.productOption;
+import static com.querydsl.core.group.GroupBy.groupBy;
+import static com.querydsl.core.group.GroupBy.list;
 @RequiredArgsConstructor
 public class ProductRepositoryImpl implements ProductRepositoryQueryDsl {
     private final JPAQueryFactory jpaQueryFactory;
@@ -41,7 +47,6 @@ public class ProductRepositoryImpl implements ProductRepositoryQueryDsl {
                 .fetch().stream().map(ProductDto.ProductResponse::of)
                 .collect(Collectors.toList());
     }
-
     @Override
     public Page<ProductDto.ProductResponse> findAllCategoriesComplex(Pageable pageable, String category) {
         List<ProductDto.ProductResponse> content = findAllCategories(pageable, category);
@@ -70,6 +75,24 @@ public class ProductRepositoryImpl implements ProductRepositoryQueryDsl {
                 .map(ProductDto.ProductResponse::of)
                 .collect(Collectors.toList());
     }
+    @Override
+    public Page<ProductDto.ProductResponse> findByProductNameContainsComplex(Pageable pageable, String category) {
+        List<ProductDto.ProductResponse> content = findByProductNameContains(pageable, category);
+
+        JPAQuery<Long> countQuery = getCount(category);
+
+        return PageableExecutionUtils.getPage(content, pageable, () -> countQuery.fetchOne());
+    }
+    public List<ProductDto.ProductResponse> findByProductNameContains(Pageable pageable, String keyword){
+        return jpaQueryFactory.selectFrom(product)
+                .where(safeNull(() -> product.productName.contains(keyword)))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .orderBy(priceSort(pageable))
+                .fetch().stream()
+                .map(ProductDto.ProductResponse::of)
+                .collect(Collectors.toList());
+    }
 
     private JPAQuery<Long> getCount(String category) {
         JPAQuery<Long> countQuery = jpaQueryFactory.select(product.count()).from(product)
@@ -81,23 +104,15 @@ public class ProductRepositoryImpl implements ProductRepositoryQueryDsl {
         return countQuery;
     }
 
-    public List<ProductDto.ProductResponse> findCompanion(Companion companion) {
-        return jpaQueryFactory.selectFrom(product)
-                .where(safeNull(() -> product.companion.eq(companion)))
-                .fetch().stream()
-                .map(ProductDto.ProductResponse::of)
-                .collect(Collectors.toList());
-    }
-
     private OrderSpecifier<?> priceSort(Pageable pageable) {
         //서비스에서 보내준 Pageable 객체에 정렬조건 null 값 체크
         if (!pageable.getSort().isEmpty()) {
-            for (Sort.Order order : pageable.getSort()) { // 멘토님
+            for (Sort.Order order : pageable.getSort()) {
                 Order direction = order.getDirection().isAscending() ? Order.ASC : Order.DESC;
                 return new OrderSpecifier(direction, product.basicPrice);
             }
         }
-        return null;
+        return new OrderSpecifier(Order.ASC, product.id);
     }
 
     public <T extends Enum> T NoMatterChecker(T t) {

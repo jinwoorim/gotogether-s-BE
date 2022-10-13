@@ -99,14 +99,12 @@ public class ProductService {
     /**
      * 전체 상품 내 검색
      *
-     * @param request
+     * @param keyword
      * @return 상품이름에 입력 String값을 포함하는 상품리스트
      */
     @Transactional(readOnly = true)
-    public List<ProductDto.ProductResponse> searchProducts(ProductDto.SearchRequest request) {
-        return productRepository.findByProductNameContains(request.getKeyword())
-                .stream().map(ProductDto.ProductResponse::of)
-                .collect(Collectors.toList());
+    public Page<ProductDto.ProductResponse> searchProducts(Pageable pageable, String keyword) {
+        return productRepository.findByProductNameContainsComplex(pageable, keyword);
     }
 
     /**
@@ -117,7 +115,7 @@ public class ProductService {
      */
     @Transactional(readOnly = true)
     public List<ProductDto.DetailResponse> productDetail(Long productId) {
-        return productRepository.findById(productId)
+        return productRepository.findByIdWithProductOption(productId)
                 .stream().map(ProductDto.DetailResponse::of)
                 .collect(Collectors.toList());
     }

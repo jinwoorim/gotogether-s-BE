@@ -36,7 +36,6 @@ public class Product {
     private Religion religion;
     @Enumerated(EnumType.STRING)
     private Theme theme;
-
     @OneToMany(fetch = FetchType.LAZY)
     private List<ProductOption> productOptionList = new ArrayList<>();
 
@@ -66,5 +65,4 @@ public class Product {
         this.theme = theme;
         this.productOptionList = productOptionList;
     }
-
 }

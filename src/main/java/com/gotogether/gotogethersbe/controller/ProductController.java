@@ -40,12 +40,12 @@ public class ProductController {
     }
 
     // 전체 상품 내 검색
-    @GetMapping("/product-list/search")
-    public DefaultRes<List<ProductDto.ProductResponse>> getSearchProducts(@RequestBody ProductDto.SearchRequest request) {
-        return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_PRODUCT_SEARCH, productService.searchProducts(request));
+    @GetMapping("/product-search")
+    public DefaultRes<Page<ProductDto.ProductResponse>> getSearchProducts(Pageable pageable, @RequestParam String keyword) {
+        return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_PRODUCT_SEARCH, productService.searchProducts(pageable, keyword));
     }
     // 상품 상세정보 보기
-    @GetMapping("/product-list/details")
+    @GetMapping("/product-details/{productId}")
     public DefaultRes<List<ProductDto.DetailResponse>> getProductDetail(@PathVariable Long productId) {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_PRODUCT, productService.productDetail(productId));
     }

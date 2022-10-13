@@ -1,6 +1,7 @@
 package com.gotogether.gotogethersbe.dto;
 
 import com.gotogether.gotogethersbe.domain.Product;
+import com.gotogether.gotogethersbe.domain.ProductOption;
 import com.gotogether.gotogethersbe.domain.enums.*;
 import lombok.*;
 
@@ -88,15 +89,4 @@ public class ProductDto {
                     .build();
         }
     }
-
-    @Getter
-    public static class SearchRequest {
-        private String keyword;
-    }
-    @Getter
-    public static class DetailRequest {
-        private Long productId;
-    }
-
-
 }
