@@ -1,9 +1,9 @@
 package com.gotogether.gotogethersbe.service;
 
+import com.gotogether.gotogethersbe.config.common.exception.CustomException;
 import com.gotogether.gotogethersbe.config.util.SecurityUtil;
 import com.gotogether.gotogethersbe.domain.Member;
 import com.gotogether.gotogethersbe.domain.Product;
-import com.gotogether.gotogethersbe.domain.ProductOption;
 import com.gotogether.gotogethersbe.domain.enums.Continent;
 import com.gotogether.gotogethersbe.dto.CurationDto;
 import com.gotogether.gotogethersbe.dto.ProductDto;
@@ -11,6 +11,8 @@ import com.gotogether.gotogethersbe.dto.ProductOptionDto;
 import com.gotogether.gotogethersbe.repository.MemberRepository;
 import com.gotogether.gotogethersbe.repository.OptionRepository;
 import com.gotogether.gotogethersbe.repository.ProductRepository;
+import com.gotogether.gotogethersbe.web.api.ResponseMessage;
+import com.gotogether.gotogethersbe.web.api.StatusCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -126,9 +127,9 @@ public class ProductService {
                 .stream().map(ProductOptionDto.OptionResponse::new)
                 .collect(Collectors.groupingBy(ProductOptionDto.OptionResponse::getName));
 
-        Optional<Product> product = productRepository.findById(productId);
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new CustomException(ResponseMessage.GET_PRODUCT_FAIL, StatusCode.BAD_REQUEST));
 
-
-        return ProductDto.DetailResponse.of(product.get(), productOptionList);
+        return ProductDto.DetailResponse.of(product, productOptionList);
     }
 }
