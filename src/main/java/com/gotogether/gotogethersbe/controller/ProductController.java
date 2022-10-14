@@ -36,31 +36,25 @@ public class ProductController {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.Get_Continent_Category_List, productService.continentList());
     }
 
-    // 메인페이지, 카테고리별 상품 목록
-    @GetMapping("/product-list")
-    public DefaultRes<Page<ProductDto.ProductResponse>> getProductsByCategory(Pageable pageable, @RequestParam String category) {
-        return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_PRODUCT_SEARCH, productService.recommendByCategory(pageable, category));
-    }
-
     // 메인페이지, 카테고리 연령대별 상품 목록
     @GetMapping("/product-list/ages")
     public DefaultRes<Page<ProductDto.ProductResponse>> getProductsByAges(Pageable pageable, @RequestParam String category) {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_PRODUCT_SEARCH, productService.recommendByCategory(pageable, category));
     }
 
-    // 메인페이지, 카테고리 연령대별 상품 목록
+    // 메인페이지, 카테고리 국가별 상품 목록
     @GetMapping("/product-list/continents")
     public DefaultRes<Page<ProductDto.ProductResponse>> getProductsByContinents(Pageable pageable, @RequestParam String category) {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_PRODUCT_SEARCH, productService.recommendByCategory(pageable, category));
     }
 
-    // 메인페이지, 카테고리 연령대별 상품 목록
+    // 메인페이지, 카테고리 유형별 상품 목록
     @GetMapping("/product-list/companion")
     public DefaultRes<Page<ProductDto.ProductResponse>> getProductsByCompanion(Pageable pageable, @RequestParam String category) {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_PRODUCT_SEARCH, productService.recommendByCategory(pageable, category));
     }
 
-    // 메인페이지, 카테고리 연령대별 상품 목록
+    // 메인페이지, 카테고리 테마별 상품 목록
     @GetMapping("/product-list/themes")
     public DefaultRes<Page<ProductDto.ProductResponse>> getProductsByThemes(Pageable pageable, @RequestParam String category) {
         return DefaultRes.res(StatusCode.OK, ResponseMessage.GET_PRODUCT_SEARCH, productService.recommendByCategory(pageable, category));

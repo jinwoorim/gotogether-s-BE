@@ -51,10 +51,10 @@ public class ProductService {
             if (findMember.getCuration() != null) {
                 return productRepository.findCustomComplex(pageable,
                         findMember.getCuration().getAges(),
-                        findMember.getCuration().getGenderGroup(),
-                        findMember.getCuration().getCompanion(),
-                        findMember.getCuration().getReligion(),
-                        findMember.getCuration().getTheme()
+                        findMember.getCuration().getGenderGroup().getKoreanName(),
+                        findMember.getCuration().getCompanion().getKoreanName(),
+                        findMember.getCuration().getReligion().getKoreanName(),
+                        findMember.getCuration().getTheme().getKoreanName()
                 );
             }
             return productRepository.findAllCategoriesComplex(pageable, "");
@@ -66,10 +66,10 @@ public class ProductService {
             CurationDto.CurationRequest cRequest = (CurationDto.CurationRequest) session.getAttribute("curation");
             return productRepository.findCustomComplex(pageable,
                     cRequest.getAges(),
-                    cRequest.getGenderGroup(),
-                    cRequest.getCompanion(),
-                    cRequest.getReligion(),
-                    cRequest.getTheme()
+                    cRequest.getGenderGroup().getKoreanName(),
+                    cRequest.getCompanion().getKoreanName(),
+                    cRequest.getReligion().getKoreanName(),
+                    cRequest.getTheme().getKoreanName()
             );
         }
         //case 2-2

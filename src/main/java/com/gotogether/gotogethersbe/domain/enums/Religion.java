@@ -2,8 +2,10 @@ package com.gotogether.gotogethersbe.domain.enums;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+@Getter
 @RequiredArgsConstructor
 @JsonFormat
 public enum Religion {
