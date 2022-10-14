@@ -62,7 +62,7 @@ public class ProductService {
 
         HttpSession session = request.getSession(false);
         //case 2-1
-        if (hasCurationData(session)) {
+        if (session != null) {
             CurationDto.CurationRequest cRequest = (CurationDto.CurationRequest) session.getAttribute("curation");
             return productRepository.findCustomComplex(pageable,
                     cRequest.getAges(),
@@ -80,9 +80,6 @@ public class ProductService {
         return SecurityUtil.getCurrentMemberId() != null;
     }
 
-    private boolean hasCurationData(HttpSession session) {
-        return session.getAttribute("curation") != null;
-    }
 
     /**
      * 메인페이지
