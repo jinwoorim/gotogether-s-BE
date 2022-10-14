@@ -37,47 +37,43 @@ public class ProductService {
     /**
      * 메인페이지 오늘의 추천 상품
      *
-     * @param request
+     *
      * @return case 1-1. 큐레이션에 설문 응답값이 있는 경우 -> 큐레이션 맞춤 상품 리스트 리턴
      * case 1-2. 큐레이션에 설문 응답값이 없는 경우 -> 오늘의 추천리스트(전체) 상품 리스트 리턴
      * case 2-1. 세션에 설문 응답값이 있는 경우 -> 큐레이션 맞춤 상품 리스트 리턴
      * case 2-2. 세선에 설문 응답값이 없는 경우 -> 오늘의 추천리스트(전체) 상품 리스트 리턴
      */
     @Transactional(readOnly = true)
-    public List<ProductDto.ProductResponse> recommendByCustom(HttpServletRequest request) {
+    public Page<ProductDto.ProductResponse> recommendByCustom(Pageable pageable, HttpServletRequest request) {
         if (isMemberLogin()) {
             //case 1-1
             Member findMember = memberRepository.findById(SecurityUtil.getCurrentMemberId()).get();
             if (findMember.getCuration() != null) {
-                return productRepository.findCustom(
+                return productRepository.findCustomComplex(pageable,
                         findMember.getCuration().getAges(),
-                        findMember.getCuration().getGenderGroup(),
-                        findMember.getCuration().getCompanion(),
-                        findMember.getCuration().getReligion(),
-                        findMember.getCuration().getTheme()
+                        findMember.getCuration().getGenderGroup().getKoreanName(),
+                        findMember.getCuration().getCompanion().getKoreanName(),
+                        findMember.getCuration().getReligion().getKoreanName(),
+                        findMember.getCuration().getTheme().getKoreanName()
                 );
             }
-            return productRepository.findAll()
-                    .stream().map(ProductDto.ProductResponse::of)
-                    .collect(Collectors.toList());
+            return productRepository.findAllCategoriesComplex(pageable, "상관 없음");
         }
 
         HttpSession session = request.getSession(false);
         //case 2-1
         if (hasCurationData(session)) {
             CurationDto.CurationRequest cRequest = (CurationDto.CurationRequest) session.getAttribute("curation");
-            return productRepository.findCustom(
+            return productRepository.findCustomComplex(pageable,
                     cRequest.getAges(),
-                    cRequest.getGenderGroup(),
-                    cRequest.getCompanion(),
-                    cRequest.getReligion(),
-                    cRequest.getTheme()
+                    cRequest.getGenderGroup().getKoreanName(),
+                    cRequest.getCompanion().getKoreanName(),
+                    cRequest.getReligion().getKoreanName(),
+                    cRequest.getTheme().getKoreanName()
             );
         }
         //case 2-2
-        return productRepository.findAll()
-                .stream().map(ProductDto.ProductResponse::of)
-                .collect(Collectors.toList());
+        return productRepository.findAllCategoriesComplex(pageable, "상관 없음");
     }
 
     private boolean isMemberLogin() {
@@ -103,6 +99,11 @@ public class ProductService {
     public Page<ProductDto.ProductResponse> recommendByCategory(Pageable pageable, String category) {
         return productRepository.findAllCategoriesComplex(pageable, category);
     }
+    @Transactional(readOnly = true)
+    public Page<ProductDto.ProductResponse> recommendByCategory(Pageable pageable, String category1, String category2, String category3, String category4) {
+        return productRepository.findAllCategoriesComplex(pageable, category1, category2, category3, category4);
+    }
+
 
     /**
      * 전체 상품 내 검색

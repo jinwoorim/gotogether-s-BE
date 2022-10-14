@@ -1,13 +1,14 @@
 package com.gotogether.gotogethersbe.dto;
 
 import com.gotogether.gotogethersbe.domain.Product;
-import com.gotogether.gotogethersbe.domain.ProductOption;
 import com.gotogether.gotogethersbe.domain.enums.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ProductDto {
     @Getter
@@ -51,7 +52,6 @@ public class ProductDto {
         private String productName;
         private long basicPrice;
         private String country;
-        private String detail;
         private String region;
         private String points;
         private String airport;
@@ -74,6 +74,9 @@ public class ProductDto {
                     .productName(product.getProductName())
                     .basicPrice(product.getBasicPrice())
                     .country(product.getCountry())
+                    .region(product.getRegion())
+                    .points(product.getPoints())
+                    .airport(product.getAirport())
                     .ages(product.getAges())
                     .genderGroup(product.getGenderGroup())
                     .companion(product.getCompanion())
