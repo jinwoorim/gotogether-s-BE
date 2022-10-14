@@ -25,7 +25,7 @@ public class ProductRepositoryImpl implements ProductRepositoryQueryDsl {
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public Page<ProductDto.ProductResponse> findCustomComplex(Pageable pageable, String ages, String genderGroup, String companion, String religion, String theme) {
+    public Page<ProductDto.ProductResponse> findCustomComplex(Pageable pageable, String ages, GenderGroup genderGroup, Companion companion, Religion religion, Theme theme) {
         List<ProductDto.ProductResponse> content = findCustom(pageable, ages, genderGroup, companion, religion, theme);
 
         JPAQuery<Long> countQuery = getCount(ages, genderGroup, companion, religion, theme);
@@ -34,11 +34,11 @@ public class ProductRepositoryImpl implements ProductRepositoryQueryDsl {
 
     }
 
-    List<ProductDto.ProductResponse> findCustom(Pageable pageable, String ages, String genderGroup, String companion, String religion, String theme) {
-        Companion c = NoMatterChecker(Companion.valueOf(companion));
-        GenderGroup g = NoMatterChecker(GenderGroup.valueOf(genderGroup));
-        Religion r = NoMatterChecker(Religion.valueOf(religion));
-        Theme t = NoMatterChecker(Theme.valueOf(theme));
+    List<ProductDto.ProductResponse> findCustom(Pageable pageable, String ages, GenderGroup genderGroup, Companion companion, Religion religion, Theme theme) {
+        Companion c = NoMatterChecker(companion);
+        GenderGroup g = NoMatterChecker(genderGroup);
+        Religion r = NoMatterChecker(religion);
+        Theme t = NoMatterChecker(theme);
 
         return jpaQueryFactory.selectFrom(product)
                 .where(safeNull(() -> product.ages.contains(ages))
@@ -141,13 +141,13 @@ public class ProductRepositoryImpl implements ProductRepositoryQueryDsl {
         return countQuery;
     }
 
-    private JPAQuery<Long> getCount(String ages, String genderGroup, String companion, String religion, String theme) {
+    private JPAQuery<Long> getCount(String ages, GenderGroup genderGroup, Companion companion, Religion religion, Theme theme) {
         JPAQuery<Long> countQuery = jpaQueryFactory.select(product.count()).from(product)
                 .where(safeNull(() -> product.ages.contains(ages)),
-                        safeNull(() -> product.genderGroup.eq(GenderGroup.valueOf(genderGroup))),
-                        safeNull(() -> product.companion.eq(Companion.valueOf(companion))),
-                        safeNull(() -> product.religion.eq(Religion.valueOf(religion))),
-                        safeNull(() -> product.theme.eq(Theme.valueOf(theme))));
+                        safeNull(() -> product.genderGroup.eq(genderGroup)),
+                        safeNull(() -> product.companion.eq(companion)),
+                        safeNull(() -> product.religion.eq(religion)),
+                        safeNull(() -> product.theme.eq(theme)));
         return countQuery;
     }
 
