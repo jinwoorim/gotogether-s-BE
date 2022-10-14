@@ -24,6 +24,7 @@ public class ProductDto {
         private String ages;
         private GenderGroup genderGroup;
         private Companion companion;
+        private Religion religion;
         private Theme theme;
 
         public static ProductResponse of(Product product) {
@@ -36,6 +37,7 @@ public class ProductDto {
                     .ages(product.getAges())
                     .genderGroup(product.getGenderGroup())
                     .companion(product.getCompanion())
+                    .religion(product.getReligion())
                     .theme(product.getTheme())
 
                     .build();
