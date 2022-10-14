@@ -11,8 +11,8 @@ import org.springframework.data.domain.Pageable;
 public interface ProductRepositoryQueryDsl {
 
 
-    Page<ProductDto.ProductResponse> findCustomComplex(Pageable pageable, String ages, String genderGroup,
-                                                       String companion, String religion, String theme);
+    Page<ProductDto.ProductResponse> findCustomComplex(Pageable pageable, String ages, GenderGroup genderGroup,
+                                                       Companion companion, Religion religion, Theme theme);
 
     Page<ProductDto.ProductResponse> findAllCategoriesComplex(Pageable pageable, String category);
 
