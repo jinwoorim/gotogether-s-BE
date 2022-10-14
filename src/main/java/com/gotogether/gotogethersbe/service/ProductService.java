@@ -51,10 +51,10 @@ public class ProductService {
             if (findMember.getCuration() != null) {
                 return productRepository.findCustomComplex(pageable,
                         findMember.getCuration().getAges(),
-                        findMember.getCuration().getGenderGroup().getKoreanName(),
-                        findMember.getCuration().getCompanion().getKoreanName(),
-                        findMember.getCuration().getReligion().getKoreanName(),
-                        findMember.getCuration().getTheme().getKoreanName()
+                        findMember.getCuration().getGenderGroup(),
+                        findMember.getCuration().getCompanion(),
+                        findMember.getCuration().getReligion(),
+                        findMember.getCuration().getTheme()
                 );
             }
             return productRepository.findAllCategoriesComplex(pageable, "상관 없음");
@@ -62,14 +62,14 @@ public class ProductService {
 
         HttpSession session = request.getSession(false);
         //case 2-1
-        if (hasCurationData(session)) {
+        if (session!=null) {
             CurationDto.CurationRequest cRequest = (CurationDto.CurationRequest) session.getAttribute("curation");
             return productRepository.findCustomComplex(pageable,
                     cRequest.getAges(),
-                    cRequest.getGenderGroup().getKoreanName(),
-                    cRequest.getCompanion().getKoreanName(),
-                    cRequest.getReligion().getKoreanName(),
-                    cRequest.getTheme().getKoreanName()
+                    cRequest.getGenderGroup(),
+                    cRequest.getCompanion(),
+                    cRequest.getReligion(),
+                    cRequest.getTheme()
             );
         }
         //case 2-2
@@ -79,11 +79,6 @@ public class ProductService {
     private boolean isMemberLogin() {
         return SecurityUtil.getCurrentMemberId() != null;
     }
-
-    private boolean hasCurationData(HttpSession session) {
-        return session.getAttribute("curation") != null;
-    }
-
     /**
      * 메인페이지
      * 여행지 종류
