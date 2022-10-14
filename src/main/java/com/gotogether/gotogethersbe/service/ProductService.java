@@ -57,7 +57,7 @@ public class ProductService {
                         findMember.getCuration().getTheme().getKoreanName()
                 );
             }
-            return productRepository.findAllCategoriesComplex(pageable, "");
+            return productRepository.findAllCategoriesComplex(pageable, "상관 없음");
         }
 
         HttpSession session = request.getSession(false);
@@ -73,7 +73,7 @@ public class ProductService {
             );
         }
         //case 2-2
-        return productRepository.findAllCategoriesComplex(pageable, "");
+        return productRepository.findAllCategoriesComplex(pageable, "상관 없음");
     }
 
     private boolean isMemberLogin() {
