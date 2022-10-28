@@ -26,7 +26,7 @@
 
 <a href="https://gotogether-s-admin.vercel.app/signin">관리자 사이트</a>
 
-<a href="https://gotogether-s-admin.vercel.app">서비스 사이트</a>
+<a href="https://gotogether-s.vercel.app">서비스 사이트</a>
 
 (추후 서버 유지 비용으로 인해 연결이 불가할 수 있습니다.)
 
