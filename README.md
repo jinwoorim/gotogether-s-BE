@@ -1,6 +1,7 @@
 ## 🤝 기업 연계 프로젝트
 ### Go Together
 좋은 사람들과의 잊을 수 없는 여행
+<img src='https://user-images.githubusercontent.com/102512612/200274763-d76bc556-4f21-4005-bf80-b717a801a972.png'/>
 
 <br>
 
